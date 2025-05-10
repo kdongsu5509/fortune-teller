@@ -33,21 +33,27 @@ ext {
 
 dependencies {
 
+    implementation 'org.springframework.boot:spring-boot-starter'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
     implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    //Spring Data JPA
     implementation 'org.springframework.ai:spring-ai-openai-spring-boot-starter'
-    // https://mvnrepository.com/artifact/org.thymeleaf/thymeleaf
-    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
-    // https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-aws
+
+    //Lombok
+    compileOnly 'org.projectlombok:lombok:1.18.36'
+    annotationProcessor 'org.projectlombok:lombok:1.18.36'
+    // AWS
     implementation 'org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE'
-    implementation 'org.projectlombok:lombok:1.18.34'
-    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0'
+
     implementation 'org.springframework.boot:spring-boot-starter-validation'
-    compileOnly 'org.projectlombok:lombok'
-    annotationProcessor 'org.projectlombok:lombok'
+
+    //Junit
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
-    //mockitio for testing
+    //mockitio
     testImplementation 'org.mockito:mockito-core'
     testImplementation 'org.junit.jupiter:junit-jupiter-api'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'

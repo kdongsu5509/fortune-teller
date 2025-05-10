@@ -7,15 +7,14 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
-public class FaceAnalyzeApplication {
+public class AIFortuneTellerApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(FaceAnalyzeApplication.class, args);
+        SpringApplication.run(AIFortuneTellerApplication.class, args);
     }
 
     @Bean
     ChatClient chatClient(ChatModel chatModel) {
         return ChatClient.builder(chatModel).build();
     }
-
 }
