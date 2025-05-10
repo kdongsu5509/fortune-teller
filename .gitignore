@@ -1,51 +1,83 @@
-# Miscellaneous
+# === 공통 ===
 *.class
 *.log
 *.pyc
 *.swp
+*.tmp
+*.lock
 .DS_Store
-.atom/
-.build/
-.buildlog/
-.history
-.svn/
-.swiftpm/
-migrate_working_dir/
+HELP.md
+*.env
 
-# IntelliJ related
+# === IDE 관련 ===
+.idea/
 *.iml
 *.ipr
 *.iws
-.idea/
+.vscode/
+*.sublime-workspace
+*.sublime-project
 
-# The .vscode folder contains launch configuration and tasks you configure in
-# VS Code which you may wish to be included in version control, so this line
-# is commented out by default.
-#.vscode/
+# === STS ===
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
 
-# Flutter/Dart/Pub related
-**/doc/api/
-**/ios/Flutter/.last_build_id
-.dart_tool/
-.flutter-plugins
-.flutter-plugins-dependencies
-.pub-cache/
-.pub/
-/build/
+# === NetBeans ===
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
 
-# Symbolication related
-app.*.symbols
+# === Flutter 관련 (Mobile/) ===
+Mobile/.dart_tool/
+Mobile/.packages
+Mobile/.flutter-plugins
+Mobile/.flutter-plugins-dependencies
+Mobile/.pub-cache/
+Mobile/.pub/
+Mobile/build/
+Mobile/.melos_tool/
+Mobile/migrate_working_dir/
 
-# Obfuscation related
-app.*.map.json
+Mobile/ios/Flutter/.last_build_id
+Mobile/android/.gradle/
+Mobile/android/app/debug/
+Mobile/android/app/profile/
+Mobile/android/app/release/
+Mobile/windows/
+Mobile/linux/
+Mobile/macos/
+Mobile/asset/generated_plugin_registrant.dart
 
-# Android Studio will place build artifacts here
-/android/app/debug
-/android/app/profile
-/android/app/release
+# === Flutter symbol/obfuscation 관련 ===
+Mobile/app.*.symbols
+Mobile/app.*.map.json
 
-# results of flutter build of web and windwos
-/windows/
+# === Spring 관련 (BackEnd/) ===
+BackEnd/.gradle/
+BackEnd/build/
+BackEnd/nbbuild/
+BackEnd/nbproject/
+BackEnd/nbdist/
+BackEnd/dist/
 
-# information about project's secrets
-*.env
+BackEnd/src/main/resources/application-private.properties
+
+# Gradle wrapper (예외 처리)
+!BackEnd/gradle/wrapper/gradle-wrapper.jar
+!BackEnd/src/main/**/build/
+!BackEnd/src/test/**/build/
+!BackEnd/src/main/**/bin/
+!BackEnd/src/test/**/bin/
+!BackEnd/src/main/**/out/
+!BackEnd/src/test/**/out/
+
+# === 테스트 디렉토리 무시하지 않음 ===
+!Mobile/test/
+!BackEnd/src/test/
