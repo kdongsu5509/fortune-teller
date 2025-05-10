@@ -1,0 +1,14 @@
+blank_issues_enabled: false
+
+issue_templates:
+  - name: Bug Report
+    description: 버그 리포트
+    file: ISSUE_TEMPLATE/bug_report.md
+  - name: Feature Request
+    description: 새로운 기능 또는 개선 사항을 제안합니다
+    file: ISSUE_TEMPLATE/feature_request.md
+
+pull_request_templates:
+  - name: 기본 PR Template
+    description: 기본 PR 템플릿
+    file: PULL_REQUEST_TEMPLATE/PULL_REQUEST_TEMPLATE.md

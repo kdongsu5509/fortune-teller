@@ -1,20 +1,22 @@
 ---
-name: Feature request
-about: Suggest an idea for this project
-title: ''
-labels: ''
-assignees: ''
+name: ✨ 기능 제안
+about: 새로운 기능이나 개선사항을 제안합니다.
+title: "[Feature] "
+labels: enhancement
+assignees:
+  - kdongsu5509
+  - jaemin4
 
 ---
 
-**Is your feature request related to a problem? Please describe.**
-A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
+## 제안하는 기능이 어떤 문제와 관련되어 있나요?
 
-**Describe the solution you'd like**
-A clear and concise description of what you want to happen.
+문제가 무엇인지 명확하고 간결하게 설명해 주세요. 예: 특정 상황에서 불편함을 느낍니다 [...]
 
-**Describe alternatives you've considered**
-A clear and concise description of any alternative solutions or features you've considered.
+## 원하는 해결 방안을 설명해 주세요
 
-**Additional context**
-Add any other context or screenshots about the feature request here.
+어떤 기능이나 개선을 원하는지 명확하고 구체적으로 작성해 주세요.
+
+## 추가 정보
+
+기능 제안에 대한 추가적인 맥락이나, 참고할 수 있는 목업/스크린샷 등이 있다면 여기에 첨부해 주세요.

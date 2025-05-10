@@ -1,38 +1,56 @@
 ---
-name: Bug report
-about: Create a report to help us improve
-title: ''
-labels: ''
-assignees: ''
+name: 버그 제보
+about: Flutter 앱 또는 Spring 서버 중 하나에서 발생한 문제를 신고합니다
+title: ""
+labels: bug, needs triage
+assignees:
+  - kdongsu5509
+  - jaemin4
+---
+
+**문제가 발생한 프로젝트**  
+*버그가 발생한 하위 프로젝트를 선택해주세요. (중복 선택 가능)*
+
+- [ ] Mobile (Flutter 모바일 앱)  
+  (예시: 앱이 비정상 종료됨, 버튼이 동작하지 않음 등)
+- [ ] BackEnd (Spring Boot 백엔드 서버)  
+  (예시: API 응답이 비정상적임, 서버가 500 오류를 반환함 등)
 
 ---
 
-**Describe the bug**
-A clear and concise description of what the bug is.
+**버그 설명**  
+*발생한 문제를 명확하고 간결하게 설명해주세요.*  
+*(예: 앱 실행 중 특정 버튼을 누르면 강제 종료되는 문제 발생)*
 
-**To Reproduce**
-Steps to reproduce the behavior:
-1. Go to '...'
-2. Click on '....'
-3. Scroll down to '....'
-4. See error
+---
 
-**Expected behavior**
-A clear and concise description of what you expected to happen.
+**재현 방법**  
+*문제를 재현할 수 있는 구체적인 단계를 작성해주세요.*  
+*(예: 1. 앱을 실행한다 → 2. 로그인한다 → 3. '시작' 버튼을 누른다 → 4. 앱이 종료됨)*  
+*가능하면 문제가 발생하는 작은 예제 코드를 작성해주세요. (100줄 이하 권장)*
 
-**Screenshots**
-If applicable, add screenshots to help explain your problem.
+---
 
-**Desktop (please complete the following information):**
- - OS: [e.g. iOS]
- - Browser [e.g. chrome, safari]
- - Version [e.g. 22]
+**기대한 동작**  
+*버그가 발생하지 않았을 경우 기대했던 동작을 명확하고 간결하게 작성해주세요.*  
+*(예: '시작' 버튼 클릭 시 정상적으로 다음 화면으로 넘어가야 함)*
 
-**Smartphone (please complete the following information):**
- - Device: [e.g. iPhone6]
- - OS: [e.g. iOS8.1]
- - Browser [e.g. stock browser, safari]
- - Version [e.g. 22]
+---
 
-**Additional context**
-Add any other context about the problem here.
+**환경 정보**
+
+- 운영체제: (예: Windows 11, macOS Ventura 14.4, Ubuntu 22.04)
+- 사용한 언어/프레임워크 버전:
+    - Flutter: (예: 3.29.0)
+    - Dart: (예: 3.7.0)
+    - Java: (예: 21)
+    - Spring Boot: (예: 3.2.3)
+- 주요 라이브러리/패키지 버전:  
+  (예: riverpod 2.4.9, dio 5.4.2, springdoc-openapi 2.2.0)
+- 실행 환경:  
+  (예: Android 에뮬레이터 Pixel 6, Postman 요청, 로컬/배포 서버)
+
+---
+
+**추가 정보 (선택 사항)**  
+*추가로 공유하고 싶은 로그, 스크린샷, 기타 정보를 적어주세요.*
