@@ -101,3 +101,8 @@ Mobile/asset/generated_plugin_registrant.dart
 !BackEnd/src/main/resources/
 !BackEnd/src/main/resources/templates/
 !Mobile/asset/
+
+# ====================================
+# ✅ application-secret.poroperties 제외
+# ====================================
+BackEnd/src/main/resources/application-secret.properties

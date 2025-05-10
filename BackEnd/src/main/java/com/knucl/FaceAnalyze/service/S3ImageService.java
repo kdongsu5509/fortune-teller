@@ -24,7 +24,7 @@ public class S3ImageService {
 
     private final AmazonS3 amazonS3;
 
-    @Value("${cloud.aws.s3.bucketName}")
+    @Value("${cloud.aws.s3.bucket}")
     private String bucketName;
 
     public S3ImageService(AmazonS3 amazonS3) {
@@ -32,13 +32,6 @@ public class S3ImageService {
     }
 
 
-    /**
-     * Method1. upload image to S3
-     *
-     * @param image(MultipartFile)
-     * @return image address
-     * @throws S3Exception
-     */
     public String upload(MultipartFile image) throws S3Exception, IOException {
         if (image.isEmpty() || Objects.isNull(image.getOriginalFilename())) {
             throw new S3Exception(ErrorCode.EMPTY_FILE_EXCEPTION);
