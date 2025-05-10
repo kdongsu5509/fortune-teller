@@ -1,4 +1,4 @@
-package com.knucl.FaceAnalyze;
+package com.jangpyeong.fortuneteller;
 
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.model.ChatModel;

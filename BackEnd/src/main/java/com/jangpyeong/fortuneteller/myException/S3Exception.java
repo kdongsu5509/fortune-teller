@@ -1,4 +1,4 @@
-package com.knucl.FaceAnalyze.myException;
+package com.jangpyeong.fortuneteller.myException;
 
 public class S3Exception extends Exception {
     private final ErrorCode errorCode;

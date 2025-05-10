@@ -1,4 +1,4 @@
-package com.knucl.FaceAnalyze.repository;
+package com.jangpyeong.fortuneteller.repository;
 
 import org.springframework.stereotype.Repository;
 

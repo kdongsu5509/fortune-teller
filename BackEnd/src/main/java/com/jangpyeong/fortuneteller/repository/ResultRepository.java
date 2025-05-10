@@ -1,4 +1,4 @@
-package com.knucl.FaceAnalyze.repository;
+package com.jangpyeong.fortuneteller.repository;
 
 import java.util.HashMap;
 import java.util.Map;

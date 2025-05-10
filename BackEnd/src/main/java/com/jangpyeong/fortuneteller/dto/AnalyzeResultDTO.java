@@ -1,4 +1,4 @@
-package com.knucl.FaceAnalyze.dto;
+package com.jangpyeong.fortuneteller.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

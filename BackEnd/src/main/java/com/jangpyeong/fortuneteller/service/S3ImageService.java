@@ -1,11 +1,11 @@
-package com.knucl.FaceAnalyze.service;
+package com.jangpyeong.fortuneteller.service;
 
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.DeleteObjectRequest;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
-import com.knucl.FaceAnalyze.myException.ErrorCode;
-import com.knucl.FaceAnalyze.myException.S3Exception;
+import com.jangpyeong.fortuneteller.myException.ErrorCode;
+import com.jangpyeong.fortuneteller.myException.S3Exception;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;

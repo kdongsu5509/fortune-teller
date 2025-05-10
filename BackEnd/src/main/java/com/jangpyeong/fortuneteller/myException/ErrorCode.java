@@ -1,4 +1,4 @@
-package com.knucl.FaceAnalyze.myException;
+package com.jangpyeong.fortuneteller.myException;
 
 public enum ErrorCode {
     NO_FILE_EXTENTION("No file extension found."),

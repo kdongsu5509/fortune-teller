@@ -1,7 +1,7 @@
-package com.knucl.FaceAnalyze.controller;
+package com.jangpyeong.fortuneteller.controller;
 
-import com.knucl.FaceAnalyze.myException.S3Exception;
-import com.knucl.FaceAnalyze.service.S3ImageService;
+import com.jangpyeong.fortuneteller.myException.S3Exception;
+import com.jangpyeong.fortuneteller.service.S3ImageService;
 import groovy.util.logging.Slf4j;
 import java.io.IOException;
 import lombok.AllArgsConstructor;

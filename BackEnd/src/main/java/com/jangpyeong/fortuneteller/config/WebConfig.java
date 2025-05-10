@@ -1,4 +1,4 @@
-package com.knucl.FaceAnalyze.config;
+package com.jangpyeong.fortuneteller.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;

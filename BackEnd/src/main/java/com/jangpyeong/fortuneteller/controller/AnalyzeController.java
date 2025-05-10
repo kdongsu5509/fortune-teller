@@ -1,8 +1,8 @@
-package com.knucl.FaceAnalyze.controller;
+package com.jangpyeong.fortuneteller.controller;
 
-import com.knucl.FaceAnalyze.dto.AnalyzeResultDTO;
-import com.knucl.FaceAnalyze.repository.UserCountRepository;
-import com.knucl.FaceAnalyze.service.AnalyzeService;
+import com.jangpyeong.fortuneteller.dto.AnalyzeResultDTO;
+import com.jangpyeong.fortuneteller.repository.UserCountRepository;
+import com.jangpyeong.fortuneteller.service.AnalyzeService;
 import groovy.util.logging.Slf4j;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;

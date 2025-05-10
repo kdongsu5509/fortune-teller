@@ -1,6 +1,6 @@
-package com.knucl.FaceAnalyze.controller;
+package com.jangpyeong.fortuneteller.controller;
 
-import com.knucl.FaceAnalyze.repository.ResultRepository;
+import com.jangpyeong.fortuneteller.repository.ResultRepository;
 import java.util.UUID;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
