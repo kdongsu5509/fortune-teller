@@ -1,4 +1,6 @@
-# === 공통 ===
+# ====================================
+# 🔥 General
+# ====================================
 *.class
 *.log
 *.pyc
@@ -6,19 +8,17 @@
 *.tmp
 *.lock
 .DS_Store
-HELP.md
 *.env
+HELP.md
 
-# === IDE 관련 ===
+# ====================================
+# 💻 IDE 설정 무시
+# ====================================
 .idea/
+.vscode/
 *.iml
 *.ipr
 *.iws
-.vscode/
-*.sublime-workspace
-*.sublime-project
-
-# === STS ===
 .apt_generated
 .classpath
 .factorypath
@@ -27,50 +27,26 @@ HELP.md
 .springBeans
 .sts4-cache
 
-# === NetBeans ===
+# NetBeans
 /nbproject/private/
 /nbbuild/
 /dist/
 /nbdist/
 /.nb-gradle/
 
-# === Flutter 관련 (Mobile/) ===
-Mobile/.dart_tool/
-Mobile/.packages
-Mobile/.flutter-plugins
-Mobile/.flutter-plugins-dependencies
-Mobile/.pub-cache/
-Mobile/.pub/
-Mobile/build/
-Mobile/.melos_tool/
-Mobile/migrate_working_dir/
-
-Mobile/ios/Flutter/.last_build_id
-Mobile/android/.gradle/
-Mobile/android/app/debug/
-Mobile/android/app/profile/
-Mobile/android/app/release/
-Mobile/windows/
-Mobile/linux/
-Mobile/macos/
-Mobile/asset/generated_plugin_registrant.dart
-
-# === Flutter symbol/obfuscation 관련 ===
-Mobile/app.*.symbols
-Mobile/app.*.map.json
-
-# === Spring 관련 (BackEnd/) ===
+# ====================================
+# ☕ Spring Boot (BackEnd)
+# ====================================
 BackEnd/.gradle/
 BackEnd/build/
-BackEnd/nbbuild/
-BackEnd/nbproject/
-BackEnd/nbdist/
-BackEnd/dist/
 
+# 민감한 설정 파일
 BackEnd/src/main/resources/application-private.properties
 
-# Gradle wrapper (예외 처리)
+# Gradle wrapper만 예외
 !BackEnd/gradle/wrapper/gradle-wrapper.jar
+
+# src 내부 build, bin, out 예외 처리
 !BackEnd/src/main/**/build/
 !BackEnd/src/test/**/build/
 !BackEnd/src/main/**/bin/
@@ -78,6 +54,50 @@ BackEnd/src/main/resources/application-private.properties
 !BackEnd/src/main/**/out/
 !BackEnd/src/test/**/out/
 
-# === 테스트 디렉토리 무시하지 않음 ===
-!Mobile/test/
+# ====================================
+# 📱 Flutter (Mobile)
+# ====================================
+Mobile/.dart_tool/
+Mobile/.flutter-plugins
+Mobile/.flutter-plugins-dependencies
+Mobile/.pub-cache/
+Mobile/.pub/
+Mobile/.packages
+Mobile/.melos_tool/
+Mobile/migrate_working_dir/
+Mobile/build/
+
+# Android
+Mobile/android/.gradle/
+Mobile/android/app/debug/
+Mobile/android/app/profile/
+Mobile/android/app/release/
+
+# iOS
+Mobile/ios/Flutter/.last_build_id
+
+# Desktop builds
+Mobile/windows/
+Mobile/linux/
+Mobile/macos/
+
+# 심볼/난독화 관련
+Mobile/app.*.symbols
+Mobile/app.*.map.json
+
+# 자동 생성된 등록자 파일
+Mobile/asset/generated_plugin_registrant.dart
+
+# ====================================
+# ✅ 테스트 파일 포함
+# ====================================
 !BackEnd/src/test/
+!Mobile/test/
+
+# ====================================
+# ✅ 소스/리소스/에셋 포함
+# ====================================
+!BackEnd/src/main/
+!BackEnd/src/main/resources/
+!BackEnd/src/main/resources/templates/
+!Mobile/asset/
