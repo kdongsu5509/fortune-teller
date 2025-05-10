@@ -38,6 +38,7 @@ dependencies:
   flutter_riverpod: ^2.6.1
   dart_format: ^1.4.0
   toastification: ^3.0.1
+  device_info_plus: ^11.4.0
   dio: ^5.8.0+1
   flutter_dotenv: ^5.2.1
   qr_flutter: ^4.1.0
