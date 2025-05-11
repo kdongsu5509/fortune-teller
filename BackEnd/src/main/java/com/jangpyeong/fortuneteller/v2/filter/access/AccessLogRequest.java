@@ -1,4 +1,4 @@
-package com.jangpyeong.fortuneteller.v2.interfaces.model;
+package com.jangpyeong.fortuneteller.v2.filter.access;
 
 import com.jangpyeong.fortuneteller.v2.infra.access.AccessLogConsumerCommand;
 import jakarta.servlet.http.HttpServletRequest;

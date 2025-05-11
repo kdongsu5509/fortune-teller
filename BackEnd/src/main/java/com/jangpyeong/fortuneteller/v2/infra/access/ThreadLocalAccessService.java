@@ -1,6 +1,6 @@
 package com.jangpyeong.fortuneteller.v2.infra.access;
 
-import com.jangpyeong.fortuneteller.v2.interfaces.model.AccessLogRequest;
+import com.jangpyeong.fortuneteller.v2.filter.access.AccessLogRequest;
 import org.springframework.stereotype.Service;
 
 @Service
