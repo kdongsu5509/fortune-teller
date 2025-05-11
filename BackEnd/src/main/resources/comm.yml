@@ -41,6 +41,6 @@ spring:
 jwt:
   secret: vmfhaltmskdlstkfkdgodyroqkfwkdbalroqkfwkdbalaaaaaaaaaaaaaaaabbbbb
   access-expiration-minutes: 10
-  refresh-expiration-days: 1
+  refresh-expiration-days: 14
   access-header-name: Authorization
   refresh-cookie-name: X-Refresh-Token

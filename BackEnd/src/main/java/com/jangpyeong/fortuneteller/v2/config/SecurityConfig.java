@@ -1,10 +1,11 @@
 package com.jangpyeong.fortuneteller.v2.config;
 
 import com.jangpyeong.fortuneteller.v2.domain.jwt.JwtService;
-import com.jangpyeong.fortuneteller.v2.filter.auth.JwtFilter;
-import com.jangpyeong.fortuneteller.v2.filter.auth.LoginFilter;
+import com.jangpyeong.fortuneteller.v2.filter.JwtFilter;
+import com.jangpyeong.fortuneteller.v2.filter.LoginFilter;
 import com.jangpyeong.fortuneteller.v2.supprot.properties.JwtProperties;
 import lombok.RequiredArgsConstructor;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -27,6 +28,7 @@ public class SecurityConfig {
     private final AuthenticationConfiguration authenticationConfiguration;
     private final JwtService jwtService;
     private final JwtProperties jwtProperties;
+    private final RabbitTemplate rabbitTemplate;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -56,7 +58,7 @@ public class SecurityConfig {
     }
 
     private void addCustomFilters(HttpSecurity http) throws Exception {
-        http.addFilterBefore(new JwtFilter(jwtService), LoginFilter.class);
+        http.addFilterBefore(new JwtFilter(jwtService,rabbitTemplate), LoginFilter.class);
         http.addFilterAt(new LoginFilter(
                         authenticationManager(authenticationConfiguration),jwtService,jwtProperties),
                 UsernamePasswordAuthenticationFilter.class

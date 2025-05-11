@@ -1,4 +1,4 @@
-package com.jangpyeong.fortuneteller.v2.filter.auth;
+package com.jangpyeong.fortuneteller.v2.filter;
 
 import com.jangpyeong.fortuneteller.v2.domain.jwt.JwtResult;
 import com.jangpyeong.fortuneteller.v2.domain.jwt.JwtService;
