@@ -1,8 +1,8 @@
-package com.jangpyeong.fortuneteller.controller;
+package com.jangpyeong.fortuneteller.v1.controller;
 
-import com.jangpyeong.fortuneteller.dto.AnalyzeResultDTO;
-import com.jangpyeong.fortuneteller.repository.UserCountRepository;
-import com.jangpyeong.fortuneteller.service.AnalyzeService;
+import com.jangpyeong.fortuneteller.v1.dto.AnalyzeResultDTO;
+import com.jangpyeong.fortuneteller.v1.repository.UserCountRepository;
+import com.jangpyeong.fortuneteller.v1.service.AnalyzeService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,4 +29,8 @@ public class AnalyzeController {
             return null;
         }
     }
+
+
+
+
 }

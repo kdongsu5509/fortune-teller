@@ -1,4 +1,4 @@
-package com.jangpyeong.fortuneteller.myException;
+package com.jangpyeong.fortuneteller.v1.myException;
 
 public class S3Exception extends Exception {
     private final ErrorCode errorCode;

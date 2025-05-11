@@ -1,4 +1,4 @@
-package com.jangpyeong.fortuneteller.repository;
+package com.jangpyeong.fortuneteller.v1.repository;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,4 +1,4 @@
-package com.jangpyeong.fortuneteller.myException;
+package com.jangpyeong.fortuneteller.v1.myException;
 
 public enum ErrorCode {
     NO_FILE_EXTENTION("No file extension found."),

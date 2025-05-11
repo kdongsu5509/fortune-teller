@@ -1,7 +1,7 @@
-package com.jangpyeong.fortuneteller.controller;
+package com.jangpyeong.fortuneteller.v1.controller;
 
-import com.jangpyeong.fortuneteller.myException.S3Exception;
-import com.jangpyeong.fortuneteller.service.S3ImageService;
+import com.jangpyeong.fortuneteller.v1.myException.S3Exception;
+import com.jangpyeong.fortuneteller.v1.service.S3ImageService;
 import groovy.util.logging.Slf4j;
 import java.io.IOException;
 import lombok.AllArgsConstructor;

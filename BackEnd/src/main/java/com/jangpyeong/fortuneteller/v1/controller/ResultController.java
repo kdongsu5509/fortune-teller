@@ -1,6 +1,6 @@
-package com.jangpyeong.fortuneteller.controller;
+package com.jangpyeong.fortuneteller.v1.controller;
 
-import com.jangpyeong.fortuneteller.repository.ResultRepository;
+import com.jangpyeong.fortuneteller.v1.repository.ResultRepository;
 import java.util.UUID;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
