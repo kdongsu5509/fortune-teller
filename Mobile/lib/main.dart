@@ -1,16 +1,30 @@
+import 'package:ai_fortune_teller_app/setting/app_theme.dart';
 import 'package:ai_fortune_teller_app/setting/app_theme_provider.dart';
 import 'package:ai_fortune_teller_app/util/provider_observer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'DataLayer/Service/storage/prefs.dart';
 import 'DataLayer/Service/storage/secure_storage.dart';
-import 'View/home_view.dart';
+import 'common/router.dart';
 
 Future<void> main() async {
     WidgetsFlutterBinding.ensureInitialized();
     await dotenv.load(fileName: "ai_fortune_teller.env");
-    runApp(ProviderScope(observers: [AppProviderObserver()], child: AIFortuneTellerApp()));
+
+    runApp(
+        ProviderScope(
+            observers: [AppProviderObserver()],
+            child: ScreenUtilInit(
+                designSize: Size(412, 915),
+                minTextAdapt: true,
+                builder: (context, child) {
+                    return AIFortuneTellerApp();
+                },
+            ),
+        ),
+    );
 }
 
 class AIFortuneTellerApp extends StatelessWidget {
@@ -51,27 +65,12 @@ class _MaterialApp extends ConsumerWidget {
     Widget build(BuildContext context, WidgetRef ref) {
         final themeMode = ref.watch(currentThemeModeProvider);
 
-        return MaterialApp(
+        return MaterialApp.router(
+            routerConfig: router,
             title: 'AI Fortune Teller',
-            theme: ThemeData(
-                brightness: Brightness.light,
-                colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
-                useMaterial3: true,
-                inputDecorationTheme: const InputDecorationTheme(
-                    border: OutlineInputBorder(),
-                ),
-            ),
-            darkTheme: ThemeData(
-                brightness: Brightness.dark,
-                colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue, brightness: Brightness.dark),
-                useMaterial3: true,
-                inputDecorationTheme: const InputDecorationTheme(
-                    border: OutlineInputBorder(),
-                ),
-            ),
+            theme: createHighContrastLightTheme(context),
+            darkTheme: createHighContrastDarkTheme(context),
             themeMode: themeMode,
-            home: const HomeView(),
-            debugShowCheckedModeBanner: false,
         );
     }
 }
