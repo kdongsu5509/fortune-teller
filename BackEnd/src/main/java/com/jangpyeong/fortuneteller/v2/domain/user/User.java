@@ -6,14 +6,16 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-@Entity
 @Table(name = "face_user")
+@Entity
+@Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class User extends BaseTimeEntity {
     @Id
     @Column(name = "email", length = 99, unique = true, nullable = false)
+    @Getter
     private String email;
 
     @Column(name = "password", length = 99, nullable = false)

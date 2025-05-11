@@ -1,12 +1,11 @@
 package com.jangpyeong.fortuneteller.v2.domain.access;
 
-import com.jangpyeong.fortuneteller.v2.interfaces.model.AccessLogRequest;
+import com.jangpyeong.fortuneteller.v2.filter.access.AccessLogRequest;
 import com.jangpyeong.fortuneteller.v2.infra.access.AccessLogConsumerCommand;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
 import java.time.LocalDateTime;
 
 @Getter

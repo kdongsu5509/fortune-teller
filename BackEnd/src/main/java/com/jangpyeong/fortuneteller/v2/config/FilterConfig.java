@@ -1,6 +1,6 @@
 package com.jangpyeong.fortuneteller.v2.config;
 
-import com.jangpyeong.fortuneteller.v2.filter.AccessLogFilter;
+import com.jangpyeong.fortuneteller.v2.filter.access.AccessLogFilter;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
