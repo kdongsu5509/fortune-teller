@@ -1,10 +1,10 @@
-package com.jangpyeong.fortuneteller.service;
+package com.jangpyeong.fortuneteller.v1.service;
 
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.GetObjectMetadataRequest;
 import com.amazonaws.services.s3.model.ObjectMetadata;
-import com.jangpyeong.fortuneteller.dto.AnalyzeResultDTO;
-import com.jangpyeong.fortuneteller.repository.ResultRepository;
+import com.jangpyeong.fortuneteller.v1.dto.AnalyzeResultDTO;
+import com.jangpyeong.fortuneteller.v1.repository.ResultRepository;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;

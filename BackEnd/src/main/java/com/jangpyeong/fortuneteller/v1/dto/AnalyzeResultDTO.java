@@ -1,4 +1,4 @@
-package com.jangpyeong.fortuneteller.dto;
+package com.jangpyeong.fortuneteller.v1.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;

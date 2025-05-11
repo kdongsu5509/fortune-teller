@@ -1,4 +1,4 @@
-package com.jangpyeong.fortuneteller.config;
+package com.jangpyeong.fortuneteller.v1.config;
 
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;

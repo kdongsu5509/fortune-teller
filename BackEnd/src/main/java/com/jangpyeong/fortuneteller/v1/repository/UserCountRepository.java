@@ -1,4 +1,4 @@
-package com.jangpyeong.fortuneteller.repository;
+package com.jangpyeong.fortuneteller.v1.repository;
 
 import org.springframework.stereotype.Repository;
 

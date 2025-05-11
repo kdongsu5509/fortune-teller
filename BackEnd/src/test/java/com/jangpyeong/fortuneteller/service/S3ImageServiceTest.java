@@ -2,8 +2,9 @@ package com.jangpyeong.fortuneteller.service;
 
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.PutObjectRequest;
-import com.jangpyeong.fortuneteller.myException.ErrorCode;
-import com.jangpyeong.fortuneteller.myException.S3Exception;
+import com.jangpyeong.fortuneteller.v1.myException.ErrorCode;
+import com.jangpyeong.fortuneteller.v1.myException.S3Exception;
+import com.jangpyeong.fortuneteller.v1.service.S3ImageService;
 import groovy.util.logging.Slf4j;
 import java.net.URI;
 import java.net.URL;

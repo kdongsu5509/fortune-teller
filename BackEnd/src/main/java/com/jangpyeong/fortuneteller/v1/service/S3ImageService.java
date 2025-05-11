@@ -1,11 +1,11 @@
-package com.jangpyeong.fortuneteller.service;
+package com.jangpyeong.fortuneteller.v1.service;
 
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.DeleteObjectRequest;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
-import com.jangpyeong.fortuneteller.myException.ErrorCode;
-import com.jangpyeong.fortuneteller.myException.S3Exception;
+import com.jangpyeong.fortuneteller.v1.myException.ErrorCode;
+import com.jangpyeong.fortuneteller.v1.myException.S3Exception;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
