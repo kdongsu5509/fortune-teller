@@ -61,14 +61,20 @@ dependencies {
     //Swagger
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.7.0")
 
-    // Amqp
+    //amqp
     implementation ("org.springframework.boot:spring-boot-starter-amqp")
 
     //database
     runtimeOnly ("com.mysql:mysql-connector-j")
     implementation ("org.springframework.boot:spring-boot-starter-data-jpa")
 
+    //spring security
+    implementation ("org.springframework.boot:spring-boot-starter-security")
 
+    //jwt
+    implementation ("io.jsonwebtoken:jjwt-api:0.12.3")
+    implementation ("io.jsonwebtoken:jjwt-impl:0.12.3")
+    implementation ("io.jsonwebtoken:jjwt-jackson:0.12.3")
 }
 
 dependencyManagement {
