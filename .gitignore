@@ -65,13 +65,13 @@ Mobile/.pub/
 Mobile/.packages
 Mobile/.melos_tool/
 Mobile/migrate_working_dir/
-Mobile/build/
+Mobile/build
 
 # Android
-Mobile/android/.gradle/
-Mobile/android/app/debug/
-Mobile/android/app/profile/
-Mobile/android/app/release/
+Mobile/android/.gradle
+Mobile/android/app/debug
+Mobile/android/app/profile
+Mobile/android/app/release
 
 # iOS
 Mobile/ios/Flutter/.last_build_id
