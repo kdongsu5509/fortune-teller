@@ -1,6 +1,6 @@
 package com.jangpyeong.fortuneteller.v2.supprot.exception;
 
-import com.jangpyeong.fortuneteller.v2.interfaces.model.APIResponse;
+import com.jangpyeong.fortuneteller.v2.supprot.response.APIResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;

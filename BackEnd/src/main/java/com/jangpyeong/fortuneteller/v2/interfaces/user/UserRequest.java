@@ -1,4 +1,4 @@
-package com.jangpyeong.fortuneteller.v2.interfaces.model;
+package com.jangpyeong.fortuneteller.v2.interfaces.user;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Email;
