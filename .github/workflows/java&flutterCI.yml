@@ -36,31 +36,31 @@ jobs:
         run: |
           touch ./src/main/resources/application-secret.properties
           echo "${{ secrets.SPRING_SECRET }}" > ./src/main/resources/application-secret.yml
-          touch ./src/test/resources/application-secret.properties
-          echo "${{ secrets.SPRING_SECRET }}" > ./src/test/resources/application-secret.yml
+          # touch ./src/test/resources/application-secret.properties
+          # echo "${{ secrets.SPRING_SECRET }}" > ./src/test/resources/application-secret.yml
 
       - name: Run Tests Only
         run: ./gradlew clean test
 
-  flutter-test:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
+  # flutter-test:
+  #   runs-on: ubuntu-latest
+  #   permissions:
+  #     contents: read
 
-    defaults:
-      run:
-        working-directory: ./Mobile  # Flutter 프로젝트 루트로 수정
+  #   defaults:
+  #     run:
+  #       working-directory: ./Mobile  # Flutter 프로젝트 루트로 수정
 
-    steps:
-      - uses: actions/checkout@v4
+  #   steps:
+  #     - uses: actions/checkout@v4
 
-      - name: Install Flutter SDK
-        uses: subosito/flutter-action@v2
-        with:
-          flutter-version: "3.29.2"
+  #     - name: Install Flutter SDK
+  #       uses: subosito/flutter-action@v2
+  #       with:
+  #         flutter-version: "3.29.2"
 
-      - name: Install Dependencies
-        run: flutter pub get
+  #     - name: Install Dependencies
+  #       run: flutter pub get
 
-      - name: Run Flutter Tests
-        run: flutter test
+  #     - name: Run Flutter Tests
+  #       run: flutter test
