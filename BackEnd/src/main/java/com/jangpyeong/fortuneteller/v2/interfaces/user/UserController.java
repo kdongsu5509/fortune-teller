@@ -1,9 +1,8 @@
-package com.jangpyeong.fortuneteller.v2.interfaces.controller;
+package com.jangpyeong.fortuneteller.v2.interfaces.user;
 
 import com.jangpyeong.fortuneteller.v2.domain.user.UserCommand;
 import com.jangpyeong.fortuneteller.v2.domain.user.UserService;
-import com.jangpyeong.fortuneteller.v2.interfaces.model.APIResponse;
-import com.jangpyeong.fortuneteller.v2.interfaces.model.UserRequest;
+import com.jangpyeong.fortuneteller.v2.supprot.response.APIResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

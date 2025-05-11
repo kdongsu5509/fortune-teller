@@ -1,4 +1,4 @@
-package com.jangpyeong.fortuneteller.v2.interfaces.model;
+package com.jangpyeong.fortuneteller.v2.supprot.response;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
