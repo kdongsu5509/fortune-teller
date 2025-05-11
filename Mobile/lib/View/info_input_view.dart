@@ -1,11 +1,10 @@
 import 'dart:developer';
 
+import 'package:ai_fortune_teller_app/View/result_view.dart';
 import 'package:flutter/material.dart';
-import 'package:knucl_face_analyzer_2025/View/result_view.dart';
 
 import '../DataLayer/Dto/user_info_dto.dart';
 import '../ViewModel/info_input_view_model.dart';
-import '../common/device_info.dart';
 
 class InfoInputView extends StatefulWidget {
     const InfoInputView({super.key});
@@ -29,8 +28,8 @@ class _ImageUploadViewState extends State<InfoInputView> {
 
     void whenLoading() {
         setState(() {
-            _isLoading = !_isLoading;
-        });
+                _isLoading = !_isLoading;
+            });
     }
     @override
     Widget build(BuildContext context) {
@@ -51,7 +50,6 @@ class _ImageUploadViewState extends State<InfoInputView> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                         _infoText(context),
-                        Text("현재 입력된 정보 : ${selectedYear}년 ${selectedMonth}월 ${selectedDay}일 ${selectedGender == 1 ? "남자" : "여자"}  ${_controller.text}", style: TextStyle(fontSize: DeviceInfo.deviceInfo.contains("Windows") ? MediaQuery.of(context).size.width * 0.02 : MediaQuery.of(context).size.width * 0.04, color: Colors.black)),
                         SizedBox(height: MediaQuery.of(context).size.height * 0.025),
                         _inputBox(),
                         Padding(
@@ -68,9 +66,9 @@ class _ImageUploadViewState extends State<InfoInputView> {
                         ),
                         SizedBox(height: MediaQuery.of(context).size.height * 0.05),
                         _isLoading ? CircularProgressIndicator(
-                          color: Colors.black,
-                        ) :
-                        _submit(context, _controller.text, selectedYear!, selectedMonth!, selectedDay!, selectedGender!)
+                                color: Colors.black
+                            ) :
+                            _submit(context, _controller.text, selectedYear!, selectedMonth!, selectedDay!, selectedGender!)
                     ]
                 )
             )
@@ -137,24 +135,24 @@ class _ImageUploadViewState extends State<InfoInputView> {
         );
     }
     Widget _submit(BuildContext context, String name, int year, int month, int day, int gender) {
-      String _selectedSex = gender == 1 ? "남자" : "여자";
-      UserInfoDTO userInfoDTO = UserInfoDTO(name: name, year: year, month: month, day: day, gender: _selectedSex);
-      return ElevatedButton(
-          style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.white,
-              foregroundColor: Colors.black,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10)
-              )),
-          onPressed: () async {
-            log("INFO_INPUT_VIEW: 분석 요청 - 1");
-            InfoInputViewModel viewModel = InfoInputViewModel();
-            whenLoading();
-            await viewModel.analyzeReqToRepo(userInfoDTO);
-            Navigator.of(context).push(MaterialPageRoute(builder: (context) => ResultView()));
-          },
-          child: Text("분석 요청")
-      );
+        String _selectedSex = gender == 1 ? "남자" : "여자";
+        UserInfoDTO userInfoDTO = UserInfoDTO(name: name, year: year, month: month, day: day, gender: _selectedSex);
+        return ElevatedButton(
+            style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.white,
+                foregroundColor: Colors.black,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10)
+                )),
+            onPressed: () async {
+                log("INFO_INPUT_VIEW: 분석 요청 - 1");
+                InfoInputViewModel viewModel = InfoInputViewModel();
+                whenLoading();
+                await viewModel.analyzeReqToRepo(userInfoDTO);
+                Navigator.of(context).push(MaterialPageRoute(builder: (context) => ResultView()));
+            },
+            child: Text("분석 요청")
+        );
     }
 }
 
@@ -162,9 +160,8 @@ Widget _infoText(BuildContext context) {
     return Padding(
         padding: EdgeInsets.all(MediaQuery.of(context).size.height * 0.05),
         child: Center(
-            child: Text("아래 입력한 정보는 분석에만 사용됩니다.\n서버 및 해당 기기에 저장되지 않습니다.",
-                style: TextStyle(fontSize: DeviceInfo.deviceInfo.contains("Windows") ? MediaQuery.of(context).size.width * 0.02 : MediaQuery.of(context).size.width * 0.04, color: Colors.black54))
-        )
-    );
+            child: Text("아래 입력한 정보는 분석에만 사용됩니다.\n서버 및 해당 기기에 저장되지 않습니다."
+            )
+        )    );
 
 }

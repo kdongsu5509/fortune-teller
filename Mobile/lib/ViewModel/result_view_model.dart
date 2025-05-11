@@ -3,7 +3,6 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 
 import '../DataLayer/Repository/analyze_repository_local.dart';
-import '../DataLayer/Service/AnalyzeService.dart';
 
 /**
  * @Structure :
