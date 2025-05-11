@@ -34,10 +34,10 @@ jobs:
 
       - name: Create secret properties file
         run: |
-          touch ./src/main/resources/application-secret.yml
-          echo "${{ secrets.MAIN_SPRING_SECRET }}" > ./src/main/resources/application-secret.yml
-          touch ./src/test/resources/application-secret.yml
-          echo "${{ secrets.TEST_SPRING_SECRET }}" > ./src/test/resources/application-secret.yml
+          touch ./src/main/resources/application-secret.properties
+          echo "${{ secrets.SPRING_SECRET }}" > ./src/main/resources/application-secret.yml
+          touch ./src/test/resources/application-secret.properties
+          echo "${{ secrets.SPRING_SECRET }}" > ./src/test/resources/application-secret.yml
 
       - name: Run Tests Only
         run: ./gradlew clean test
