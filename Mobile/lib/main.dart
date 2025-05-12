@@ -1,18 +1,29 @@
+import 'dart:developer';
+
 import 'package:ai_fortune_teller_app/setting/app_theme.dart';
 import 'package:ai_fortune_teller_app/setting/app_theme_provider.dart';
+import 'package:ai_fortune_teller_app/setting/util/user_info_provider.dart';
 import 'package:ai_fortune_teller_app/util/provider_observer.dart';
+import 'package:ai_fortune_teller_app/util/secure_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'DataLayer/Service/storage/prefs.dart';
-import 'DataLayer/Service/storage/secure_storage.dart';
+import 'util/prefs.dart';
 import 'common/router.dart';
+
+/// @description
+/// Flutter 애플리케이션의 진입점입니다.
+///
+/// 초기화
+/// - 환경변수 파일(.env)을 로드합니다.
+/// - Flutter의 위젯 바인딩을 초기화합니다.
+/// - Riverpod의 ProviderScope를 사용하여 상태 관리를 설정합니다.
+/// - ScreenUtil을 사용하여 화면 크기에 따라 UI를 조정합니다.
 
 Future<void> main() async {
     WidgetsFlutterBinding.ensureInitialized();
     await dotenv.load(fileName: "ai_fortune_teller.env");
-
     runApp(
         ProviderScope(
             observers: [AppProviderObserver()],
@@ -38,22 +49,37 @@ class AIFortuneTellerApp extends StatelessWidget {
     }
 }
 
-class _EagerInitialization extends ConsumerWidget {
+class _EagerInitialization extends ConsumerStatefulWidget {
     const _EagerInitialization({required this.child});
     final Widget child;
 
     @override
-    Widget build(BuildContext context, WidgetRef ref) {
+    ConsumerState<_EagerInitialization> createState() => _EagerInitializationState();
+}
+
+class _EagerInitializationState extends ConsumerState<_EagerInitialization> {
+    bool _initialized = false;
+
+    @override
+    void didChangeDependencies() {
+        super.didChangeDependencies();
+
+        if (!_initialized) {
+            ref.read(userInfoProvider.notifier).load();
+            _initialized = true;
+        }
+    }
+
+    @override
+    Widget build(BuildContext context) {
         final values = [
             ref.watch(prefsProvider),
             ref.watch(secureStorageProvider),
         ];
 
-        //ref.wathch를 사용하기 때문에 값이 바뀌면 build가 다시 호출된다.
         if (values.every((value) => value.hasValue)) {
-            return child;
+            return widget.child;
         }
-
         return const SizedBox();
     }
 }
