@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:ai_fortune_teller_app/setting/app_theme.dart';
 import 'package:ai_fortune_teller_app/setting/app_theme_provider.dart';
 import 'package:ai_fortune_teller_app/setting/util/user_info_provider.dart';
