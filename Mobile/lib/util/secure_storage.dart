@@ -28,7 +28,11 @@ class SecureStorage {
     return SecureStorage._(flutterSecureStorage, cache);
   }
 
-  String? get(String key) => _cache[key];
+  Future<String?> get(String key) async {
+    final value = await _flutterSecureStorage.read(key: key);
+    if (value != null) _cache[key] = value; // 최신값으로 캐시 갱신
+    return value;
+  }
 
   Future<void> set(String key, String value) {
     _cache[key] = value;

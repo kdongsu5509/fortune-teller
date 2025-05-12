@@ -1,14 +1,24 @@
+import 'package:ai_fortune_teller_app/setting/repository/model/birth_time.dart';
+import 'package:ai_fortune_teller_app/setting/repository/model/user_info_dto.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class UserInfoUpdateViewModel {
-  final TextEditingController controller = TextEditingController();
+import '../util/user_info_provider.dart';
 
+class UserInfoUpdateViewModel extends ChangeNotifier {
+  final Ref ref;
+  UserInfoDTO? userInfo;
+
+  UserInfoUpdateViewModel(this.ref) {
+    userInfo = ref.read(userInfoProvider);
+  }
+
+  final TextEditingController nameController = TextEditingController();
   int? selectedYear;
   int? selectedMonth;
   int? selectedDay;
   int? selectedGender = 1;
-  int? selectedHour = 0;
-  int? selectedMinute = 0;
+  BirthTime selectedTime = BirthTime.Missing;
 
   final List<int> years = List.generate(60, (i) => DateTime.now().year - i);
   final List<int> months = List.generate(12, (i) => i + 1);
@@ -16,13 +26,23 @@ class UserInfoUpdateViewModel {
   final List<int> sex = [1, 2];
 
   Future<void> init() async {
-    selectedYear = years.contains(DateTime.now().year) ? DateTime.now().year : null;
-    selectedMonth = DateTime.now().month;
-    selectedDay = DateTime.now().day;
-    updateDays();
+    if (userInfo != null ) {
+      nameController.text = userInfo!.name;
+      selectedYear = userInfo!.birthDate.year;
+      selectedMonth = userInfo!.birthDate.month;
+      selectedDay = userInfo!.birthDate.day;
+      selectedTime = userInfo!.birthTime;
+    } else {
+      nameController.text = "";
+      selectedYear = null;
+      selectedMonth = null;
+      selectedDay = null;
+      selectedTime = BirthTime.Missing;
+    }
+    generateDayList();
   }
 
-  void updateDays() {
+  void generateDayList() {
     int maxDay = 31;
     if (selectedMonth != null) {
       switch (selectedMonth) {
@@ -46,5 +66,15 @@ class UserInfoUpdateViewModel {
     if (selectedDay != null && selectedDay! > maxDay) {
       selectedDay = maxDay;
     }
+  }
+
+  Future<void> updateUserInfo() async {
+    userInfo = UserInfoDTO(
+      name: nameController.text,
+      birthDate: DateTime(selectedYear!, selectedMonth!, selectedDay!),
+      birthTime: selectedTime,
+      gender: selectedGender == 1 ? "남자" : "여자",
+    );
+    await ref.read(userInfoProvider.notifier).updateUserInfo(userInfo!);
   }
 }

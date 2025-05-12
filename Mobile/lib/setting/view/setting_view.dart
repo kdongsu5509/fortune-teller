@@ -10,7 +10,6 @@ class SettingsView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // SettingViewModel viewModel = SettingViewModel();
     final isDark = ref.watch(currentThemeModeProvider) == ThemeMode.dark;
 
     return Scaffold(

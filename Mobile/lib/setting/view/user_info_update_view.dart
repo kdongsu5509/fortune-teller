@@ -1,10 +1,10 @@
+import 'package:ai_fortune_teller_app/common/router.dart';
 import 'package:ai_fortune_teller_app/setting/repository/model/birth_time.dart';
 import 'package:ai_fortune_teller_app/setting/view_model/user_info_update_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 import '../repository/model/user_info_dto.dart';
-import '../util/user_info_provider.dart';
+import '../util/user_info_view_model_provider.dart';
 
 class UserInfoUpdateView extends ConsumerStatefulWidget {
   const UserInfoUpdateView({super.key});
@@ -14,259 +14,305 @@ class UserInfoUpdateView extends ConsumerStatefulWidget {
 }
 
 class _UserInfoUpdateViewState extends ConsumerState<UserInfoUpdateView> {
-  final UserInfoUpdateViewModel viewModel = UserInfoUpdateViewModel();
-  final TextEditingController _nameController = TextEditingController();
+  late final UserInfoUpdateViewModel viewModel;
   UserInfoDTO? userInfo;
-  late DateTime selectedDate;
-  late BirthTime selectedTime;
 
   @override
   void initState() {
     super.initState();
-    userInfo = ref.read(userInfoProvider);
-    if (userInfo != null) {
-      _nameController.text = userInfo!.name;
-      selectedDate = userInfo!.birthDate;
-      selectedTime = userInfo!.birthTime;
-    } else {
-      selectedDate = DateTime.now();
-      selectedTime = BirthTime.Missing;
-    }
+    viewModel = ref.read(userInfoUpdateViewModelProvider);
+    viewModel.init();
+    userInfo = viewModel.userInfo;
   }
 
   @override
   Widget build(BuildContext context) {
     final sw = MediaQuery.of(context).size.width;
     final sh = MediaQuery.of(context).size.height;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     final isSmall = sw < 400;
 
     return Scaffold(
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: sw * 0.06, vertical: sh * 0.04),
+      resizeToAvoidBottomInset: true,
+      body: SingleChildScrollView(
+        padding: EdgeInsets.only(
+          left: sw * 0.06,
+          right: sw * 0.06,
+          top: sh * 0.04,
+          bottom: MediaQuery.of(context).viewInsets.bottom + 24,
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _pageTitle(),
+            _buildTitle(context),
             SizedBox(height: sh * 0.03),
-            _name(sw, sh, isSmall),
+            _buildNameField(sw, sh, isSmall, isDark),
             SizedBox(height: sh * 0.03),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                _dropdownButton(viewModel.years, "생년"),
-                _dropdownButton(viewModel.months, "생월"),
-                _dropdownButton(viewModel.days, "생일"),
-              ],
-            ),
+            _buildDateInkwells(sw, sh, isDark),
             SizedBox(height: sh * 0.03),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                _dropdownButton(viewModel.sex, "성별"),
-              ],
-            ),
-            SizedBox(height: sh * 0.03),
-            InkWell(
-              onTap: () async {
-                final picked = await showModalBottomSheet<String>(
-                  context: context,
-                  builder: (context) => ListView.separated(
-                    padding: const EdgeInsets.symmetric(vertical: 12),
-                    itemCount: 13,
-                    itemBuilder: (context, index) {
-                      final time = BirthTime.values[index].name;
-                      return ListTile(
-                        title: Text(BirthTime.values[index].label),
-                        onTap: () => Navigator.pop(context, time),
-                      );
-                    },
-                    separatorBuilder: (context, index) => const Divider(height: 1),
-                  ),
-                );
-                if (picked != null) {
-                  setState(() => selectedTime = BirthTime.values.firstWhere((e) => e.name == picked));
-                }
-              },
-              borderRadius: BorderRadius.circular(16),
-              child: Container(
-                padding: EdgeInsets.symmetric(horizontal: sw * 0.04, vertical: sh * 0.02),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(16),
-                  boxShadow: const [
-                    BoxShadow(
-                      color: Colors.black12,
-                      blurRadius: 8,
-                      offset: Offset(0, 4),
-                    ),
-                  ],
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      selectedTime.label,
-                      style: TextStyle(fontSize: isSmall ? 14 : 16),
-                    ),
-                    const Icon(Icons.expand_more, color: Colors.grey),
-                  ],
-                ),
-              ),
-            ),
-            const Spacer(),
-            SizedBox(
-              width: double.infinity,
-              height: 52,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                ),
-                onPressed: () {
-                  if (_nameController.text.isEmpty) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text("이름을 입력해주세요")),
-                    );
-                    return;
-                  }
-                  if (selectedDate.isAfter(DateTime.now())) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text("생년월일이 잘못되었습니다")),
-                    );
-                    return;
-                  }
-
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text("저장 완료")),
-                  );
-                  Navigator.pop(context);
-                },
-                child: Text(
-                  "저장",
-                  style: TextStyle(
-                    fontSize: isSmall ? 14 : 16,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(height: sh * 0.02),
+            _buildSexAndTimeRow(sw, sh, isSmall, isDark),
+            SizedBox(height: 100), // 바닥 여유공간
           ],
         ),
       ),
-    );
-  }
-  Widget _pageTitle() {
-    return Text(
-      "사용자 정보 수정",
-      style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-        fontWeight: FontWeight.w600,
-        fontFamily: "ChosunCentennial",
+      bottomNavigationBar: Padding(
+        padding: EdgeInsets.only(
+          left: sw * 0.06,
+          right: sw * 0.06,
+          bottom: MediaQuery.of(context).viewInsets.bottom > 0
+              ? MediaQuery.of(context).viewInsets.bottom
+              : 24,
+          top: 12,
+        ),
+        child: _buildSaveButton(sw, isSmall),
       ),
     );
   }
 
-  Widget _name(double sw, double sh, bool isSmall) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black12,
-            blurRadius: 8,
-            offset: Offset(0, 4),
+  Widget _buildTitle(BuildContext context) => Text(
+    "사용자 정보 수정",
+    style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+      fontWeight: FontWeight.w600,
+      fontFamily: "ChosunCentennial",
+    ),
+  );
+
+  Widget _buildNameField(double sw, double sh, bool isSmall, bool isDark) => _outlinedContainer(
+    sw,
+    sh,
+    TextField(
+      controller: viewModel.nameController,
+      style: TextStyle(fontSize: isSmall ? 14 : 16),
+      decoration: const InputDecoration(
+        labelText: "이름",
+        border: InputBorder.none,
+      ),
+    ),
+    isDark,
+  );
+
+  Widget _buildDateInkwells(double sw, double sh, bool isDark) => Row(
+    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    children: [
+      Expanded(flex:4,child: _buildDateInkWell("생년", viewModel.selectedYear, sw, sh, isDark)),
+      SizedBox(width: sw * 0.03),
+      Expanded(flex:3,child: _buildDateInkWell("생월", viewModel.selectedMonth, sw, sh, isDark)),
+      SizedBox(width: sw * 0.03),
+      Expanded(flex:3,child: _buildDateInkWell("생일", viewModel.selectedDay, sw, sh, isDark)),
+    ],
+  );
+
+  Widget _buildDateInkWell(String label, int? selected, double sw, double sh, bool isDark) => InkWell(
+    onTap: () async {
+      final picked = await showModalBottomSheet<int>(
+        context: context,
+        builder: (context) => ListView.separated(
+          padding: const EdgeInsets.symmetric(vertical: 12),
+          itemCount: _getList(label).length,
+          itemBuilder: (context, index) {
+            final value = _getList(label)[index];
+            return ListTile(
+              title: Text("$value"),
+              onTap: () => Navigator.pop(context, value),
+            );
+          },
+          separatorBuilder: (context, index) => const Divider(height: 1),
+        ),
+      );
+      if (picked != null) {
+        setState(() {
+          switch (label) {
+            case "생년":
+              viewModel.selectedYear = picked;
+              viewModel.generateDayList();
+              break;
+            case "생월":
+              viewModel.selectedMonth = picked;
+              viewModel.generateDayList();
+              break;
+            case "생일":
+              viewModel.selectedDay = picked;
+              break;
+          }
+        });
+      }
+    },
+    borderRadius: BorderRadius.circular(16),
+    child: _outlinedContainer(
+      sw,
+      sh,
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            "$label: ${selected ?? '-'}",
+            style: TextStyle(fontSize: sw * 0.035, fontWeight: FontWeight.w500),
           ),
+          const Icon(Icons.expand_more, color: Colors.grey),
         ],
       ),
-      padding: EdgeInsets.symmetric(horizontal: sw * 0.04, vertical: sh * 0.018),
-      child: TextField(
-        controller: _nameController,
-        style: TextStyle(fontSize: isSmall ? 14 : 16),
-        decoration: const InputDecoration(
-          labelText: "이름",
-          border: InputBorder.none,
-        ),
-      ),
-    );
-  }
+      isDark,
+    ),
+  );
 
-
-  Widget _dropdownButton(List<int> items, String label) {
-    final isSex = label == "성별";
-
-    int? selected;
+  List<int> _getList(String label) {
     switch (label) {
       case "생년":
-        selected = viewModel.selectedYear;
-        break;
+        return viewModel.years;
       case "생월":
-        selected = viewModel.selectedMonth;
-        break;
+        return viewModel.months;
       case "생일":
-        selected = viewModel.selectedDay;
-        break;
+        return viewModel.days;
+      default:
+        return [];
+    }
+  }
+
+  Widget _buildSexAndTimeRow(double sw, double sh, bool isSmall, bool isDark) => Row(
+    children: [
+      Expanded(flex: 1, child: _outlinedDropdown(sw, sh, viewModel.sex, "성별", isDark)),
+      SizedBox(width: sw * 0.03),
+      Expanded(flex: 2,child: _buildBirthTimePicker(sw, sh, isSmall, isDark)),
+    ],
+  );
+
+  Widget _buildBirthTimePicker(double sw, double sh, bool isSmall, bool isDark) => InkWell(
+    onTap: () async {
+      final picked = await showModalBottomSheet<String>(
+        context: context,
+        builder: (context) => ListView.separated(
+          padding: const EdgeInsets.symmetric(vertical: 12),
+          itemCount: BirthTime.values.length,
+          itemBuilder: (context, index) {
+            final time = BirthTime.values[index];
+            return ListTile(
+              title: Text(time.label),
+              onTap: () => Navigator.pop(context, time.name),
+            );
+          },
+          separatorBuilder: (context, index) => const Divider(height: 1),
+        ),
+      );
+      if (picked != null) {
+        setState(() => viewModel.selectedTime = BirthTime.values.firstWhere((e) => e.name == picked));
+      }
+    },
+    borderRadius: BorderRadius.circular(16),
+    child: _outlinedContainer(
+      sw,
+      sh,
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            '생시: ${viewModel.selectedTime.label}',
+            style: TextStyle(fontSize: sw * 0.035, fontWeight: FontWeight.w500),
+          ),
+          const Icon(Icons.expand_more, color: Colors.grey),
+        ],
+      ),
+      isDark,
+    ),
+  );
+
+  Widget _buildSaveButton(double sw, bool isSmall) => SizedBox(
+    width: double.infinity,
+    height: 52,
+    child: ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+        ),
+      ),
+      onPressed: _handleSave,
+      child: Text(
+        "저장",
+        style: TextStyle(fontSize: isSmall ? 14 : 16, fontWeight: FontWeight.w600),
+      ),
+    ),
+  );
+
+  Widget _outlinedContainer(double sw, double sh, Widget child, bool isDark) => Container(
+    padding: EdgeInsets.symmetric(horizontal: sw * 0.04, vertical: sh * 0.018),
+    decoration: BoxDecoration(
+      color: isDark ? Colors.grey[900] : Colors.white,
+      borderRadius: BorderRadius.circular(16),
+      boxShadow: [
+        BoxShadow(
+          color: isDark ? Colors.transparent : Colors.black12,
+          blurRadius: 8,
+          offset: const Offset(0, 4),
+        ),
+      ],
+    ),
+    child: child,
+  );
+
+  Widget _outlinedDropdown(double sw, double sh, List<int> items, String label, bool isDark) {
+    final isSex = label == "성별";
+    int? selected;
+    switch (label) {
       case "성별":
         selected = viewModel.selectedGender;
         break;
-      case "생시":
-        selected = viewModel.selectedHour;
-        break;
-      case "생분":
-        selected = viewModel.selectedMinute;
-        break;
     }
 
-    return SizedBox(
-      width: MediaQuery.of(context).size.width * 0.2,
-      height: MediaQuery.of(context).size.width * 0.1,
-      child: DropdownButtonFormField<int>(
-        value: selected,
-        decoration: InputDecoration(
-          labelText: label,
-          border: const OutlineInputBorder(),
-        ),
-        items: items.map((value) {
-          return DropdownMenuItem(
-            value: value,
-            child: Text(label == "생시"
-                ? "$value시"
-                : label == "생분"
-                ? "$value분"
-                : isSex
-                ? (value == 1 ? "남자" : "여자")
-                : "$value"),
-          );
-        }).toList(),
-        onChanged: (value) {
-          setState(() {
-            switch (label) {
-              case "생년":
-                viewModel.selectedYear = value;
-                viewModel.updateDays();
-                break;
-              case "생월":
-                viewModel.selectedMonth = value;
-                viewModel.updateDays();
-                break;
-              case "생일":
-                viewModel.selectedDay = value;
-                break;
-              case "성별":
+    return _outlinedContainer(
+      sw,
+      sh,
+      DropdownButtonHideUnderline(
+        child: DropdownButtonFormField<int>(
+          value: selected,
+          decoration: InputDecoration(
+            labelStyle: TextStyle(color: isDark ? Colors.white70 : Colors.grey[800]),
+            border: InputBorder.none,
+            contentPadding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+          ),
+          dropdownColor: isDark ? Colors.grey[900] : Colors.white,
+          isExpanded: true,
+          borderRadius: BorderRadius.circular(12),
+          items: items.map((value) {
+            return DropdownMenuItem(
+              value: value,
+              child: Text(
+                isSex ? (value == 1 ? "남자" : "여자") : "$value",
+                style: TextStyle(
+                  fontSize: sw * 0.035,
+                  fontWeight: FontWeight.w500,
+                  color: isDark ? Colors.white : Colors.black,
+                ),
+              ),
+            );
+          }).toList(),
+          onChanged: (value) {
+            setState(() {
+              if (label == "성별") {
                 viewModel.selectedGender = value;
-                break;
-              case "생시":
-                viewModel.selectedHour = value;
-                break;
-              case "생분":
-                viewModel.selectedMinute = value;
-                break;
-            }
-          });
-        },
+              }
+            });
+          },
+        ),
       ),
+      isDark,
     );
   }
-}
 
+  void _handleSave() async {
+    if (viewModel.nameController.text.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("이름을 입력해주세요")),
+      );
+      return;
+    }
+
+    await viewModel.updateUserInfo();
+
+    if (!mounted) return;
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text("저장 완료")),
+    );
+
+    router.pop();
+  }
+}

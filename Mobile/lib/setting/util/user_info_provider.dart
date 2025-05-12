@@ -12,7 +12,7 @@ class UserInfo extends _$UserInfo {
 
   Future<void> load() async {
     final storage = await ref.read(secureStorageProvider.future);
-    final json = storage.get('userInfo');
+    final json = await storage.get('userInfo');
     if (json != null) {
       state = UserInfoDTO.fromJson(jsonDecode(json));
     }
@@ -28,5 +28,10 @@ class UserInfo extends _$UserInfo {
     state = null;
     final storage = await ref.read(secureStorageProvider.future);
     await storage.remove('userInfo');
+  }
+
+  Future<void> updateUserInfo(UserInfoDTO userInfoDTO) async {
+    await delete();
+    await save(userInfoDTO);
   }
 }

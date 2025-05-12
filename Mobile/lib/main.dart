@@ -59,13 +59,17 @@ class _EagerInitializationState extends ConsumerState<_EagerInitialization> {
     bool _initialized = false;
 
     @override
-    void didChangeDependencies() {
-        super.didChangeDependencies();
+    void initState() {
+        super.initState();
+        _initialize();
+    }
 
-        if (!_initialized) {
-            ref.read(userInfoProvider.notifier).load();
+    Future<void> _initialize() async {
+        if (_initialized) return;
+        await ref.read(userInfoProvider.notifier).load(); // await!
+        setState(() {
             _initialized = true;
-        }
+        });
     }
 
     @override
@@ -75,12 +79,14 @@ class _EagerInitializationState extends ConsumerState<_EagerInitialization> {
             ref.watch(secureStorageProvider),
         ];
 
-        if (values.every((value) => value.hasValue)) {
+        if (_initialized && values.every((v) => v.hasValue)) {
             return widget.child;
         }
-        return const SizedBox();
+
+        return const Center(child: CircularProgressIndicator());
     }
 }
+
 
 class _MaterialApp extends ConsumerWidget {
     const _MaterialApp({super.key});

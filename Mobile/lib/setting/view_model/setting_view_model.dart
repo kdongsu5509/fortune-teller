@@ -22,15 +22,15 @@ class SettingViewModel extends StateNotifier<UserInfoDTO?> {
   }
 
   Future<void> _initUserInfo() async {
-    final json = _secureStorage.get('userInfo');
+    final json = await _secureStorage.get('userInfo'); // ✅ await 추가
     if (json != null) {
       state = UserInfoDTO.fromJson(jsonDecode(json));
     }
   }
 
   Future<void> updateUserInfo(UserInfoDTO userInfo) async {
-    state = userInfo;
     await _secureStorage.set('userInfo', jsonEncode(userInfo.toJson()));
+    state = userInfo;
   }
 
   Future<void> clearUserInfo() async {

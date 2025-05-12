@@ -22,6 +22,7 @@ Map<String, dynamic> _$UserInfoDTOToJson(UserInfoDTO instance) =>
     };
 
 const _$BirthTimeEnumMap = {
+  BirthTime.Missing: 'Missing',
   BirthTime.Ja: 'Ja',
   BirthTime.Chuk: 'Chuk',
   BirthTime.In: 'In',
@@ -34,5 +35,4 @@ const _$BirthTimeEnumMap = {
   BirthTime.Yu: 'Yu',
   BirthTime.Sul: 'Sul',
   BirthTime.Hae: 'Hae',
-  BirthTime.Missing: 'Missing',
 };

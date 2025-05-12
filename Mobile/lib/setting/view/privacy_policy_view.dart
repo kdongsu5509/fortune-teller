@@ -8,7 +8,6 @@ class PrivacyPolicyView extends StatelessWidget {
     final sw = MediaQuery.of(context).size.width;
 
     return Scaffold(
-
       body: Padding(
         padding: EdgeInsets.all(sw * 0.06),
         child: ListView(
@@ -16,8 +15,9 @@ class PrivacyPolicyView extends StatelessWidget {
             Text(
               "개인정보 처리방침",
               style: TextStyle(fontSize: sw*0.075, fontWeight: FontWeight.bold),
-              textAlign: TextAlign.center,
+              textAlign: TextAlign.left,
             ),
+            const SizedBox(height: 16),
             const Text(
               "1. 수집하는 개인정보 항목",
               style: TextStyle(fontWeight: FontWeight.bold),
