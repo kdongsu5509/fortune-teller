@@ -1,4 +1,5 @@
 import 'package:ai_fortune_teller_app/common/router.dart';
+import 'package:ai_fortune_teller_app/home/widget/add_box.dart';
 import 'package:ai_fortune_teller_app/home/widget/notice_box.dart';
 import 'package:ai_fortune_teller_app/home/widget/top_banner.dart';
 import 'package:ai_fortune_teller_app/home/widget/user_info_card.dart';
@@ -18,9 +19,11 @@ class HomeView extends ConsumerWidget {
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
-          TopBanner(sw),
+          TopBanner(),
           SizedBox(height: sw * 0.03),
           UserInfoCard(sw),
+          SizedBox(height: sw * 0.03),
+          AddBox(0.15),
           SizedBox(height: sw * 0.04),
           GridView.count(
             crossAxisCount: 2,
@@ -43,6 +46,7 @@ class HomeView extends ConsumerWidget {
                 title: '오늘의 운세',
                 subtitle: '오늘 하루 나의 운세는?',
                 onTap: () {
+                  router.push('/today');
                 },
               ),
               ServiceCard(
@@ -55,15 +59,15 @@ class HomeView extends ConsumerWidget {
               ServiceCard(
                 icon: "☁️",
                 title: '해몽',
-                subtitle: '꿈의 의미를 해석해드립니다',
+                subtitle: '꿈 해석해드립니다',
                 onTap: () {},
               ),
             ],
           ),
           SizedBox(height: sw * 0.03),
-          Text("광고", style: TextStyle(fontSize: 16)),
+          AddBox(0.3),
           SizedBox(height: sw * 0.03),
-          NoticeBox(sw),
+          NoticeBox(),
         ],
       ),
     );

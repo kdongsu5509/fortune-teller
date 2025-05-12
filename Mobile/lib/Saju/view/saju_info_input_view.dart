@@ -1,5 +1,6 @@
+import 'package:ai_fortune_teller_app/Saju/view_model/saju_info_input_view_model.dart';
 import 'package:flutter/material.dart';
-import '../../DataLayer/Dto/user_info_dto.dart';
+import '../../setting/repository/model/user_info_dto.dart';
 import '../../View/result_view.dart';
 import '../../ViewModel/info_input_view_model.dart';
 
@@ -11,18 +12,7 @@ class InfoInputView extends StatefulWidget {
 }
 
 class _InfoInputViewState extends State<InfoInputView> {
-  final TextEditingController _controller = TextEditingController();
-
-  int? selectedYear;
-  int? selectedMonth;
-  int? selectedDay;
-  int? selectedGender = 1;
-
-  final List<int> years = List.generate(60, (i) => DateTime.now().year - i);
-  final List<int> months = List.generate(12, (i) => i + 1);
-  List<int> days = [];
-  final List<int> sex = [1, 2];
-
+  SajuInfoInputViewModel viewModel = SajuInfoInputViewModel();
   bool _isLoading = false;
 
   void toggleLoading() => setState(() => _isLoading = !_isLoading);
@@ -30,36 +20,7 @@ class _InfoInputViewState extends State<InfoInputView> {
   @override
   void initState() {
     super.initState();
-    selectedYear = years.contains(DateTime.now().year) ? DateTime.now().year : null;
-    selectedMonth = DateTime.now().month;
-    selectedDay = DateTime.now().day;
-    _updateDays();
-  }
-
-  void _updateDays() {
-    int maxDay = 31;
-    if (selectedMonth != null) {
-      switch (selectedMonth) {
-        case 2:
-          if (selectedYear != null &&
-              ((selectedYear! % 4 == 0 && selectedYear! % 100 != 0) || selectedYear! % 400 == 0)) {
-            maxDay = 29;
-          } else {
-            maxDay = 28;
-          }
-          break;
-        case 4:
-        case 6:
-        case 9:
-        case 11:
-          maxDay = 30;
-          break;
-      }
-    }
-    days = List.generate(maxDay, (i) => i + 1);
-    if (selectedDay != null && selectedDay! > maxDay) {
-      selectedDay = maxDay;
-    }
+    viewModel.init();
   }
 
   @override
@@ -69,25 +30,21 @@ class _InfoInputViewState extends State<InfoInputView> {
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("정보 입력"),
-        centerTitle: true,
-        backgroundColor: isDark ? Colors.black : Colors.white,
-        foregroundColor: isDark ? Colors.white : Colors.black,
-        elevation: 0,
-      ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: sw * 0.08),
         child: ListView(
           children: [
-            SizedBox(height: sh * 0.05),
-            const Text(
-              "아래 입력한 정보는 분석에만 사용됩니다.\n서버 및 해당 기기에 저장되지 않습니다.",
+            SizedBox(height: sh * 0.2),
+            Text(
+              "사용자 정보 입력",
+              style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
               textAlign: TextAlign.center,
             ),
-            SizedBox(height: sh * 0.05),
+            SizedBox(height: sh * 0.03),
             TextField(
-              controller: _controller,
+              controller: viewModel.controller,
               decoration: InputDecoration(
                 labelText: "이름을 입력하세요",
                 border: const OutlineInputBorder(),
@@ -102,10 +59,18 @@ class _InfoInputViewState extends State<InfoInputView> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                _dropdownButton(years, "생년"),
-                _dropdownButton(months, "생월"),
-                _dropdownButton(days, "생일"),
-                _dropdownButton(sex, "성별"),
+                _dropdownButton(viewModel.years, "생년"),
+                _dropdownButton(viewModel.months, "생월"),
+                _dropdownButton(viewModel.days, "생일"),
+                _dropdownButton(viewModel.sex, "성별"),
+              ],
+            ),
+            SizedBox(height: sh * 0.02),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                _dropdownButton(List.generate(24, (i) => i), "생시"),
+                _dropdownButton(List.generate(60, (i) => i), "생분"),
               ],
             ),
             SizedBox(height: sh * 0.06),
@@ -113,25 +78,27 @@ class _InfoInputViewState extends State<InfoInputView> {
                 ? const Center(child: CircularProgressIndicator())
                 : ElevatedButton(
               onPressed: () async {
-                if (_controller.text.trim().isEmpty) {
+                if (viewModel.controller.text.trim().isEmpty) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(content: Text("이름을 입력하세요.")),
                   );
                   return;
                 }
 
-                final name = _controller.text.trim();
-                final genderStr = selectedGender == 1 ? "남자" : "여자";
-                final dto = UserInfoDTO(
-                  name: name,
-                  year: selectedYear!,
-                  month: selectedMonth!,
-                  day: selectedDay!,
-                  gender: genderStr,
-                );
+                final name = viewModel.controller.text.trim();
+                final genderStr = viewModel.selectedGender == 1 ? "남자" : "여자";
+                // final dto = UserInfoDTO(
+                //   name: name,
+                //   year: viewModel.selectedYear!,
+                //   month: viewModel.selectedMonth!,
+                //   day: viewModel.selectedDay!,
+                //   gender: genderStr,
+                //   hour: viewModel.selectedHour!,
+                //   minute: viewModel.selectedMinute!,
+                // );
 
                 toggleLoading();
-                await InfoInputViewModel().analyzeReqToRepo(dto);
+                // await InfoInputViewModel().analyzeReqToRepo(dto);
                 toggleLoading();
 
                 Navigator.of(context).push(
@@ -163,16 +130,22 @@ class _InfoInputViewState extends State<InfoInputView> {
     int? selected;
     switch (label) {
       case "생년":
-        selected = selectedYear;
+        selected = viewModel.selectedYear;
         break;
       case "생월":
-        selected = selectedMonth;
+        selected = viewModel.selectedMonth;
         break;
       case "생일":
-        selected = selectedDay;
+        selected = viewModel.selectedDay;
         break;
       case "성별":
-        selected = selectedGender;
+        selected = viewModel.selectedGender;
+        break;
+      case "생시":
+        selected = viewModel.selectedHour;
+        break;
+      case "생분":
+        selected = viewModel.selectedMinute;
         break;
     }
 
@@ -187,25 +160,37 @@ class _InfoInputViewState extends State<InfoInputView> {
         items: items.map((value) {
           return DropdownMenuItem(
             value: value,
-            child: Text(isSex ? (value == 1 ? "남자" : "여자") : "$value"),
+            child: Text(label == "생시"
+                ? "$value시"
+                : label == "생분"
+                ? "$value분"
+                : isSex
+                ? (value == 1 ? "남자" : "여자")
+                : "$value"),
           );
         }).toList(),
         onChanged: (value) {
           setState(() {
             switch (label) {
               case "생년":
-                selectedYear = value;
-                _updateDays();
+                viewModel.selectedYear = value;
+                viewModel.updateDays();
                 break;
               case "생월":
-                selectedMonth = value;
-                _updateDays();
+                viewModel.selectedMonth = value;
+                viewModel.updateDays();
                 break;
               case "생일":
-                selectedDay = value;
+                viewModel.selectedDay = value;
                 break;
               case "성별":
-                selectedGender = value;
+                viewModel.selectedGender = value;
+                break;
+              case "생시":
+                viewModel.selectedHour = value;
+                break;
+              case "생분":
+                viewModel.selectedMinute = value;
                 break;
             }
           });

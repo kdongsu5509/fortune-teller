@@ -3,7 +3,7 @@ import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import '../Dto/user_info_dto.dart';
+import '../../setting/repository/model/user_info_dto.dart';
 import 'my_dio.dart';
 
 /**

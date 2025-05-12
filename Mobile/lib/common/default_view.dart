@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../setting/app_theme_provider.dart';
+import '../setting/view/widget/theme_icon_button.dart';
 
 class DefaultView extends ConsumerStatefulWidget {
   final Widget child;
@@ -41,7 +42,13 @@ class _DefaultViewState extends ConsumerState<DefaultView> {
             children: [
               SizedBox(width: sw * 0.125),
               const Text("AI Fortune Teller", style: TextStyle(fontFamily: "Lobster")),
-              const ThemeIconButton(),
+              ThemeIconButton(
+                onPressed: () {
+                  final currentThemeMode = ref.read(currentThemeModeProvider);
+                  ref.read(currentThemeModeProvider.notifier).state =
+                      currentThemeMode == ThemeMode.dark ? ThemeMode.light : ThemeMode.dark;
+                },
+              ),
             ],
           ),
         ),
@@ -80,21 +87,5 @@ class _DefaultViewState extends ConsumerState<DefaultView> {
     if (location.startsWith('/premium')) return 1;
     if (location.startsWith('/settings')) return 2;
     return 0;
-  }
-}
-
-class ThemeIconButton extends ConsumerWidget {
-  const ThemeIconButton({super.key});
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final themeMode = ref.watch(currentThemeModeProvider);
-    return IconButton(
-      icon: Icon(themeMode == ThemeMode.dark ? Icons.light_mode : Icons.dark_mode),
-      onPressed: () {
-        ref.read(currentThemeModeProvider.notifier).state =
-        themeMode == ThemeMode.dark ? ThemeMode.light : ThemeMode.dark;
-      },
-    );
   }
 }

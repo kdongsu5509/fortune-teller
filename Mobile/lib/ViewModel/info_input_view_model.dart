@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import '../DataLayer/Dto/user_info_dto.dart';
+import '../setting/repository/model/user_info_dto.dart';
 import '../DataLayer/Repository/analyze_repository_local.dart';
 
 class InfoInputViewModel {

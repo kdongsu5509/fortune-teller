@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import '../Dto/user_info_dto.dart';
+import '../../setting/repository/model/user_info_dto.dart';
 import '../Service/AnalyzeService.dart';
 
 class AnalyzeRepositoryLocal {

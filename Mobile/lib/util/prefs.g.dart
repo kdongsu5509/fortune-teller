@@ -8,7 +8,11 @@ part of 'prefs.dart';
 
 String _$prefsHash() => r'2bafd251ee278646f0e60ac1b32877e860e438af';
 
-/// See also [prefs].
+/// SharedPreferencesWithCache
+///
+/// This class is a wrapper around SharedPreferences that provides caching functionality.
+///
+/// Copied from [prefs].
 @ProviderFor(prefs)
 final prefsProvider =
     AutoDisposeFutureProvider<SharedPreferencesWithCache>.internal(

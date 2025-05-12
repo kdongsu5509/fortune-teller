@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
 class NoticeBox extends StatelessWidget {
-  const NoticeBox(this.sw, {super.key});
-  final double sw;
+  const NoticeBox({super.key});
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    final sw = size.width;
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Container(
