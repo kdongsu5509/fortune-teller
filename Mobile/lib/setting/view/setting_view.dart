@@ -6,7 +6,9 @@ import '../../common/router.dart';
 import '../app_theme_provider.dart';
 
 class SettingsView extends ConsumerWidget {
-  const SettingsView({super.key});
+  SettingsView({super.key});
+
+  final SettingViewModel viewModel = SettingViewModel(null);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -36,7 +38,7 @@ class SettingsView extends ConsumerWidget {
             title: const Text('다크 모드'),
             value: isDark,
             onChanged: (value) {
-              // viewModel.toggleTheme(ref);
+              viewModel.toggleTheme(ref);
             },
           ),
 

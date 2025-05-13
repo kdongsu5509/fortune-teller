@@ -1,5 +1,5 @@
 import 'package:ai_fortune_teller_app/common/router.dart';
-import 'package:ai_fortune_teller_app/home/widget/add_box.dart';
+import 'package:ai_fortune_teller_app/home/widget/banner_add_box.dart';
 import 'package:ai_fortune_teller_app/home/widget/notice_box.dart';
 import 'package:ai_fortune_teller_app/home/widget/top_banner.dart';
 import 'package:ai_fortune_teller_app/home/widget/user_info_card.dart';
@@ -23,7 +23,7 @@ class HomeView extends ConsumerWidget {
           SizedBox(height: sw * 0.03),
           UserInfoCard(sw),
           SizedBox(height: sw * 0.03),
-          AddBox(0.15),
+          BannerAddBox(0.15),
           SizedBox(height: sw * 0.04),
           GridView.count(
             crossAxisCount: 2,
@@ -65,7 +65,7 @@ class HomeView extends ConsumerWidget {
             ],
           ),
           SizedBox(height: sw * 0.03),
-          AddBox(0.3),
+          BannerAddBox(0.3),
           SizedBox(height: sw * 0.03),
           NoticeBox(),
         ],

@@ -1,10 +1,9 @@
-import 'package:flutter/material.dart';
+import 'package:ai_fortune_teller_app/Saju/view/saju_result_view.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:ai_fortune_teller_app/common/default_view.dart';
 import 'package:ai_fortune_teller_app/home/home_view.dart';
 import 'package:ai_fortune_teller_app/premium/view/premium_view.dart';
-import 'package:ai_fortune_teller_app/Saju/view/saju_info_input_view.dart';
 import 'package:ai_fortune_teller_app/TodayLuck/today_luck.dart';
 import 'package:ai_fortune_teller_app/setting/view/setting_view.dart';
 import 'package:ai_fortune_teller_app/setting/view/user_info_update_view.dart';
@@ -18,8 +17,8 @@ final router = GoRouter(
       routes: [
         GoRoute(path: '/', builder: (_, __) => const HomeView()),
         GoRoute(path: '/premium', builder: (_, __) => const PremiumView()),
-        GoRoute(path: '/saju', builder: (_, __) => const InfoInputView()),
-        GoRoute(path: '/settings', builder: (_, __) => const SettingsView()),
+        GoRoute(path: '/saju', builder: (_, __) => const SaJuResultView(data: {})),
+        GoRoute(path: '/settings', builder: (_, __) => SettingsView()),
         GoRoute(path: '/settings/user', builder: (_, __) => const UserInfoUpdateView()),
         GoRoute(path: '/settings/privacy', builder: (_, __) => const PrivacyPolicyView()),
         GoRoute(path: '/today', builder: (_, __) => const TodayFortuneView()),

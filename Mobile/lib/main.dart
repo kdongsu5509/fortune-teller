@@ -1,12 +1,16 @@
+import 'dart:async';
+
 import 'package:ai_fortune_teller_app/setting/app_theme.dart';
 import 'package:ai_fortune_teller_app/setting/app_theme_provider.dart';
 import 'package:ai_fortune_teller_app/setting/util/user_info_provider.dart';
+import 'package:ai_fortune_teller_app/splash_screen.dart';
 import 'package:ai_fortune_teller_app/util/provider_observer.dart';
 import 'package:ai_fortune_teller_app/util/secure_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'util/prefs.dart';
 import 'common/router.dart';
 
@@ -21,6 +25,7 @@ import 'common/router.dart';
 
 Future<void> main() async {
     WidgetsFlutterBinding.ensureInitialized();
+    await MobileAds.instance.initialize();
     await dotenv.load(fileName: "ai_fortune_teller.env");
     runApp(
         ProviderScope(
@@ -66,7 +71,7 @@ class _EagerInitializationState extends ConsumerState<_EagerInitialization> {
 
     Future<void> _initialize() async {
         if (_initialized) return;
-        await ref.read(userInfoProvider.notifier).load(); // await!
+        await ref.read(userInfoProvider.notifier).load(); // 기본 초기화
         setState(() {
             _initialized = true;
         });
@@ -83,7 +88,10 @@ class _EagerInitializationState extends ConsumerState<_EagerInitialization> {
             return widget.child;
         }
 
-        return const Center(child: CircularProgressIndicator());
+        return const Directionality(
+            textDirection: TextDirection.ltr,
+            child: SplashScreenWidget(),
+        );
     }
 }
 
