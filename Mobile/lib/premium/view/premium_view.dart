@@ -41,7 +41,7 @@ class PremiumView extends StatelessWidget {
                     _premiumOptionCard(
                       context,
                       title: "🚫 광고 제거",
-                      description: "AI 운세를 광고 없이 쾌적하게 이용할 수 있어요.",
+                      description: "앱을 \"전면광고\" 없이 쾌적하게 이용할 수 있어요.",
                       buttonText: "광고 제거 구매하기",
                       onPressed: () {
                         // TODO: 광고 제거 IAP 로직
@@ -52,7 +52,7 @@ class PremiumView extends StatelessWidget {
                     _premiumOptionCard(
                       context,
                       title: "☕ 개발자에게 커피 한 잔",
-                      description: "앱이 마음에 드셨다면 따뜻한 후원을 보내주세요!",
+                      description: "앱이 마음에 드셨다면 따뜻한 후원을 보내주세요! \n학생 개발자인 제가 이 앱을 오래 유지할 수 있어요!",
                       buttonText: "후원하기",
                       onPressed: () {
                         // TODO: 단순 후원 결제 로직

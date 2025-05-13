@@ -71,7 +71,7 @@ class _EagerInitializationState extends ConsumerState<_EagerInitialization> {
 
     Future<void> _initialize() async {
         if (_initialized) return;
-        await ref.read(userInfoProvider.notifier).load(); // 기본 초기화
+        await ref.read(userInfoProvider.notifier).load(); // 사용자 정보 로드
         setState(() {
             _initialized = true;
         });
