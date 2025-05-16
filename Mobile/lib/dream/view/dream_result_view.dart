@@ -64,7 +64,7 @@ class DreamResultView extends StatelessWidget {
                   context,
                 ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
               ),
-              SizedBox(height: 12),
+              SizedBox(height: sh * 0.015),
               for (final item in symbols)
                 _buildSymbolCard(context, item['symbol'], item['meaning']),
 
@@ -74,18 +74,16 @@ class DreamResultView extends StatelessWidget {
               _buildSymbolCard(context, "💡 조언", dreamAdvice),
 
               getAskToGptButton(isDark, sw),
-              SizedBox(height: 32),
+              SizedBox(height: sh * 0.02),
               Center(
                 child: Text(
                   "※ 본 해몽은 AI 분석 결과이며 참고용입니다.",
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: isDark ? Colors.grey[300] : Colors.grey,
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                    color: isDark ? Colors.white70 : Colors.black54,
                   ),
                   textAlign: TextAlign.center,
                 ),
               ),
-              SizedBox(height: 16),
             ],
           ),
         ),
