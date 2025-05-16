@@ -26,8 +26,14 @@ final router = GoRouter(
         GoRoute(path: '/today', builder: (_, __) => const TodayFortuneView()),
         GoRoute(path: '/face/input', builder: (_, __) => FaceInputView()),
         GoRoute(path: '/face/result', builder: (_, __) => FaceAnalysisView()),
-        GoRoute(path: '/dream/input', builder: (_, __) => const DreamInputView()),
-        GoRoute(path: '/dream/result', builder: (_, __) => const DreamResultView()),
+        GoRoute(
+          path: '/dream/input',
+          builder: (_, __) => const DreamInputView(),
+        ),
+        GoRoute(
+          path: '/dream/result',
+          builder: (_, __) => const DreamResultView(),
+        ),
         GoRoute(path: '/settings', builder: (_, __) => SettingsView()),
         GoRoute(
           path: '/settings/user',

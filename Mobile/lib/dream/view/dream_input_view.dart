@@ -29,7 +29,6 @@ class _DreamInputViewState extends State<DreamInputView> {
 
     // 👉 실제 AI 해몽 요청 또는 결과 화면으로 이동
     router.go('/dream/result');
-
   }
 
   @override
@@ -47,7 +46,9 @@ class _DreamInputViewState extends State<DreamInputView> {
           children: [
             Text(
               "🔮 어떤 꿈을 꾸셨나요?",
-              style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
+              style: Theme.of(
+                context,
+              ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
             ),
             SizedBox(height: sh * 0.02),
             Expanded(
@@ -58,8 +59,12 @@ class _DreamInputViewState extends State<DreamInputView> {
                 keyboardType: TextInputType.multiline,
                 decoration: InputDecoration(
                   hintText: "꿈 내용을 입력해 주세요.",
-                  hintStyle: TextStyle(color: isDark ? Colors.grey[400] : Colors.grey[600], ),
-                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                  hintStyle: TextStyle(
+                    color: isDark ? Colors.grey[400] : Colors.grey[600],
+                  ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
                   filled: true,
                   fillColor: isDark ? Colors.grey[900] : Colors.grey[100],
                 ),
@@ -72,7 +77,9 @@ class _DreamInputViewState extends State<DreamInputView> {
               child: ElevatedButton(
                 onPressed: _submitDream,
                 style: ElevatedButton.styleFrom(
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
                 ),
                 child: const Text("AI에게 해몽 요청하기"),
               ),
@@ -81,7 +88,10 @@ class _DreamInputViewState extends State<DreamInputView> {
             Center(
               child: Text(
                 "※ 꿈 내용을 바탕으로 AI가 유형과 해몽을 분석합니다.",
-                style: TextStyle(fontSize: 12, color: isDark ? Colors.grey[300] : Colors.grey),
+                style: TextStyle(
+                  fontSize: 12,
+                  color: isDark ? Colors.grey[300] : Colors.grey,
+                ),
                 textAlign: TextAlign.center,
               ),
             ),

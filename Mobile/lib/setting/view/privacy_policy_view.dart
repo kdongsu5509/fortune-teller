@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
 class PrivacyPolicyView extends StatelessWidget {
-    const PrivacyPolicyView({super.key});
+  const PrivacyPolicyView({super.key});
 
-    @override
-    Widget build(BuildContext context) {
-        final sw = MediaQuery.of(context).size.width;
+  @override
+  Widget build(BuildContext context) {
+    final sw = MediaQuery.of(context).size.width;
 
-        const String _privacyPolicyContent = '''
+    const String _privacyPolicyContent = '''
 1. 수집하는 개인정보 항목 및 수집 방법
 본 앱은 사용자에게 맞춤형 운세 분석 및 AI 기반 서비스를 제공하기 위해 다음과 같은 개인정보를 수집할 수 있습니다.
 
@@ -54,29 +54,29 @@ class PrivacyPolicyView extends StatelessWidget {
 - 내용 변경 시 앱 내 알림 또는 공지사항을 통해 사전 고지합니다.
 ''';
 
-        return Scaffold(
-            body: Padding(
-                padding: EdgeInsets.all(sw * 0.06),
-                child: ListView(
-                    children: [
-                        Text(
-                            "개인정보 처리방침",
-                            style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                                fontSize: sw * 0.06
-                            ),
-                            textAlign: TextAlign.left
-                        ),
-                        SizedBox(height: sw * 0.05),
-                        Text(
-                            _privacyPolicyContent,
-                            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                                fontSize: sw * 0.04
-                            ),
-                            textAlign: TextAlign.left
-                        ),
-                    ]
-                )
-            )
-        );
-    }
+    return Scaffold(
+      body: Padding(
+        padding: EdgeInsets.all(sw * 0.06),
+        child: ListView(
+          children: [
+            Text(
+              "개인정보 처리방침",
+              style: Theme.of(
+                context,
+              ).textTheme.titleLarge!.copyWith(fontSize: sw * 0.06),
+              textAlign: TextAlign.left,
+            ),
+            SizedBox(height: sw * 0.05),
+            Text(
+              _privacyPolicyContent,
+              style: Theme.of(
+                context,
+              ).textTheme.bodyMedium!.copyWith(fontSize: sw * 0.04),
+              textAlign: TextAlign.left,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 }

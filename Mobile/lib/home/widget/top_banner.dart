@@ -13,10 +13,7 @@ class TopBanner extends StatelessWidget {
       height: sw * 0.25,
       padding: EdgeInsets.all(sw * 0.03),
       alignment: Alignment.bottomLeft,
-      child: Text(
-        _title,
-        style: Theme.of(context).textTheme.titleLarge,
-      ),
+      child: Text(_title, style: Theme.of(context).textTheme.titleLarge),
     );
   }
 }
