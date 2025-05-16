@@ -5,65 +5,76 @@ class PremiumView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     final size = MediaQuery.of(context).size;
-    final sw = size.width;
-    final sh = size.height;
-    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      backgroundColor: theme.scaffoldBackgroundColor,
       body: LayoutBuilder(
         builder: (context, constraints) {
-          final isWide = constraints.maxWidth > 600;
+          final isWide = constraints.maxWidth >= 600;
+          final padding = EdgeInsets.symmetric(horizontal: isWide ? 32 : 16);
+
           return Center(
             child: ConstrainedBox(
               constraints: const BoxConstraints(maxWidth: 700),
               child: Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: sw * 0.06,
-                  vertical: sh * 0.03,
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    SizedBox(height: sh * 0.05),
-                    Text(
-                      "🎁 프리미엄 서비스 안내",
-                      style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                        fontWeight: FontWeight.bold,
+                padding: padding,
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      SizedBox(height: size.height * 0.05),
+                      Text(
+                        '🎁 프리미엄 서비스 안내',
+                        style: theme.textTheme.headlineSmall?.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
+                        textAlign: TextAlign.center,
                       ),
-                      textAlign: TextAlign.center,
-                    ),
-                    SizedBox(height: sh * 0.03),
-                    const Text(
-                      "원하는 방식으로 앱을 후원하거나 광고 없이 이용하세요!",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 16),
-                    ),
-                    SizedBox(height: sh * 0.05),
-                    _premiumOptionCard(
-                      context,
-                      title: "🚫 광고 제거",
-                      description: "앱을 \"전면광고\" 없이 쾌적하게 이용할 수 있어요.",
-                      buttonText: "광고 제거 구매하기",
-                      onPressed: () {
-                        // TODO: 광고 제거 IAP 로직
-                      },
-                      isWide: isWide,
-                    ),
-                    SizedBox(height: sh * 0.03),
-                    _premiumOptionCard(
-                      context,
-                      title: "☕ 개발자에게 커피 한 잔",
-                      description:
-                          "앱이 마음에 드셨다면 따뜻한 후원을 보내주세요! \n학생 개발자인 제가 이 앱을 오래 유지할 수 있어요!",
-                      buttonText: "후원하기",
-                      onPressed: () {
-                        // TODO: 단순 후원 결제 로직
-                      },
-                      isWide: isWide,
-                    ),
-                  ],
+                      SizedBox(height: size.height * 0.02),
+                      Text(
+                        '광고 없이 더 깔끔하게,\n후원으로 앱의 미래를 함께 해주세요!',
+                        style: theme.textTheme.bodyMedium?.copyWith(height: 1.4),
+                        textAlign: TextAlign.center,
+                      ),
+                      SizedBox(height: size.height * 0.04),
+                      Wrap(
+                        runSpacing: 24,
+                        spacing: 24,
+                        alignment: WrapAlignment.center,
+                        children: [
+                          SizedBox(
+                            width: isWide ? 300 : double.infinity,
+                            child: PremiumOptionCard(
+                              size: size.width,
+                              icon: Icons.block,
+                              title: '광고 제거',
+                              description: '앱을 전면광고 없이 쾌적하게 이용할 수 있어요.',
+                              buttonText: '광고 제거 구매하기',
+                              onPressed: () {
+                                // TODO: 광고 제거 로직
+                              },
+                            ),
+                          ),
+                          SizedBox(
+                            width: isWide ? 300 : double.infinity,
+                            child: PremiumOptionCard(
+                              size: size.width,
+                              icon: Icons.coffee,
+                              title: '개발자 후원',
+                              description:
+                              '따뜻한 커피 한 잔 후원으로 앱 유지에 큰 힘이 돼요 ☕',
+                              buttonText: '후원하기',
+                              onPressed: () {
+                                // TODO: 후원 결제 로직
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: size.height * 0.02),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -72,48 +83,70 @@ class PremiumView extends StatelessWidget {
       ),
     );
   }
+}
 
-  Widget _premiumOptionCard(
-    BuildContext context, {
-    required String title,
-    required String description,
-    required String buttonText,
-    required VoidCallback onPressed,
-    required bool isWide,
-  }) {
-    final sw = MediaQuery.of(context).size.width;
-    final sh = MediaQuery.of(context).size.height;
-    final isDark = Theme.of(context).brightness == Brightness.dark;
+class PremiumOptionCard extends StatelessWidget {
+  final IconData icon;
+  final String title;
+  final String description;
+  final String buttonText;
+  final VoidCallback onPressed;
+  final double size;
 
-    return Container(
-      width: double.infinity,
-      padding: EdgeInsets.all(sw * 0.05),
-      decoration: BoxDecoration(
-        color: isDark ? Colors.grey[850] : Colors.grey[200],
+  const PremiumOptionCard({
+    super.key,
+    required this.icon,
+    required this.title,
+    required this.description,
+    required this.buttonText,
+    required this.onPressed,
+    this.size = 64,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+
+    return Card(
+      color: theme.cardColor,
+      elevation: isDark ? 0 : 4,
+      shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(title, style: Theme.of(context).textTheme.titleMedium),
-          SizedBox(height: sh * 0.01),
-          Text(description),
-          SizedBox(height: sh * 0.03),
-          Center(
-            child: ElevatedButton(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 20),
+        child: Column(
+          children: [
+            Icon(icon, size: size * 0.2, color: theme.colorScheme.primary),
+            SizedBox(height: size * 0.02),
+            Text(
+              title,
+              style: theme.textTheme.titleMedium?.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(height: size * 0.01),
+            Text(
+              description,
+              style: theme.textTheme.bodyMedium,
+              textAlign: TextAlign.center,
+            ),
+            SizedBox(height: size * 0.02),
+            ElevatedButton(
               onPressed: onPressed,
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFF5B77F5),
-                foregroundColor: Colors.white,
-                minimumSize: Size(isWide ? sw * 0.3 : sw * 0.6, 48),
+                minimumSize: const Size.fromHeight(44),
+                backgroundColor: theme.colorScheme.primary,
+                foregroundColor: theme.colorScheme.onPrimary,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
               ),
               child: Text(buttonText),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
