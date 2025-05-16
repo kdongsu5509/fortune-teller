@@ -104,12 +104,12 @@ class _UserInfoUpdateViewState extends ConsumerState<UserInfoUpdateView> {
       SizedBox(width: sw * 0.03),
       Expanded(
         flex: 3,
-        child: _buildDateInkWell("생월", viewModel.selectedMonth, sw, sh, isDark),
+        child: _buildDateInkWell("월", viewModel.selectedMonth, sw, sh, isDark),
       ),
       SizedBox(width: sw * 0.03),
       Expanded(
         flex: 3,
-        child: _buildDateInkWell("생일", viewModel.selectedDay, sw, sh, isDark),
+        child: _buildDateInkWell("일", viewModel.selectedDay, sw, sh, isDark),
       ),
     ],
   );

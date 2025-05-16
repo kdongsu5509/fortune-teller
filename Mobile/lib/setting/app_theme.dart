@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 ThemeData createHighContrastLightTheme(BuildContext context) {
   final size = MediaQuery.of(context).size;
   final double sw = size.width;
-  final double sh = size.height;
 
   return ThemeData(
     useMaterial3: true,
@@ -21,20 +20,23 @@ ThemeData createHighContrastLightTheme(BuildContext context) {
       elevation: 0,
       centerTitle: true,
       titleTextStyle: TextStyle(
-        fontSize: sw * 0.06, // 상대 폰트 크기
+        fontSize: sw * 0.065, // 기존보다 약간 큼
         fontWeight: FontWeight.bold,
         color: Colors.black,
       ),
     ),
     textTheme: TextTheme(
       bodyLarge: TextStyle(
-        fontSize: sw * 0.042,
+        fontSize: sw * 0.045, // 기존 0.042
         color: Colors.black,
         fontWeight: FontWeight.w500,
       ),
-      bodyMedium: TextStyle(fontSize: sw * 0.037, color: Colors.black87),
+      bodyMedium: TextStyle(
+        fontSize: sw * 0.04, // 기존 0.037
+        color: Colors.black87,
+      ),
       titleLarge: TextStyle(
-        fontSize: sw * 0.048,
+        fontSize: sw * 0.052, // 기존 0.048
         fontWeight: FontWeight.bold,
         color: Colors.black,
       ),
@@ -53,7 +55,10 @@ ThemeData createHighContrastLightTheme(BuildContext context) {
       style: ElevatedButton.styleFrom(
         backgroundColor: Colors.black,
         foregroundColor: Colors.white,
-        textStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: sw * 0.04),
+        textStyle: TextStyle(
+          fontWeight: FontWeight.bold,
+          fontSize: sw * 0.045, // 기존 0.04
+        ),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(sw * 0.03),
         ),
@@ -93,20 +98,23 @@ ThemeData createHighContrastDarkTheme(BuildContext context) {
       elevation: 0,
       centerTitle: true,
       titleTextStyle: TextStyle(
-        fontSize: sw * 0.05,
+        fontSize: sw * 0.055, // 기존보다 큼
         fontWeight: FontWeight.bold,
         color: Colors.white,
       ),
     ),
     textTheme: TextTheme(
       bodyLarge: TextStyle(
-        fontSize: sw * 0.042,
+        fontSize: sw * 0.045, // 기존 0.042
         color: Colors.white,
         fontWeight: FontWeight.w500,
       ),
-      bodyMedium: TextStyle(fontSize: sw * 0.037, color: Colors.white70),
+      bodyMedium: TextStyle(
+        fontSize: sw * 0.04, // 기존 0.037
+        color: Colors.white70,
+      ),
       titleLarge: TextStyle(
-        fontSize: sw * 0.048,
+        fontSize: sw * 0.052, // 기존 0.048
         fontWeight: FontWeight.bold,
         color: Colors.white,
       ),
@@ -125,7 +133,10 @@ ThemeData createHighContrastDarkTheme(BuildContext context) {
       style: ElevatedButton.styleFrom(
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
-        textStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: sw * 0.04),
+        textStyle: TextStyle(
+          fontWeight: FontWeight.bold,
+          fontSize: sw * 0.045, // 기존 0.04
+        ),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(sw * 0.03),
         ),

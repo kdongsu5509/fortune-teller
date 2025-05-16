@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:ai_fortune_teller_app/common/router.dart';
 import 'package:ai_fortune_teller_app/home/widget/banner_add_box.dart';
 import 'package:ai_fortune_teller_app/home/widget/notice_box.dart';
@@ -5,6 +7,7 @@ import 'package:ai_fortune_teller_app/home/widget/top_banner.dart';
 import 'package:ai_fortune_teller_app/home/widget/user_info_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../setting/util/user_info_provider.dart';
 import 'widget/service_card.dart';
 
 class HomeView extends ConsumerWidget {
@@ -14,6 +17,8 @@ class HomeView extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final size = MediaQuery.of(context).size;
     final sw = size.width;
+
+    bool isUserExit = ref.watch(userInfoProvider) != null;
 
     List<String> _titles = ['토정비결', '오늘의 운세', '관상', '해몽'];
 
@@ -52,7 +57,28 @@ class HomeView extends ConsumerWidget {
                 title: _titles[index],
                 subtitle: _subtitles[index],
                 onTap: () {
-                  router.push(_routes[index]);
+                  log(' is User Exit =>  ${isUserExit}');
+                  if(!isUserExit) {
+                    showDialog(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                        title: Text('사용자 정보 등록이 필요합니다.', style: Theme.of(context).textTheme.titleMedium,),
+                        content: Text('서비스를 이용하기 위해서 우선 사용자 정보를 등록해주세요.'),
+                        actions: [
+                          TextButton(
+                            onPressed: () {
+                              router.push('/settings/user');
+                              Navigator.of(context).pop();
+                            },
+                            child: Text('확인'),
+                          ),
+                        ],
+                      ),
+                    );
+                    return;
+                  } else {
+                    router.push(_routes[index]);
+                  }
                 },
               ),
             ),

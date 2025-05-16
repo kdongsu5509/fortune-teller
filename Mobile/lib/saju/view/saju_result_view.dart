@@ -3,9 +3,10 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 
 import '../../common/ask_to_gpt_button.dart';
+import '../../common/content_card.dart';
 
 class SaJuResultView extends StatelessWidget {
-  final Map<String, dynamic> data = {
+  final Map<String, dynamic> _tempData = {
     "name": "고동수",
     "birth": "1997년 5월 14일 (음력) / 미시 출생",
     "ohaeng":
@@ -23,67 +24,45 @@ class SaJuResultView extends StatelessWidget {
     final sw = MediaQuery.of(context).size.width;
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
+    List<String> _tileTitle = [
+      "🌕 출생 정보",
+      "🌿 오행 분석",
+      "🧠 성격",
+      "🔮 대운 / 현재 운세",
+      "💡 조언",
+    ];
+
     return Scaffold(
       body: Padding(
         padding: EdgeInsets.all(sw * 0.06),
         child: ListView(
           children: [
             Text(
-              '🔮 ${data['name']}님의 사주 분석',
+              '🔮 ${_tempData['name']}님의 사주 분석',
               style: Theme.of(
                 context,
               ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
               textAlign: TextAlign.center,
             ),
-            const SizedBox(height: 20),
-
-            _buildSectionCard(context, "🌕 출생 정보", data['birth']),
-            _buildSectionCard(context, "🌿 오행 분석", data['ohaeng']),
-            _buildSectionCard(context, "🧠 성격", data['personality']),
-            _buildSectionCard(context, "🔮 대운 / 현재 운세", data['luck']),
-            _buildSectionCard(context, "💡 조언", data['suggestion']),
-
-            const SizedBox(height: 24),
+            contentsCard(context, _tileTitle[0], _tempData['birth'], sw),
+            contentsCard(context, _tileTitle[1], _tempData['ohaeng'], sw),
+            contentsCard(context, _tileTitle[2], _tempData['personality'], sw),
+            contentsCard(context, _tileTitle[3], _tempData['luck'], sw),
+            contentsCard(context, _tileTitle[4], _tempData['suggestion'], sw),
             getAskToGptButton(isDark, sw),
-            const SizedBox(height: 32),
+            SizedBox(height: sw * 0.05),
             Center(
               child: Text(
                 "※ 본 분석은 AI 기반 사주 결과이며 참고용입니다.",
-                style: TextStyle(
-                  fontSize: 12,
-                  color: isDark ? Colors.grey[300] : Colors.grey,
-                ),
+                style: Theme.of(context)
+                    .textTheme
+                    .bodySmall
+                    ?.copyWith(color: Colors.grey),
                 textAlign: TextAlign.center,
               ),
             ),
-            const SizedBox(height: 12),
+            SizedBox(height: sw * 0.05),
           ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildSectionCard(BuildContext context, String title, String content) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 12.0),
-      child: Card(
-        elevation: 1,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 14),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                title,
-                style: Theme.of(
-                  context,
-                ).textTheme.titleSmall?.copyWith(fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 6),
-              Text(content, style: Theme.of(context).textTheme.bodyMedium),
-            ],
-          ),
         ),
       ),
     );
