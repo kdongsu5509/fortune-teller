@@ -26,38 +26,32 @@ class ServiceCard extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(sw * 0.03),
         ),
-        child: Padding(
-          padding: EdgeInsets.symmetric(
-            vertical: sw * 0.04,
-            horizontal: sw * 0.04,
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(icon, style: TextStyle(fontSize: sw * 0.08)),
-              SizedBox(height: sw * 0.02),
-              Text(
-                title,
-                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  fontFamily: "ChosunCentennial",
-                  fontSize: sw * 0.06,
-                ),
-                textAlign: TextAlign.center,
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(icon, style: TextStyle(fontSize: sw * 0.08)),
+            SizedBox(height: sw * 0.02),
+            Text(
+              title,
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                fontFamily: "ChosunCentennial",
+                fontSize: sw * 0.06,
               ),
-              SizedBox(height: sw * 0.02),
-              Text(
-                subtitle,
-                style: Theme.of(
-                  context,
-                ).textTheme.bodyMedium?.copyWith(fontSize: sw * 0.035),
-                textAlign: TextAlign.center,
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-              ),
-            ],
-          ),
+              textAlign: TextAlign.center,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+            ),
+            SizedBox(height: sw * 0.02),
+            Text(
+              subtitle,
+              style: Theme.of(
+                context,
+              ).textTheme.bodyMedium?.copyWith(fontSize: sw * 0.035),
+              textAlign: TextAlign.center,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ],
         ),
       ),
     );

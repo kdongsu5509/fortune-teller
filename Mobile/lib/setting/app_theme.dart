@@ -21,7 +21,7 @@ ThemeData createHighContrastLightTheme(BuildContext context) {
       elevation: 0,
       centerTitle: true,
       titleTextStyle: TextStyle(
-        fontSize: sw * 0.05, // 상대 폰트 크기
+        fontSize: sw * 0.06, // 상대 폰트 크기
         fontWeight: FontWeight.bold,
         color: Colors.black,
       ),

@@ -7,15 +7,15 @@ class TopBanner extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final sw = size.width;
+    final _title = 'AI로\n당신의 운명을 알려드립니다';
 
     return Container(
       height: sw * 0.25,
       padding: EdgeInsets.all(sw * 0.03),
       alignment: Alignment.bottomLeft,
-      decoration: BoxDecoration(borderRadius: BorderRadius.circular(12)),
       child: Text(
-        'AI로\n당신의 운명을 알려드립니다',
-        style: TextStyle(fontSize: sw * 0.05, fontWeight: FontWeight.bold),
+        _title,
+        style: Theme.of(context).textTheme.titleLarge,
       ),
     );
   }
