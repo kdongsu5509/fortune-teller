@@ -32,6 +32,16 @@ class _UserInfoUpdateViewState extends ConsumerState<UserInfoUpdateView> {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final isSmall = sw < 400;
 
+    List<Widget> children = [
+      _buildTitle(context),
+      SizedBox(height: sh * 0.03),
+      _buildNameField(sw, sh, isSmall, isDark),
+      SizedBox(height: sh * 0.03),
+      _buildDateInkwells(sw, sh, isDark),
+      SizedBox(height: sh * 0.03),
+      _buildSexAndTimeRow(sw, sh, isSmall, isDark),
+    ];
+
     return Scaffold(
       resizeToAvoidBottomInset: true,
       body: SingleChildScrollView(
@@ -43,16 +53,7 @@ class _UserInfoUpdateViewState extends ConsumerState<UserInfoUpdateView> {
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _buildTitle(context),
-            SizedBox(height: sh * 0.03),
-            _buildNameField(sw, sh, isSmall, isDark),
-            SizedBox(height: sh * 0.03),
-            _buildDateInkwells(sw, sh, isDark),
-            SizedBox(height: sh * 0.03),
-            _buildSexAndTimeRow(sw, sh, isSmall, isDark),
-            SizedBox(height: 100), // 바닥 여유공간
-          ],
+          children: children,
         ),
       ),
       bottomNavigationBar: Padding(
@@ -62,8 +63,8 @@ class _UserInfoUpdateViewState extends ConsumerState<UserInfoUpdateView> {
           bottom:
               MediaQuery.of(context).viewInsets.bottom > 0
                   ? MediaQuery.of(context).viewInsets.bottom
-                  : 24,
-          top: 12,
+                  : sh * 0.03,
+          top: sh * 0.02,
         ),
         child: _buildSaveButton(sw, isSmall),
       ),
