@@ -34,12 +34,7 @@ class ServiceCard extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                icon,
-                style: TextStyle(
-                  fontSize: sw * 0.08,
-                ),
-              ),
+              Text(icon, style: TextStyle(fontSize: sw * 0.08)),
               SizedBox(height: sw * 0.02),
               Text(
                 title,
@@ -54,9 +49,9 @@ class ServiceCard extends StatelessWidget {
               SizedBox(height: sw * 0.02),
               Text(
                 subtitle,
-                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  fontSize: sw * 0.035,
-                ),
+                style: Theme.of(
+                  context,
+                ).textTheme.bodyMedium?.copyWith(fontSize: sw * 0.035),
                 textAlign: TextAlign.center,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,

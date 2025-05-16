@@ -16,7 +16,6 @@ enum BirthTime {
   Sul('술시 (19:30~21:30)'),
   Hae('해시 (21:30~23:30)');
 
-
   final String label;
   const BirthTime(this.label);
 }

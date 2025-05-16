@@ -25,8 +25,14 @@ final router = GoRouter(
         GoRoute(path: '/face/result', builder: (_, __) => FaceAnalysisView()),
         GoRoute(path: '/dream', builder: (_, __) => const DreamResultView()),
         GoRoute(path: '/settings', builder: (_, __) => SettingsView()),
-        GoRoute(path: '/settings/user', builder: (_, __) => const UserInfoUpdateView()),
-        GoRoute(path: '/settings/privacy', builder: (_, __) => const PrivacyPolicyView()),
+        GoRoute(
+          path: '/settings/user',
+          builder: (_, __) => const UserInfoUpdateView(),
+        ),
+        GoRoute(
+          path: '/settings/privacy',
+          builder: (_, __) => const PrivacyPolicyView(),
+        ),
       ],
     ),
   ],

@@ -11,8 +11,10 @@ class ThemeIconButton extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final themeMode = ref.watch(currentThemeModeProvider);
     return IconButton(
-      icon: Icon(themeMode == ThemeMode.dark ? Icons.light_mode : Icons.dark_mode),
-      onPressed: onPressed
+      icon: Icon(
+        themeMode == ThemeMode.dark ? Icons.light_mode : Icons.dark_mode,
+      ),
+      onPressed: onPressed,
     );
   }
 }

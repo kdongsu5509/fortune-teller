@@ -27,12 +27,22 @@ ThemeData createHighContrastLightTheme(BuildContext context) {
       ),
     ),
     textTheme: TextTheme(
-      bodyLarge: TextStyle(fontSize: sw * 0.042, color: Colors.black, fontWeight: FontWeight.w500),
+      bodyLarge: TextStyle(
+        fontSize: sw * 0.042,
+        color: Colors.black,
+        fontWeight: FontWeight.w500,
+      ),
       bodyMedium: TextStyle(fontSize: sw * 0.037, color: Colors.black87),
-      titleLarge: TextStyle(fontSize: sw * 0.048, fontWeight: FontWeight.bold, color: Colors.black),
+      titleLarge: TextStyle(
+        fontSize: sw * 0.048,
+        fontWeight: FontWeight.bold,
+        color: Colors.black,
+      ),
     ),
     inputDecorationTheme: InputDecorationTheme(
-      border: OutlineInputBorder(borderRadius: BorderRadius.circular(sw * 0.03)),
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(sw * 0.03),
+      ),
       focusedBorder: OutlineInputBorder(
         borderSide: BorderSide(color: Colors.black, width: sw * 0.005),
       ),
@@ -89,12 +99,22 @@ ThemeData createHighContrastDarkTheme(BuildContext context) {
       ),
     ),
     textTheme: TextTheme(
-      bodyLarge: TextStyle(fontSize: sw * 0.042, color: Colors.white, fontWeight: FontWeight.w500),
+      bodyLarge: TextStyle(
+        fontSize: sw * 0.042,
+        color: Colors.white,
+        fontWeight: FontWeight.w500,
+      ),
       bodyMedium: TextStyle(fontSize: sw * 0.037, color: Colors.white70),
-      titleLarge: TextStyle(fontSize: sw * 0.048, fontWeight: FontWeight.bold, color: Colors.white),
+      titleLarge: TextStyle(
+        fontSize: sw * 0.048,
+        fontWeight: FontWeight.bold,
+        color: Colors.white,
+      ),
     ),
     inputDecorationTheme: InputDecorationTheme(
-      border: OutlineInputBorder(borderRadius: BorderRadius.circular(sw * 0.03)),
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(sw * 0.03),
+      ),
       focusedBorder: OutlineInputBorder(
         borderSide: BorderSide(color: Colors.white, width: sw * 0.005),
       ),

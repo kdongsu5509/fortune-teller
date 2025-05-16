@@ -16,7 +16,8 @@ class SajuInfoInputViewModel {
   final List<int> sex = [1, 2];
 
   Future<void> init() async {
-    selectedYear = years.contains(DateTime.now().year) ? DateTime.now().year : null;
+    selectedYear =
+        years.contains(DateTime.now().year) ? DateTime.now().year : null;
     selectedMonth = DateTime.now().month;
     selectedDay = DateTime.now().day;
     updateDays();
@@ -28,7 +29,8 @@ class SajuInfoInputViewModel {
       switch (selectedMonth) {
         case 2:
           if (selectedYear != null &&
-              ((selectedYear! % 4 == 0 && selectedYear! % 100 != 0) || selectedYear! % 400 == 0)) {
+              ((selectedYear! % 4 == 0 && selectedYear! % 100 != 0) ||
+                  selectedYear! % 400 == 0)) {
             maxDay = 29;
           } else {
             maxDay = 28;

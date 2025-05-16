@@ -19,11 +19,13 @@ class SecureStorage {
     const flutterSecureStorage = FlutterSecureStorage();
     final cache = <String, String>{};
     await keys
-        .map((key) => flutterSecureStorage.read(key: key).then((value) {
-              if (value != null) {
-                cache[key] = value;
-              }
-            }))
+        .map(
+          (key) => flutterSecureStorage.read(key: key).then((value) {
+            if (value != null) {
+              cache[key] = value;
+            }
+          }),
+        )
         .wait;
     return SecureStorage._(flutterSecureStorage, cache);
   }

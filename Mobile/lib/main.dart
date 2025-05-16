@@ -24,91 +24,86 @@ import 'common/router.dart';
 /// - ScreenUtil을 사용하여 화면 크기에 따라 UI를 조정합니다.
 
 Future<void> main() async {
-    WidgetsFlutterBinding.ensureInitialized();
-    await MobileAds.instance.initialize();
-    await dotenv.load(fileName: "ai_fortune_teller.env");
-    runApp(
-        ProviderScope(
-            observers: [AppProviderObserver()],
-            child: ScreenUtilInit(
-                designSize: Size(412, 915),
-                minTextAdapt: true,
-                builder: (context, child) {
-                    return AIFortuneTellerApp();
-                },
-            ),
-        ),
-    );
+  WidgetsFlutterBinding.ensureInitialized();
+  await MobileAds.instance.initialize();
+  await dotenv.load(fileName: "ai_fortune_teller.env");
+  runApp(
+    ProviderScope(
+      observers: [AppProviderObserver()],
+      child: ScreenUtilInit(
+        designSize: Size(412, 915),
+        minTextAdapt: true,
+        builder: (context, child) {
+          return AIFortuneTellerApp();
+        },
+      ),
+    ),
+  );
 }
 
 class AIFortuneTellerApp extends StatelessWidget {
-    const AIFortuneTellerApp({super.key});
+  const AIFortuneTellerApp({super.key});
 
-    @override
-    Widget build(BuildContext context) {
-        return _EagerInitialization(
-            child: _MaterialApp(),
-        );
-    }
+  @override
+  Widget build(BuildContext context) {
+    return _EagerInitialization(child: _MaterialApp());
+  }
 }
 
 class _EagerInitialization extends ConsumerStatefulWidget {
-    const _EagerInitialization({required this.child});
-    final Widget child;
+  const _EagerInitialization({required this.child});
+  final Widget child;
 
-    @override
-    ConsumerState<_EagerInitialization> createState() => _EagerInitializationState();
+  @override
+  ConsumerState<_EagerInitialization> createState() =>
+      _EagerInitializationState();
 }
 
 class _EagerInitializationState extends ConsumerState<_EagerInitialization> {
-    bool _initialized = false;
+  bool _initialized = false;
 
-    @override
-    void initState() {
-        super.initState();
-        _initialize();
+  @override
+  void initState() {
+    super.initState();
+    _initialize();
+  }
+
+  Future<void> _initialize() async {
+    if (_initialized) return;
+    await ref.read(userInfoProvider.notifier).load(); // 사용자 정보 로드
+    setState(() {
+      _initialized = true;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final values = [ref.watch(prefsProvider), ref.watch(secureStorageProvider)];
+
+    if (_initialized && values.every((v) => v.hasValue)) {
+      return widget.child;
     }
 
-    Future<void> _initialize() async {
-        if (_initialized) return;
-        await ref.read(userInfoProvider.notifier).load(); // 사용자 정보 로드
-        setState(() {
-            _initialized = true;
-        });
-    }
-
-    @override
-    Widget build(BuildContext context) {
-        final values = [
-            ref.watch(prefsProvider),
-            ref.watch(secureStorageProvider),
-        ];
-
-        if (_initialized && values.every((v) => v.hasValue)) {
-            return widget.child;
-        }
-
-        return const Directionality(
-            textDirection: TextDirection.ltr,
-            child: SplashScreenWidget(),
-        );
-    }
+    return const Directionality(
+      textDirection: TextDirection.ltr,
+      child: SplashScreenWidget(),
+    );
+  }
 }
 
-
 class _MaterialApp extends ConsumerWidget {
-    const _MaterialApp({super.key});
+  const _MaterialApp({super.key});
 
-    @override
-    Widget build(BuildContext context, WidgetRef ref) {
-        final themeMode = ref.watch(currentThemeModeProvider);
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final themeMode = ref.watch(currentThemeModeProvider);
 
-        return MaterialApp.router(
-            routerConfig: router,
-            title: 'AI Fortune Teller',
-            theme: createHighContrastLightTheme(context),
-            darkTheme: createHighContrastDarkTheme(context),
-            themeMode: themeMode,
-        );
-    }
+    return MaterialApp.router(
+      routerConfig: router,
+      title: 'AI Fortune Teller',
+      theme: createHighContrastLightTheme(context),
+      darkTheme: createHighContrastDarkTheme(context),
+      themeMode: themeMode,
+    );
+  }
 }

@@ -12,15 +12,10 @@ class TopBanner extends StatelessWidget {
       height: sw * 0.25,
       padding: EdgeInsets.all(sw * 0.03),
       alignment: Alignment.bottomLeft,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12),
-      ),
+      decoration: BoxDecoration(borderRadius: BorderRadius.circular(12)),
       child: Text(
         'AI로\n당신의 운명을 알려드립니다',
-        style: TextStyle(
-          fontSize: sw * 0.05,
-          fontWeight: FontWeight.bold,
-        ),
+        style: TextStyle(fontSize: sw * 0.05, fontWeight: FontWeight.bold),
       ),
     );
   }

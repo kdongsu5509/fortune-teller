@@ -26,7 +26,7 @@ class UserInfoUpdateViewModel extends ChangeNotifier {
   final List<int> sex = [1, 2];
 
   Future<void> init() async {
-    if (userInfo != null ) {
+    if (userInfo != null) {
       nameController.text = userInfo!.name;
       selectedYear = userInfo!.birthDate.year;
       selectedMonth = userInfo!.birthDate.month;
@@ -48,7 +48,8 @@ class UserInfoUpdateViewModel extends ChangeNotifier {
       switch (selectedMonth) {
         case 2:
           if (selectedYear != null &&
-              ((selectedYear! % 4 == 0 && selectedYear! % 100 != 0) || selectedYear! % 400 == 0)) {
+              ((selectedYear! % 4 == 0 && selectedYear! % 100 != 0) ||
+                  selectedYear! % 400 == 0)) {
             maxDay = 29;
           } else {
             maxDay = 28;

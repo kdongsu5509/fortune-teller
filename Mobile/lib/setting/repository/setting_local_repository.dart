@@ -5,7 +5,8 @@ import 'dart:convert';
 class SettingLocalRepository {
   final FlutterSecureStorage _storage = const FlutterSecureStorage();
 
-  static final SettingLocalRepository _instance = SettingLocalRepository._internal();
+  static final SettingLocalRepository _instance =
+      SettingLocalRepository._internal();
 
   SettingLocalRepository._internal();
 

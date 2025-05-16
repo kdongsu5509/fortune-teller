@@ -59,9 +59,10 @@ class _UserInfoUpdateViewState extends ConsumerState<UserInfoUpdateView> {
         padding: EdgeInsets.only(
           left: sw * 0.06,
           right: sw * 0.06,
-          bottom: MediaQuery.of(context).viewInsets.bottom > 0
-              ? MediaQuery.of(context).viewInsets.bottom
-              : 24,
+          bottom:
+              MediaQuery.of(context).viewInsets.bottom > 0
+                  ? MediaQuery.of(context).viewInsets.bottom
+                  : 24,
           top: 12,
         ),
         child: _buildSaveButton(sw, isSmall),
@@ -77,47 +78,64 @@ class _UserInfoUpdateViewState extends ConsumerState<UserInfoUpdateView> {
     ),
   );
 
-  Widget _buildNameField(double sw, double sh, bool isSmall, bool isDark) => _outlinedContainer(
-    sw,
-    sh,
-    TextField(
-      controller: viewModel.nameController,
-      style: TextStyle(fontSize: isSmall ? 14 : 16),
-      decoration: const InputDecoration(
-        labelText: "이름",
-        border: InputBorder.none,
-      ),
-    ),
-    isDark,
-  );
+  Widget _buildNameField(double sw, double sh, bool isSmall, bool isDark) =>
+      _outlinedContainer(
+        sw,
+        sh,
+        TextField(
+          controller: viewModel.nameController,
+          style: TextStyle(fontSize: isSmall ? 14 : 16),
+          decoration: const InputDecoration(
+            labelText: "이름",
+            border: InputBorder.none,
+          ),
+        ),
+        isDark,
+      );
 
   Widget _buildDateInkwells(double sw, double sh, bool isDark) => Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [
-      Expanded(flex:4,child: _buildDateInkWell("생년", viewModel.selectedYear, sw, sh, isDark)),
+      Expanded(
+        flex: 4,
+        child: _buildDateInkWell("생년", viewModel.selectedYear, sw, sh, isDark),
+      ),
       SizedBox(width: sw * 0.03),
-      Expanded(flex:3,child: _buildDateInkWell("생월", viewModel.selectedMonth, sw, sh, isDark)),
+      Expanded(
+        flex: 3,
+        child: _buildDateInkWell("생월", viewModel.selectedMonth, sw, sh, isDark),
+      ),
       SizedBox(width: sw * 0.03),
-      Expanded(flex:3,child: _buildDateInkWell("생일", viewModel.selectedDay, sw, sh, isDark)),
+      Expanded(
+        flex: 3,
+        child: _buildDateInkWell("생일", viewModel.selectedDay, sw, sh, isDark),
+      ),
     ],
   );
 
-  Widget _buildDateInkWell(String label, int? selected, double sw, double sh, bool isDark) => InkWell(
+  Widget _buildDateInkWell(
+    String label,
+    int? selected,
+    double sw,
+    double sh,
+    bool isDark,
+  ) => InkWell(
     onTap: () async {
       final picked = await showModalBottomSheet<int>(
         context: context,
-        builder: (context) => ListView.separated(
-          padding: const EdgeInsets.symmetric(vertical: 12),
-          itemCount: _getList(label).length,
-          itemBuilder: (context, index) {
-            final value = _getList(label)[index];
-            return ListTile(
-              title: Text("$value"),
-              onTap: () => Navigator.pop(context, value),
-            );
-          },
-          separatorBuilder: (context, index) => const Divider(height: 1),
-        ),
+        builder:
+            (context) => ListView.separated(
+              padding: const EdgeInsets.symmetric(vertical: 12),
+              itemCount: _getList(label).length,
+              itemBuilder: (context, index) {
+                final value = _getList(label)[index];
+                return ListTile(
+                  title: Text("$value"),
+                  onTap: () => Navigator.pop(context, value),
+                );
+              },
+              separatorBuilder: (context, index) => const Divider(height: 1),
+            ),
       );
       if (picked != null) {
         setState(() {
@@ -168,33 +186,51 @@ class _UserInfoUpdateViewState extends ConsumerState<UserInfoUpdateView> {
     }
   }
 
-  Widget _buildSexAndTimeRow(double sw, double sh, bool isSmall, bool isDark) => Row(
-    children: [
-      Expanded(flex: 1, child: _outlinedDropdown(sw, sh, viewModel.sex, "성별", isDark)),
-      SizedBox(width: sw * 0.03),
-      Expanded(flex: 2,child: _buildBirthTimePicker(sw, sh, isSmall, isDark)),
-    ],
-  );
+  Widget _buildSexAndTimeRow(double sw, double sh, bool isSmall, bool isDark) =>
+      Row(
+        children: [
+          Expanded(
+            flex: 1,
+            child: _outlinedDropdown(sw, sh, viewModel.sex, "성별", isDark),
+          ),
+          SizedBox(width: sw * 0.03),
+          Expanded(
+            flex: 2,
+            child: _buildBirthTimePicker(sw, sh, isSmall, isDark),
+          ),
+        ],
+      );
 
-  Widget _buildBirthTimePicker(double sw, double sh, bool isSmall, bool isDark) => InkWell(
+  Widget _buildBirthTimePicker(
+    double sw,
+    double sh,
+    bool isSmall,
+    bool isDark,
+  ) => InkWell(
     onTap: () async {
       final picked = await showModalBottomSheet<String>(
         context: context,
-        builder: (context) => ListView.separated(
-          padding: const EdgeInsets.symmetric(vertical: 12),
-          itemCount: BirthTime.values.length,
-          itemBuilder: (context, index) {
-            final time = BirthTime.values[index];
-            return ListTile(
-              title: Text(time.label),
-              onTap: () => Navigator.pop(context, time.name),
-            );
-          },
-          separatorBuilder: (context, index) => const Divider(height: 1),
-        ),
+        builder:
+            (context) => ListView.separated(
+              padding: const EdgeInsets.symmetric(vertical: 12),
+              itemCount: BirthTime.values.length,
+              itemBuilder: (context, index) {
+                final time = BirthTime.values[index];
+                return ListTile(
+                  title: Text(time.label),
+                  onTap: () => Navigator.pop(context, time.name),
+                );
+              },
+              separatorBuilder: (context, index) => const Divider(height: 1),
+            ),
       );
       if (picked != null) {
-        setState(() => viewModel.selectedTime = BirthTime.values.firstWhere((e) => e.name == picked));
+        setState(
+          () =>
+              viewModel.selectedTime = BirthTime.values.firstWhere(
+                (e) => e.name == picked,
+              ),
+        );
       }
     },
     borderRadius: BorderRadius.circular(16),
@@ -220,35 +256,46 @@ class _UserInfoUpdateViewState extends ConsumerState<UserInfoUpdateView> {
     height: 52,
     child: ElevatedButton(
       style: ElevatedButton.styleFrom(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       ),
       onPressed: _handleSave,
       child: Text(
         "저장",
-        style: TextStyle(fontSize: isSmall ? 14 : 16, fontWeight: FontWeight.w600),
+        style: TextStyle(
+          fontSize: isSmall ? 14 : 16,
+          fontWeight: FontWeight.w600,
+        ),
       ),
     ),
   );
 
-  Widget _outlinedContainer(double sw, double sh, Widget child, bool isDark) => Container(
-    padding: EdgeInsets.symmetric(horizontal: sw * 0.04, vertical: sh * 0.018),
-    decoration: BoxDecoration(
-      color: isDark ? Colors.grey[900] : Colors.white,
-      borderRadius: BorderRadius.circular(16),
-      boxShadow: [
-        BoxShadow(
-          color: isDark ? Colors.transparent : Colors.black12,
-          blurRadius: 8,
-          offset: const Offset(0, 4),
+  Widget _outlinedContainer(double sw, double sh, Widget child, bool isDark) =>
+      Container(
+        padding: EdgeInsets.symmetric(
+          horizontal: sw * 0.04,
+          vertical: sh * 0.018,
         ),
-      ],
-    ),
-    child: child,
-  );
+        decoration: BoxDecoration(
+          color: isDark ? Colors.grey[900] : Colors.white,
+          borderRadius: BorderRadius.circular(16),
+          boxShadow: [
+            BoxShadow(
+              color: isDark ? Colors.transparent : Colors.black12,
+              blurRadius: 8,
+              offset: const Offset(0, 4),
+            ),
+          ],
+        ),
+        child: child,
+      );
 
-  Widget _outlinedDropdown(double sw, double sh, List<int> items, String label, bool isDark) {
+  Widget _outlinedDropdown(
+    double sw,
+    double sh,
+    List<int> items,
+    String label,
+    bool isDark,
+  ) {
     final isSex = label == "성별";
     int? selected;
     switch (label) {
@@ -264,26 +311,32 @@ class _UserInfoUpdateViewState extends ConsumerState<UserInfoUpdateView> {
         child: DropdownButtonFormField<int>(
           value: selected,
           decoration: InputDecoration(
-            labelStyle: TextStyle(color: isDark ? Colors.white70 : Colors.grey[800]),
+            labelStyle: TextStyle(
+              color: isDark ? Colors.white70 : Colors.grey[800],
+            ),
             border: InputBorder.none,
-            contentPadding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+            contentPadding: const EdgeInsets.symmetric(
+              horizontal: 8,
+              vertical: 4,
+            ),
           ),
           dropdownColor: isDark ? Colors.grey[900] : Colors.white,
           isExpanded: true,
           borderRadius: BorderRadius.circular(12),
-          items: items.map((value) {
-            return DropdownMenuItem(
-              value: value,
-              child: Text(
-                isSex ? (value == 1 ? "남자" : "여자") : "$value",
-                style: TextStyle(
-                  fontSize: sw * 0.035,
-                  fontWeight: FontWeight.w500,
-                  color: isDark ? Colors.white : Colors.black,
-                ),
-              ),
-            );
-          }).toList(),
+          items:
+              items.map((value) {
+                return DropdownMenuItem(
+                  value: value,
+                  child: Text(
+                    isSex ? (value == 1 ? "남자" : "여자") : "$value",
+                    style: TextStyle(
+                      fontSize: sw * 0.035,
+                      fontWeight: FontWeight.w500,
+                      color: isDark ? Colors.white : Colors.black,
+                    ),
+                  ),
+                );
+              }).toList(),
           onChanged: (value) {
             setState(() {
               if (label == "성별") {
@@ -299,9 +352,9 @@ class _UserInfoUpdateViewState extends ConsumerState<UserInfoUpdateView> {
 
   void _handleSave() async {
     if (viewModel.nameController.text.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("이름을 입력해주세요")),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text("이름을 입력해주세요")));
       return;
     }
 
@@ -309,9 +362,9 @@ class _UserInfoUpdateViewState extends ConsumerState<UserInfoUpdateView> {
 
     if (!mounted) return;
 
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text("저장 완료")),
-    );
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(const SnackBar(content: Text("저장 완료")));
 
     router.pop();
   }

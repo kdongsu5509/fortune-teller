@@ -56,10 +56,7 @@ class _BannerAddBoxState extends State<BannerAddBox> {
         ),
         child: Text(
           '광고 로딩 중...',
-          style: TextStyle(
-            fontSize: sw * 0.05,
-            fontWeight: FontWeight.bold,
-          ),
+          style: TextStyle(fontSize: sw * 0.05, fontWeight: FontWeight.bold),
         ),
       );
     }

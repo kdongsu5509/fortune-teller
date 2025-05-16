@@ -7,10 +7,9 @@ import '../app_theme_provider.dart';
 class SettingViewModel extends StateNotifier<UserInfoDTO?> {
   SettingViewModel(super.state);
 
-
   void toggleTheme(WidgetRef ref) {
     final current = ref.read(currentThemeModeProvider);
     ref.read(currentThemeModeProvider.notifier).state =
-    current == ThemeMode.dark ? ThemeMode.light : ThemeMode.dark;
+        current == ThemeMode.dark ? ThemeMode.light : ThemeMode.dark;
   }
 }

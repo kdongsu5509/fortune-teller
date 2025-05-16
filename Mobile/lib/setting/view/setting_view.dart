@@ -20,9 +20,12 @@ class SettingsView extends ConsumerWidget {
         padding: const EdgeInsets.all(16),
         children: [
           const SizedBox(height: 16),
-          Text('환경 설정', style: Theme.of(context).textTheme.titleLarge?.copyWith(
-            fontFamily: "ChosunCentennial",
-          )),
+          Text(
+            '환경 설정',
+            style: Theme.of(
+              context,
+            ).textTheme.titleLarge?.copyWith(fontFamily: "ChosunCentennial"),
+          ),
           const Divider(),
 
           ListTile(

@@ -14,26 +14,23 @@ import 'my_dio.dart';
 
 ///
 class AnalyzeService {
+  Dio dio = MyDio().get();
 
-    Dio dio = MyDio().get();
+  Future<String> reqAnalyzeToServer(UserInfoDTO info) async {
+    try {
+      final response = await dio.post(
+        "${dotenv.env['baseUrl']}/analyze",
+        data: info.toJson(),
+      );
 
-
-    Future<String> reqAnalyzeToServer(UserInfoDTO info) async {
-      try {
-        final response = await dio.post(
-            "${dotenv.env['baseUrl']}/analyze",
-            data: info.toJson(),
-        );
-
-        if (response.statusCode == 200) {
-          return response.data!;
-        } else {
-          throw Exception('서버 에러: ${response.statusCode}');
-        }
-      } catch (e) {
-        log("[에러] reason : ${e.toString()}");
-        return Future.error(e);  // 스트림 소비자에 에러를 전달
+      if (response.statusCode == 200) {
+        return response.data!;
+      } else {
+        throw Exception('서버 에러: ${response.statusCode}');
       }
+    } catch (e) {
+      log("[에러] reason : ${e.toString()}");
+      return Future.error(e); // 스트림 소비자에 에러를 전달
     }
+  }
 }
-

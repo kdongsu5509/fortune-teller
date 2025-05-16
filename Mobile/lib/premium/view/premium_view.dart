@@ -19,7 +19,10 @@ class PremiumView extends StatelessWidget {
             child: ConstrainedBox(
               constraints: const BoxConstraints(maxWidth: 700),
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: sw * 0.06, vertical: sh * 0.03),
+                padding: EdgeInsets.symmetric(
+                  horizontal: sw * 0.06,
+                  vertical: sh * 0.03,
+                ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
@@ -52,7 +55,8 @@ class PremiumView extends StatelessWidget {
                     _premiumOptionCard(
                       context,
                       title: "☕ 개발자에게 커피 한 잔",
-                      description: "앱이 마음에 드셨다면 따뜻한 후원을 보내주세요! \n학생 개발자인 제가 이 앱을 오래 유지할 수 있어요!",
+                      description:
+                          "앱이 마음에 드셨다면 따뜻한 후원을 보내주세요! \n학생 개발자인 제가 이 앱을 오래 유지할 수 있어요!",
                       buttonText: "후원하기",
                       onPressed: () {
                         // TODO: 단순 후원 결제 로직
@@ -70,13 +74,13 @@ class PremiumView extends StatelessWidget {
   }
 
   Widget _premiumOptionCard(
-      BuildContext context, {
-        required String title,
-        required String description,
-        required String buttonText,
-        required VoidCallback onPressed,
-        required bool isWide,
-      }) {
+    BuildContext context, {
+    required String title,
+    required String description,
+    required String buttonText,
+    required VoidCallback onPressed,
+    required bool isWide,
+  }) {
     final sw = MediaQuery.of(context).size.width;
     final sh = MediaQuery.of(context).size.height;
     final isDark = Theme.of(context).brightness == Brightness.dark;
