@@ -54,7 +54,7 @@ class HomeView extends ConsumerWidget {
                 title: '관상',
                 subtitle: 'AI 관상으로 로또각?',
                 onTap: () {
-                  router.push('/face/result');
+                  router.push('/face/input');
                 },
               ),
               ServiceCard(
@@ -62,7 +62,7 @@ class HomeView extends ConsumerWidget {
                 title: '해몽',
                 subtitle: '꿈 해석해드립니다',
                 onTap: () {
-                  router.push('/dream');
+                  router.push('/dream/input');
                 },
               ),
             ],
