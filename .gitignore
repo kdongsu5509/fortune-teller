@@ -7,18 +7,27 @@
 *.swp
 *.tmp
 *.lock
+*.bak
 .DS_Store
 *.env
-HELP.md
-
-# ====================================
-# 💻 IDE 설정 무시
-# ====================================
-.idea/
-.vscode/
+*.ps1
+*.cmd
+*.bat
+*.lnk
+*.swo
 *.iml
 *.ipr
 *.iws
+HELP.md
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# ====================================
+# 💻 IDE & Tool 설정 무시
+# ====================================
+.idea/
+.vscode/
 .apt_generated
 .classpath
 .factorypath
@@ -28,31 +37,31 @@ HELP.md
 .sts4-cache
 
 # NetBeans
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
+nbproject/private/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
 
 # ====================================
 # ☕ Spring Boot (BackEnd)
 # ====================================
 BackEnd/.gradle/
 BackEnd/build/
+BackEnd/out/
+BackEnd/bin/
 
 # 민감한 설정 파일
 BackEnd/src/main/resources/application-private.properties
+BackEnd/src/main/resources/application-secret.properties
 
-# Gradle wrapper만 예외
+# Gradle wrapper는 포함
 !BackEnd/gradle/wrapper/gradle-wrapper.jar
 
-# src 내부 build, bin, out 예외 처리
-!BackEnd/src/main/**/build/
-!BackEnd/src/test/**/build/
-!BackEnd/src/main/**/bin/
-!BackEnd/src/test/**/bin/
-!BackEnd/src/main/**/out/
-!BackEnd/src/test/**/out/
+# src 내부 빌드 아티팩트 무시
+BackEnd/src/**/build/
+BackEnd/src/**/out/
+BackEnd/src/**/bin/
 
 # ====================================
 # 📱 Flutter (Mobile)
@@ -65,13 +74,21 @@ Mobile/.pub/
 Mobile/.packages
 Mobile/.melos_tool/
 Mobile/migrate_working_dir/
-Mobile/build
+Mobile/build/
+Mobile/android/app/**/*.cxx/
+Mobile/android/app/**/*.cmake/
+Mobile/android/app/**/*.json
+Mobile/android/app/**/*.txt
+Mobile/android/app/**/*.so
+Mobile/build/**/intermediates/
+Mobile/build/**/generated/
+
 
 # Android
-Mobile/android/.gradle
-Mobile/android/app/debug
-Mobile/android/app/profile
-Mobile/android/app/release
+Mobile/android/.gradle/
+Mobile/android/app/debug/
+Mobile/android/app/profile/
+Mobile/android/app/release/
 
 # iOS
 Mobile/ios/Flutter/.last_build_id
@@ -89,20 +106,12 @@ Mobile/app.*.map.json
 Mobile/asset/generated_plugin_registrant.dart
 
 # ====================================
-# ✅ 테스트 파일 포함
-# ====================================
-!BackEnd/src/test/
-!Mobile/test/
-
-# ====================================
-# ✅ 소스/리소스/에셋 포함
+# ✅ 테스트 및 소스 코드 포함
 # ====================================
 !BackEnd/src/main/
+!BackEnd/src/test/
 !BackEnd/src/main/resources/
 !BackEnd/src/main/resources/templates/
-!Mobile/asset/
 
-# ====================================
-# ✅ application-secret.poroperties 제외
-# ====================================
-BackEnd/src/main/resources/application-secret.properties
+!Mobile/test/
+!Mobile/asset/
