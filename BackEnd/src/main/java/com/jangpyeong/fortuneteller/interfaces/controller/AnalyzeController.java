@@ -1,4 +1,4 @@
-package com.jangpyeong.fortuneteller.controller;
+package com.jangpyeong.fortuneteller.interfaces.controller;
 
 import com.jangpyeong.fortuneteller.dto.AnalyzeResultDTO;
 import com.jangpyeong.fortuneteller.repository.UserCountRepository;

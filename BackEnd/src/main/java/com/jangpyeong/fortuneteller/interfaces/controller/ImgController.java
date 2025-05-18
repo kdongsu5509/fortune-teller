@@ -1,6 +1,5 @@
-package com.jangpyeong.fortuneteller.controller;
+package com.jangpyeong.fortuneteller.interfaces.controller;
 
-import com.jangpyeong.fortuneteller.myException.S3Exception;
 import com.jangpyeong.fortuneteller.service.S3ImageService;
 import groovy.util.logging.Slf4j;
 import java.io.IOException;
@@ -22,7 +21,7 @@ public class ImgController {
     private S3ImageService imgService;
 
     @PostMapping("image")
-    public String upload(@RequestParam("img") MultipartFile img) throws S3Exception, IOException {
+    public String upload(@RequestParam("img") MultipartFile img) throws IOException {
         String s3Url = imgService.upload(img);
         log.info("Image uploaded to: " + s3Url);
         return s3Url;
@@ -30,11 +29,7 @@ public class ImgController {
 
     @DeleteMapping("image")
     public String delete(@RequestParam("imgAddress") String imgAddress) {
-        try {
-            imgService.deleteImageFromS3(imgAddress);
-            return "success";
-        } catch (S3Exception e) {
-            return e.getErrorCode().getMessage();
-        }
+        imgService.deleteImageFromS3(imgAddress);
+        return "success";
     }
 }

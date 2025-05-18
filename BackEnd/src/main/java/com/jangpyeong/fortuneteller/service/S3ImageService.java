@@ -4,8 +4,6 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.DeleteObjectRequest;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
-import com.jangpyeong.fortuneteller.myException.ErrorCode;
-import com.jangpyeong.fortuneteller.myException.S3Exception;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
@@ -32,9 +30,9 @@ public class S3ImageService {
     }
 
 
-    public String upload(MultipartFile image) throws S3Exception, IOException {
+    public String upload(MultipartFile image) throws IOException {
         if (image.isEmpty() || Objects.isNull(image.getOriginalFilename())) {
-            throw new S3Exception(ErrorCode.EMPTY_FILE_EXCEPTION);
+            throw new IOException("File is empty or filename is null");
         }
 
         String fileName = "/" + UUID.randomUUID().toString() + image.getName();
@@ -54,22 +52,23 @@ public class S3ImageService {
     }
 
 
-    public void deleteImageFromS3(String imageAddress) throws S3Exception {
+    public void deleteImageFromS3(String imageAddress) {
         String key = getKeyFromImageAddress(imageAddress);
         try {
             amazonS3.deleteObject(new DeleteObjectRequest(bucketName, key));
         } catch (Exception e) {
-            throw new S3Exception(ErrorCode.IO_EXCEPTION_ON_IMAGE_DELETE);
+            log.error("Error deleting image from S3: {}", e.getMessage());
         }
     }
 
-    private String getKeyFromImageAddress(String imageAddress) throws S3Exception {
+    private String getKeyFromImageAddress(String imageAddress) {
         try {
             URL url = new URL(imageAddress);
             String decodingKey = URLDecoder.decode(url.getPath(), "UTF-8");
             return decodingKey.substring(1); // 맨 앞의 '/' 제거
         } catch (MalformedURLException | UnsupportedEncodingException e) {
-            throw new S3Exception(ErrorCode.IO_EXCEPTION_ON_IMAGE_DELETE);
+            log.error("Error parsing image address: {}", e.getMessage());
+            return null; // or throw an exception
         }
     }
 }
