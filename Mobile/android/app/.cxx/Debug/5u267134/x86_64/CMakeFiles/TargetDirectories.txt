@@ -1,2 +1,0 @@
-C:/Project/fortune-teller/Mobile/android/app/.cxx/Debug/5u267134/x86_64/CMakeFiles/edit_cache.dir
-C:/Project/fortune-teller/Mobile/android/app/.cxx/Debug/5u267134/x86_64/CMakeFiles/rebuild_cache.dir
