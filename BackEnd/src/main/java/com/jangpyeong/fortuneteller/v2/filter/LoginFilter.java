@@ -2,12 +2,15 @@ package com.jangpyeong.fortuneteller.v2.filter;
 
 import com.jangpyeong.fortuneteller.v2.domain.jwt.JwtResult;
 import com.jangpyeong.fortuneteller.v2.domain.jwt.JwtService;
-import com.jangpyeong.fortuneteller.v2.supprot.properties.JwtProperties;
-import com.jangpyeong.fortuneteller.v2.supprot.util.JsonUtils;
+import com.jangpyeong.fortuneteller.v2.support.properties.JwtProperties;
+import static com.jangpyeong.fortuneteller.v2.support.util.CommUtils.LOGIN_URL;
+import com.jangpyeong.fortuneteller.v2.support.util.JsonUtils;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -17,9 +20,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import java.io.IOException;
-import java.io.PrintWriter;
-import static com.jangpyeong.fortuneteller.v2.supprot.util.CommUtils.LOGIN_URL;
 
 @RequiredArgsConstructor
 @Slf4j
@@ -34,9 +34,10 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
     }
 
     @Override
-    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
+    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
+            throws AuthenticationException {
         UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(
-                obtainUsername(request), obtainPassword(request),null
+                obtainUsername(request), obtainPassword(request), null
         );
 
         log.info("Attempting to authenticate: {},{}", obtainUsername(request), obtainPassword(request));
@@ -45,18 +46,21 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
     }
 
     @Override
-    protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
+    protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain,
+                                            Authentication authResult) throws IOException, ServletException {
         UserDetails user = (UserDetails) authResult.getPrincipal();
-        JwtResult.Issue resDto =jwtService.issueJwtAuth(user.getUsername(),user.getAuthorities().iterator().next().getAuthority());
+        JwtResult.Issue resDto = jwtService.issueJwtAuth(user.getUsername(),
+                user.getAuthorities().iterator().next().getAuthority());
 
         log.info("login success : {}", JsonUtils.toJson(resDto));
-        response.setHeader(jwtProperties.getAccessHeaderName(),"Bearer " + resDto.getAccessToken());
+        response.setHeader(jwtProperties.getAccessHeaderName(), "Bearer " + resDto.getAccessToken());
         response.addCookie(resDto.getCookie());
         response.setStatus(HttpStatus.OK.value());
     }
 
     @Override
-    protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) throws IOException, ServletException {
+    protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response,
+                                              AuthenticationException failed) throws IOException, ServletException {
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         response.setContentType("application/json;charset=UTF-8");
 

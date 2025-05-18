@@ -1,9 +1,9 @@
-package com.jangpyeong.fortuneteller.v2.supprot.response;
+package com.jangpyeong.fortuneteller.v2.support.response;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
-import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
 
 @Getter
 public class APIResponse<T> {
@@ -30,6 +30,7 @@ public class APIResponse<T> {
     public static <T> APIResponse<T> success() {
         return success(null);
     }
+
     public static <T> APIResponse<T> fail(int code, String message) {
         return new APIResponse<>(code, message, null);
     }

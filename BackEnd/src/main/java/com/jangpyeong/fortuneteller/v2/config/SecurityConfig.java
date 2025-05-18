@@ -3,7 +3,8 @@ package com.jangpyeong.fortuneteller.v2.config;
 import com.jangpyeong.fortuneteller.v2.domain.jwt.JwtService;
 import com.jangpyeong.fortuneteller.v2.filter.JwtFilter;
 import com.jangpyeong.fortuneteller.v2.filter.LoginFilter;
-import com.jangpyeong.fortuneteller.v2.supprot.properties.JwtProperties;
+import com.jangpyeong.fortuneteller.v2.support.properties.JwtProperties;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.context.annotation.Bean;
@@ -19,7 +20,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import java.util.List;
 
 @Configuration
 @RequiredArgsConstructor
@@ -58,9 +58,9 @@ public class SecurityConfig {
     }
 
     private void addCustomFilters(HttpSecurity http) throws Exception {
-        http.addFilterBefore(new JwtFilter(jwtService,rabbitTemplate), LoginFilter.class);
+        http.addFilterBefore(new JwtFilter(jwtService, rabbitTemplate), LoginFilter.class);
         http.addFilterAt(new LoginFilter(
-                        authenticationManager(authenticationConfiguration),jwtService,jwtProperties),
+                        authenticationManager(authenticationConfiguration), jwtService, jwtProperties),
                 UsernamePasswordAuthenticationFilter.class
         );
     }
@@ -82,7 +82,7 @@ public class SecurityConfig {
                 "http://localhost:3000"
         ));
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-        config.setAllowedHeaders(List.of("Authorization", "Content-Type","access","refresh","Set-Cookie"));
+        config.setAllowedHeaders(List.of("Authorization", "Content-Type", "access", "refresh", "Set-Cookie"));
         config.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();

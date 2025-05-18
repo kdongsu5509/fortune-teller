@@ -1,6 +1,6 @@
 package com.jangpyeong.fortuneteller.v2.domain.user;
 
-import com.jangpyeong.fortuneteller.v2.supprot.util.JsonUtils;
+import com.jangpyeong.fortuneteller.v2.support.util.JsonUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -19,13 +19,13 @@ public class UserService {
         final String role = "ROLE_USER";
 
         isDuplicated(command.getEmail());
-        User user = User.create(command.getEmail(),encodedPassword,role);
+        User user = User.create(command.getEmail(), encodedPassword, role);
         User resSignUp = userRepository.save(user);
 
         log.info("User signup successful : {}", JsonUtils.toJson(resSignUp));
     }
 
-    private void isDuplicated(String email){
+    private void isDuplicated(String email) {
         userRepository.findByEmail(email).ifPresent(user -> {
             throw new RuntimeException("User with email " + email + " already exists");
         });

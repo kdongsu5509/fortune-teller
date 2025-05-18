@@ -1,6 +1,6 @@
 package com.jangpyeong.fortuneteller.v2.config;
 
-import com.jangpyeong.fortuneteller.v2.supprot.properties.RabbitmqProperties;
+import com.jangpyeong.fortuneteller.v2.support.properties.RabbitmqProperties;
 import lombok.RequiredArgsConstructor;
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;

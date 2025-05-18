@@ -1,11 +1,17 @@
 package com.jangpyeong.fortuneteller.v2.filter;
 
 import com.jangpyeong.fortuneteller.v2.domain.jwt.JwtService;
-import com.jangpyeong.fortuneteller.v2.supprot.util.JsonUtils;
+import static com.jangpyeong.fortuneteller.v2.support.util.CommUtils.LOGIN_URL;
+import com.jangpyeong.fortuneteller.v2.support.util.JsonUtils;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.time.LocalDateTime;
+import java.util.Collections;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -14,13 +20,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.web.util.ContentCachingRequestWrapper;
 import org.springframework.web.util.ContentCachingResponseWrapper;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.time.LocalDateTime;
-import java.util.Collections;
-import java.util.stream.Collectors;
-
-import static com.jangpyeong.fortuneteller.v2.supprot.util.CommUtils.LOGIN_URL;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -66,7 +65,8 @@ public class JwtFilter extends OncePerRequestFilter {
     }
 
 
-    private void logAccess(ContentCachingRequestWrapper req, ContentCachingResponseWrapper res, LocalDateTime requestAt) {
+    private void logAccess(ContentCachingRequestWrapper req, ContentCachingResponseWrapper res,
+                           LocalDateTime requestAt) {
         LocalDateTime responseAt = LocalDateTime.now();
 
         String requestBody = new String(req.getContentAsByteArray(), StandardCharsets.UTF_8);

@@ -1,4 +1,4 @@
-package com.jangpyeong.fortuneteller.v2.supprot.properties;
+package com.jangpyeong.fortuneteller.v2.support.properties;
 
 import lombok.Getter;
 import lombok.Setter;

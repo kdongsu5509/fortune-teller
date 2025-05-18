@@ -1,6 +1,7 @@
-package com.jangpyeong.fortuneteller.v2.supprot.exception;
+package com.jangpyeong.fortuneteller.v2.support.exception;
 
-import com.jangpyeong.fortuneteller.v2.supprot.response.APIResponse;
+import com.jangpyeong.fortuneteller.v2.support.response.APIResponse;
+import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
@@ -8,8 +9,6 @@ import org.springframework.validation.BindException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-
-import java.util.stream.Collectors;
 
 @RestControllerAdvice
 @Slf4j

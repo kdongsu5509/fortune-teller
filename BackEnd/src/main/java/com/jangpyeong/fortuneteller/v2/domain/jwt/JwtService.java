@@ -1,9 +1,12 @@
 package com.jangpyeong.fortuneteller.v2.domain.jwt;
 
 import com.jangpyeong.fortuneteller.v2.infra.jwt.JwtUtil;
-import com.jangpyeong.fortuneteller.v2.supprot.properties.JwtProperties;
+import com.jangpyeong.fortuneteller.v2.support.properties.JwtProperties;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -11,9 +14,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
-import java.time.LocalDateTime;
-import java.util.List;
-import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -41,7 +41,7 @@ public class JwtService {
             return null;
         }
 
-        if(!accessToken.equals(jwtAuth.getAccessToken())) {
+        if (!accessToken.equals(jwtAuth.getAccessToken())) {
             log.warn("access token does not match");
             return null;
         }
@@ -68,10 +68,10 @@ public class JwtService {
         savedJwt.setAccessExpiration(jwtUtil.getExpirationFromToken(access));
         savedJwt.setRefreshExpiration(jwtUtil.getExpirationFromToken(refresh));
 
-        if(findJwtAuth == null) {
+        if (findJwtAuth == null) {
             savedJwt.setId("JWT:" + UUID.randomUUID());
             savedJwt.setCreateAt(LocalDateTime.now());
-        }else{
+        } else {
             savedJwt.setId(findJwtAuth.getId());
             savedJwt.setCreateAt(findJwtAuth.getCreateAt());
             savedJwt.setUpdateAt(LocalDateTime.now());
@@ -79,7 +79,6 @@ public class JwtService {
 
         JwtAuthRedis jwtAuth = jwtRepository.saveOrUpdateJwtAuth(savedJwt);
         Cookie cookie = jwtUtil.createRefreshCookie(refresh);
-
 
         return JwtResult.Issue.of(
                 jwtAuth.getAccessToken(),
@@ -113,12 +112,12 @@ public class JwtService {
             return null;
         }
 
-        if(!refreshToken.equals(jwtAuth.getRefreshToken())) {
+        if (!refreshToken.equals(jwtAuth.getRefreshToken())) {
             log.warn("refresh token does not match");
             return null;
         }
 
-        if(jwtAuth.getRefreshExpiration().isBefore(LocalDateTime.now())) {
+        if (jwtAuth.getRefreshExpiration().isBefore(LocalDateTime.now())) {
             log.warn("refresh expired");
             return null;
         }
@@ -142,7 +141,7 @@ public class JwtService {
         return new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
     }
 
-    public List<JwtAuthRedis> getJwtInfoAll(){
+    public List<JwtAuthRedis> getJwtInfoAll() {
         return jwtRepository.findAllJwtAuthRedis();
     }
 

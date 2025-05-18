@@ -1,6 +1,6 @@
 package com.jangpyeong.fortuneteller.v2.domain.user;
 
-import com.jangpyeong.fortuneteller.v2.supprot.util.BaseTimeEntity;
+import com.jangpyeong.fortuneteller.v2.support.util.BaseTimeEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -8,6 +8,7 @@ import jakarta.persistence.Table;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
 @Table(name = "face_user")
 @Entity
 @Getter

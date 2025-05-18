@@ -1,7 +1,7 @@
 package com.jangpyeong.fortuneteller.v2.infra.access;
 
 import com.jangpyeong.fortuneteller.v2.domain.access.AccessLog;
-import com.jangpyeong.fortuneteller.v2.supprot.util.JsonUtils;
+import com.jangpyeong.fortuneteller.v2.support.util.JsonUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -23,8 +23,8 @@ public class AccessLogConsumerService {
             accessLogJpaRepository.save(accessLog);
             log.info("Save access log: {}", JsonUtils.toJson(accessLog));
 
-        }catch (Exception e){
-            log.error("AccessLog Save error : {},{}",e.getMessage(), JsonUtils.toJson(command));
+        } catch (Exception e) {
+            log.error("AccessLog Save error : {},{}", e.getMessage(), JsonUtils.toJson(command));
         }
     }
 
