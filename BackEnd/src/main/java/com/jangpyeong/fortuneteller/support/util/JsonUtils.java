@@ -13,7 +13,6 @@ public class JsonUtils {
             .registerModule(new JavaTimeModule())
             .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
 
-    //TODO 객체 → JSON 문자열
     public static String toJson(Object obj) {
         try {
             ObjectMapper mapper = new ObjectMapper();
@@ -26,7 +25,6 @@ public class JsonUtils {
         }
     }
 
-    //TODO  JSON 문자열 → 객체
     public static <T> T fromJson(String json, Class<T> clazz) {
         try {
             return objectMapper.readValue(json, clazz);
