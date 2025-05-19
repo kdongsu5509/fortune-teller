@@ -54,6 +54,7 @@ BackEnd/bin/
 # 민감한 설정 파일
 BackEnd/src/main/resources/application-private.properties
 BackEnd/src/main/resources/application-secret.properties
+BackEnd/src/main/resources/jangpyeong-a9fe18fdd9c2.json
 
 # Gradle wrapper는 포함
 !BackEnd/gradle/wrapper/gradle-wrapper.jar
