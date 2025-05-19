@@ -1,7 +1,8 @@
-package com.jangpyeong.fortuneteller.infra.user;
+package com.jangpyeong.fortuneteller.fortune.user.infra;
 
 import com.jangpyeong.fortuneteller.domain.user.User;
 import com.jangpyeong.fortuneteller.domain.user.UserRepository;
+import com.jangpyeong.fortuneteller.infra.user.UserJpaRepository;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
