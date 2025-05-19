@@ -1,8 +1,5 @@
-package com.jangpyeong.fortuneteller.domain.jwt;
+package com.jangpyeong.fortuneteller.domain.jwt.domain;
 
-import com.jangpyeong.fortuneteller.domain.jwt.domain.JwtAuthRedis;
-import com.jangpyeong.fortuneteller.domain.jwt.domain.JwtRepository;
-import com.jangpyeong.fortuneteller.domain.jwt.domain.JwtResult;
 import com.jangpyeong.fortuneteller.domain.jwt.infra.JwtUtil;
 import com.jangpyeong.fortuneteller.support.properties.JwtProperties;
 import jakarta.servlet.http.Cookie;
@@ -38,8 +35,7 @@ public class JwtService {
         accessToken = accessToken.replaceFirst("^Bearer\\s+", "").trim();
         log.info("accessToken: {}", accessToken);
 
-        JwtAuthRedis jwtAuth = jwtRepository.findJwtAuthRedisByAccessToken(
-                accessToken).orElse(null);
+        JwtAuthRedis jwtAuth = jwtRepository.findJwtAuthRedisByAccessToken(accessToken).orElse(null);
         if (jwtAuth == null) {
             log.warn("accessToken not found in Redis");
             return null;
@@ -63,8 +59,7 @@ public class JwtService {
         String access = jwtUtil.createAccessToken(userId, role);
         String refresh = jwtUtil.createRefreshToken(userId, role);
 
-        JwtAuthRedis findJwtAuth = jwtRepository.findJwtAuthRedisByEmail(
-                userId).orElse(null);
+        JwtAuthRedis findJwtAuth = jwtRepository.findJwtAuthRedisByEmail(userId).orElse(null);
 
         JwtAuthRedis savedJwt = new JwtAuthRedis();
         savedJwt.setAccessToken(access);
@@ -82,8 +77,7 @@ public class JwtService {
             savedJwt.setUpdateAt(LocalDateTime.now());
         }
 
-        JwtAuthRedis jwtAuth = jwtRepository.saveOrUpdateJwtAuth(
-                savedJwt);
+        JwtAuthRedis jwtAuth = jwtRepository.saveOrUpdateJwtAuth(savedJwt);
         Cookie cookie = jwtUtil.createRefreshCookie(refresh);
 
         return JwtResult.Issue.of(
@@ -111,8 +105,7 @@ public class JwtService {
             return null;
         }
 
-        JwtAuthRedis jwtAuth = jwtRepository.findJwtAuthRedisByRefreshToken(
-                refreshToken).orElse(null);
+        JwtAuthRedis jwtAuth = jwtRepository.findJwtAuthRedisByRefreshToken(refreshToken).orElse(null);
 
         if (jwtAuth == null) {
             log.warn("refresh token not found in redis");

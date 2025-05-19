@@ -1,6 +1,5 @@
-package com.jangpyeong.fortuneteller.domain.user;
+package com.jangpyeong.fortuneteller.domain.user.domain;
 
-import com.jangpyeong.fortuneteller.domain.user.domain.User;
 import java.util.ArrayList;
 import java.util.Collection;
 import lombok.Getter;

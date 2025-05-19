@@ -1,15 +1,19 @@
 package com.jangpyeong.fortuneteller.domain.jwt;
 
+import com.jangpyeong.fortuneteller.domain.jwt.domain.JwtAuthRedis;
 import java.util.List;
 import java.util.Optional;
 
 public interface JwtRepository {
 
-    Optional<JwtAuthRedis> findJwtAuthRedisByAccessToken(String accessToken);
+    Optional<JwtAuthRedis> findJwtAuthRedisByAccessToken(
+            String accessToken);
 
-    Optional<JwtAuthRedis> findJwtAuthRedisByRefreshToken(String refreshToken);
+    Optional<JwtAuthRedis> findJwtAuthRedisByRefreshToken(
+            String refreshToken);
 
-    JwtAuthRedis saveOrUpdateJwtAuth(JwtAuthRedis jwtAuthRedis);
+    JwtAuthRedis saveOrUpdateJwtAuth(
+            JwtAuthRedis jwtAuthRedis);
 
     List<JwtAuthRedis> findAllJwtAuthRedis();
 

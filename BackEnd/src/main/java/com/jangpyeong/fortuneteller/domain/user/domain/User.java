@@ -1,4 +1,4 @@
-package com.jangpyeong.fortuneteller.domain.user;
+package com.jangpyeong.fortuneteller.domain.user.domain;
 
 import com.jangpyeong.fortuneteller.common.util.BaseTimeEntity;
 import jakarta.persistence.Column;
@@ -9,7 +9,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Table(name = "face_user")
+@Table(name = "users")
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -31,8 +31,7 @@ public class User extends BaseTimeEntity {
         this.role = role;
     }
 
-    public static com.jangpyeong.fortuneteller.domain.user.domain.User create(String email, String password,
-                                                                              String role) {
-        return new com.jangpyeong.fortuneteller.domain.user.domain.User(email, password, role);
+    public static User create(String email, String password, String role) {
+        return new User(email, password, role);
     }
 }

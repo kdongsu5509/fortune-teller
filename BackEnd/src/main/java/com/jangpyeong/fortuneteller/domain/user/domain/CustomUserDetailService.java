@@ -1,8 +1,5 @@
-package com.jangpyeong.fortuneteller.domain.user;
+package com.jangpyeong.fortuneteller.domain.user.domain;
 
-import com.jangpyeong.fortuneteller.domain.user.domain.CustomUserDetails;
-import com.jangpyeong.fortuneteller.domain.user.domain.User;
-import com.jangpyeong.fortuneteller.domain.user.domain.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UserDetails;

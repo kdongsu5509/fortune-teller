@@ -35,5 +35,4 @@ public class JwtProperties {
      * JWT 이름 (access token 저장용)
      */
     private String accessHeaderName;
-
 }
