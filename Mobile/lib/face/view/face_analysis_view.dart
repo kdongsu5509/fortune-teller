@@ -13,27 +13,24 @@ class FaceAnalysisView extends StatelessWidget {
         final sh = size.height;
         final isDark = Theme.of(context).brightness == Brightness.dark;
 
-        final List<String> _tiltes = [
-            "👁 눈",
-            "👃 코",
-            "👄 입",
-            "🧠 이마"
-        ];
-
         final face = {
             "summary": "당신은 전체적으로 강한 인상을 주는 이목구비를 지녔으며, 리더십과 책임감이 돋보이는 인상입니다.",
             "keywords": ["통찰력", "리더십", "긍정 에너지"],
             "features": {
                 "eyes": {
+                    "title": "👁 눈",
                     "description": "눈매가 또렷하고 길게 뻗어 있어, 판단력과 통찰력이 뛰어난 사람입니다."
                 },
                 "nose": {
+                    "title": "👃 코",
                     "description": "높은 콧대는 자존심이 강하고 독립적인 성향을 나타냅니다."
                 },
                 "mouth": {
+                    "title": "👄 입",
                     "description": "입꼬리가 올라가 있어 긍정적인 에너지와 말솜씨를 지닌 타입입니다."
                 },
                 "forehead": {
+                    "title": "🧠 이마",
                     "description": "넓은 이마는 지적 능력과 미래 지향적인 사고를 의미합니다."
                 }
             },
@@ -41,8 +38,6 @@ class FaceAnalysisView extends StatelessWidget {
         };
 
         final features = face['features'] as Map<String, dynamic>? ?? {};
-        List<String>? _featuresList = features.values.cast<String>().toList();
-
         final faceSummary = face['summary'] as String? ?? '';
         final faceAdvice = face['advice'] as String? ?? '';
 
@@ -108,11 +103,11 @@ class FaceAnalysisView extends StatelessWidget {
                                 ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold)
                             ),
                             SizedBox(height: sh * 0.015),
-                            for (int i = 0 ; i < 4 ; i++)
+                            for (final key in features.keys)
                                 contentsCard(
                                     context,
-                                    _tiltes[i],
-                                    _featuresList[i] ?? '',
+                                    features[key]['title'] ?? '',
+                                    features[key]['description'] ?? '',
                                     sw
                                 ),
                             SizedBox(height: sh * 0.035),
