@@ -122,11 +122,12 @@ class _UserInfoUpdateViewState extends ConsumerState<UserInfoUpdateView> {
     bool isDark,
   ) => InkWell(
     onTap: () async {
+      print(label);
       final picked = await showModalBottomSheet<int>(
         context: context,
         builder:
             (context) => ListView.separated(
-              padding: const EdgeInsets.symmetric(vertical: 12),
+              padding: EdgeInsets.symmetric(vertical: 12),
               itemCount: _getList(label).length,
               itemBuilder: (context, index) {
                 final value = _getList(label)[index];
@@ -145,11 +146,11 @@ class _UserInfoUpdateViewState extends ConsumerState<UserInfoUpdateView> {
               viewModel.selectedYear = picked;
               viewModel.generateDayList();
               break;
-            case "생월":
+            case "월":
               viewModel.selectedMonth = picked;
               viewModel.generateDayList();
               break;
-            case "생일":
+            case "일":
               viewModel.selectedDay = picked;
               break;
           }
@@ -178,9 +179,9 @@ class _UserInfoUpdateViewState extends ConsumerState<UserInfoUpdateView> {
     switch (label) {
       case "생년":
         return viewModel.years;
-      case "생월":
+      case "월":
         return viewModel.months;
-      case "생일":
+      case "일":
         return viewModel.days;
       default:
         return [];
