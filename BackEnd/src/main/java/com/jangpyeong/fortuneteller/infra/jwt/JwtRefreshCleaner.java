@@ -1,7 +1,8 @@
 package com.jangpyeong.fortuneteller.infra.jwt;
 
-import com.jangpyeong.fortuneteller.domain.jwt.JwtRepository;
-import static com.jangpyeong.fortuneteller.support.util.CommUtils.EXPIRED_JWT_CLEANUP_CRON;
+import static com.jangpyeong.fortuneteller.common.util.CommUtils.EXPIRED_JWT_CLEANUP_CRON;
+
+import com.jangpyeong.fortuneteller.domain.jwt.domain.JwtRepository;
 import java.time.LocalDateTime;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

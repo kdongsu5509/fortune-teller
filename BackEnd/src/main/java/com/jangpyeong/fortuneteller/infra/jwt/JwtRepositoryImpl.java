@@ -1,8 +1,8 @@
 package com.jangpyeong.fortuneteller.infra.jwt;
 
-import com.jangpyeong.fortuneteller.domain.jwt.JwtAuthRedis;
-import com.jangpyeong.fortuneteller.domain.jwt.JwtRepository;
-import com.jangpyeong.fortuneteller.support.util.JsonUtils;
+import com.jangpyeong.fortuneteller.common.util.JsonUtils;
+import com.jangpyeong.fortuneteller.domain.jwt.domain.JwtAuthRedis;
+import com.jangpyeong.fortuneteller.domain.jwt.domain.JwtRepository;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;

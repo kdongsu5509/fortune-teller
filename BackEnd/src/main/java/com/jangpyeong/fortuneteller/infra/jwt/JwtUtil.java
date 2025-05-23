@@ -1,6 +1,6 @@
 package com.jangpyeong.fortuneteller.infra.jwt;
 
-import com.jangpyeong.fortuneteller.support.properties.JwtProperties;
+import com.jangpyeong.fortuneteller.infra.user.JwtProperties;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import jakarta.annotation.PostConstruct;
