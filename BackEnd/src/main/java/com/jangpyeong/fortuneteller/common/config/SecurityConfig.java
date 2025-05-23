@@ -3,7 +3,7 @@ package com.jangpyeong.fortuneteller.common.config;
 import com.jangpyeong.fortuneteller.common.filter.JwtFilter;
 import com.jangpyeong.fortuneteller.common.filter.LoginFilter;
 import com.jangpyeong.fortuneteller.domain.jwt.domain.JwtService;
-import com.jangpyeong.fortuneteller.support.properties.JwtProperties;
+import com.jangpyeong.fortuneteller.infra.user.JwtProperties;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;

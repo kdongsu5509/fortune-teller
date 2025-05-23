@@ -26,8 +26,8 @@ public class ResultService {
     }
 
     public void saveResult(String result) {
-        resultRepository.save(result);
-        cacheRepository.set(result.getUser().getEmail(), result.getResultType(), toDto(result));
+//        resultRepository.save(result);
+//        cacheRepository.set(result.getUser().getEmail(), result.replace(), toDto(result));
     }
 
     public void deleteResult(String email, ResultType type) {

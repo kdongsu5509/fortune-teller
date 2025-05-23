@@ -1,13 +1,11 @@
 package com.jangpyeong.fortuneteller.domain.analyze.application;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.jangpyeong.fortuneteller.domain.analyze.dao.DreamDto;
-import com.jangpyeong.fortuneteller.domain.analyze.dao.FaceDto;
-import com.jangpyeong.fortuneteller.domain.analyze.dao.SajuDto;
-import com.jangpyeong.fortuneteller.domain.analyze.dao.TodayLuckDto;
-import com.jangpyeong.fortuneteller.domain.analyze.domain.Result;
 import com.jangpyeong.fortuneteller.domain.analyze.domain.ResultService;
+import com.jangpyeong.fortuneteller.domain.analyze.dto.DreamDto;
+import com.jangpyeong.fortuneteller.domain.analyze.dto.FaceDto;
+import com.jangpyeong.fortuneteller.domain.analyze.dto.SajuDto;
+import com.jangpyeong.fortuneteller.domain.analyze.dto.TodayLuckDto;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import org.springframework.ai.chat.model.ChatModel;
@@ -63,33 +61,36 @@ public class AnalyzeService {
     }
 
     private <T> T parseResponse(String response, Class<T> clazz) {
-        try {
-            T dto = objectMapper.readValue(response, clazz);
+//        try {
+////            T dto = objectMapper.readValue(response, clazz);
+//
+//            // 👉 Result 엔티티 생성 및 저장
+//            //TODO: 수정필요
+//            resultService.saveResult(extractResultFromDto(dto));
+//
+//            return dto;
+//
+//        } catch (JsonProcessingException e) {
+//            throw new RuntimeException("❗ GPT 응답을 파싱하는 데 실패했습니다.\n\n응답 내용:\n" + response, e);
+//        }
 
-            // 👉 Result 엔티티 생성 및 저장
-            //TODO: 수정필요
-            resultService.saveResult(extractResultFromDto(dto));
-
-            return dto;
-
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException("❗ GPT 응답을 파싱하는 데 실패했습니다.\n\n응답 내용:\n" + response, e);
-        }
+        return objectMapper.convertValue(response, clazz);
     }
 
 
     private <T> String extractResultFromDto(T dto) {
-        if (dto instanceof FaceDto face) {
-            return new Result(face.getSummary(), ResultType.FACE, currentUser());
-        } else if (dto instanceof SajuDto saju) {
-            return new Result(saju.getSummary(), ResultType.SAJU, currentUser());
-        } else if (dto instanceof DreamDto dream) {
-            return new Result(dream.getSummary(), ResultType.DREAM, currentUser());
-        } else if (dto instanceof TodayLuckDto luck) {
-            return new Result(luck.getSummary(), ResultType.TODAY_LUCK, currentUser());
-        } else {
-            throw new IllegalArgumentException("지원하지 않는 분석 타입입니다: " + dto.getClass());
-        }
+//        if (dto instanceof FaceDto face) {
+//            return new Result(face.getSummary(), ResultType.FACE, currentUser());
+//        } else if (dto instanceof SajuDto saju) {
+//            return new Result(saju.getSummary(), ResultType.SAJU, currentUser());
+//        } else if (dto instanceof DreamDto dream) {
+//            return new Result(dream.getSummary(), ResultType.DREAM, currentUser());
+//        } else if (dto instanceof TodayLuckDto luck) {
+//            return new Result(luck.getSummary(), ResultType.TODAY_LUCK, currentUser());
+//        } else {
+//            throw new IllegalArgumentException("지원하지 않는 분석 타입입니다: " + dto.getClass());
+//        }4
+        return null;
     }
 
 }

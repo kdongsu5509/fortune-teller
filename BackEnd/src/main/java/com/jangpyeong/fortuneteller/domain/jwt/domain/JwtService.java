@@ -1,7 +1,7 @@
 package com.jangpyeong.fortuneteller.domain.jwt.domain;
 
-import com.jangpyeong.fortuneteller.domain.jwt.infra.JwtUtil;
-import com.jangpyeong.fortuneteller.support.properties.JwtProperties;
+import com.jangpyeong.fortuneteller.infra.jwt.JwtUtil;
+import com.jangpyeong.fortuneteller.infra.user.JwtProperties;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;

@@ -1,6 +1,6 @@
 package com.jangpyeong.fortuneteller.common.filter;
 
-import com.jangpyeong.fortuneteller.infra.AccessLogConsumerCommand;
+import com.jangpyeong.fortuneteller.infra.access_log.AccessLogConsumerCommand;
 import jakarta.servlet.http.HttpServletRequest;
 import java.time.Duration;
 import java.time.LocalDateTime;

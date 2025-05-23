@@ -1,6 +1,7 @@
 package com.jangpyeong.fortuneteller.domain.user.domain;
 
 import com.jangpyeong.fortuneteller.common.util.JsonUtils;
+import com.jangpyeong.fortuneteller.infra.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -30,6 +31,4 @@ public class UserService {
             throw new RuntimeException("User with email " + email + " already exists");
         });
     }
-
-
 }

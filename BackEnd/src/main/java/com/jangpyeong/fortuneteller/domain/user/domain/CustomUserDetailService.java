@@ -1,5 +1,6 @@
 package com.jangpyeong.fortuneteller.domain.user.domain;
 
+import com.jangpyeong.fortuneteller.infra.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UserDetails;

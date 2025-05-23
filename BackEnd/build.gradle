@@ -44,8 +44,9 @@ dependencies {
     //Lombok
     compileOnly 'org.projectlombok:lombok:1.18.36'
     annotationProcessor 'org.projectlombok:lombok:1.18.36'
-    // AWS
-    implementation 'org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE'
+
+    //Google Cloud Storage
+    implementation group: 'org.springframework.cloud', name: 'spring-cloud-gcp-storage', version: '1.2.5.RELEASE'
 
     implementation 'org.springframework.boot:spring-boot-starter-validation'
 
