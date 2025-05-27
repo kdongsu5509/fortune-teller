@@ -14,6 +14,18 @@ class TodayFortuneView extends StatelessWidget {
         final sh = size.height;
         final isDark = Theme.of(context).brightness == Brightness.dark;
 
+        final String _generalTtile = "📅 종합 운세";
+        final String _moneyTtile = "💰 금전 운";
+        final String _loveTtile = "💘 연애 운";
+        final String _healthTtile = "💪 건강 운";
+
+        final List<String> _categoryTitle = [
+            _generalTtile,
+            _moneyTtile,
+            _loveTtile,
+            _healthTtile
+        ];
+
         final fortune = {
             "date": "2025-05-14",
             "summary": "기회와 전환점이 찾아오는 날입니다. 주저하지 말고 움직이세요.",
@@ -43,6 +55,11 @@ class TodayFortuneView extends StatelessWidget {
         };
 
         final categories = fortune['categories'] as Map<String, dynamic>? ?? {};
+        final _contentList = categories.entries.map((entry) {
+            return {
+                "description": entry.value['description'] ?? ''
+            };
+        }).toList();
         final categories2 = fortune['summary'] as String? ?? '';
         final categories3 = fortune['advice'] as String? ?? '';
 
@@ -101,8 +118,8 @@ class TodayFortuneView extends StatelessWidget {
                             SizedBox(height: sh * 0.035),
 
                             /// 📌 카테고리 카드
-                            for (final key in categories.keys)
-                                contentsCard(context, categories[key]['title'] ?? '', categories[key]['description'] ?? '', sw),
+                            for (int i = 0; i < _categoryTitle.length; i++)
+                                contentsCard(context, _categoryTitle[i], _contentList[i]["description"], sw),
                             contentsCard(context, "💡 오늘의 조언", categories3, sw),
 
                             Padding(

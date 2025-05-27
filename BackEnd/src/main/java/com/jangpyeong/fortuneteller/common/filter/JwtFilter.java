@@ -3,7 +3,7 @@ package com.jangpyeong.fortuneteller.common.filter;
 import static com.jangpyeong.fortuneteller.common.util.CommUtils.LOGIN_URL;
 
 import com.jangpyeong.fortuneteller.common.util.JsonUtils;
-import com.jangpyeong.fortuneteller.domain.jwt.domain.JwtService;
+import com.jangpyeong.fortuneteller.domain.jwt.application.JwtService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

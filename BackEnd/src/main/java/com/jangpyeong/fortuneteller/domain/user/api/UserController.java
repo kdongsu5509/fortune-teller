@@ -1,9 +1,9 @@
 package com.jangpyeong.fortuneteller.domain.user.api;
 
 import com.jangpyeong.fortuneteller.common.response.APIResponse;
+import com.jangpyeong.fortuneteller.domain.user.application.UserService;
 import com.jangpyeong.fortuneteller.domain.user.domain.UserCommand;
 import com.jangpyeong.fortuneteller.domain.user.domain.UserRequest;
-import com.jangpyeong.fortuneteller.domain.user.domain.UserService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;

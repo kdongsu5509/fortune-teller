@@ -2,7 +2,7 @@ package com.jangpyeong.fortuneteller.common.config;
 
 import com.jangpyeong.fortuneteller.common.filter.JwtFilter;
 import com.jangpyeong.fortuneteller.common.filter.LoginFilter;
-import com.jangpyeong.fortuneteller.domain.jwt.domain.JwtService;
+import com.jangpyeong.fortuneteller.domain.jwt.application.JwtService;
 import com.jangpyeong.fortuneteller.infra.user.JwtProperties;
 import java.util.List;
 import lombok.RequiredArgsConstructor;

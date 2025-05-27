@@ -1,8 +1,8 @@
 package com.jangpyeong.fortuneteller.domain.admin.api;
 
 import com.jangpyeong.fortuneteller.common.response.APIResponse;
+import com.jangpyeong.fortuneteller.domain.jwt.application.JwtService;
 import com.jangpyeong.fortuneteller.domain.jwt.domain.JwtAuthRedis;
-import com.jangpyeong.fortuneteller.domain.jwt.domain.JwtService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
