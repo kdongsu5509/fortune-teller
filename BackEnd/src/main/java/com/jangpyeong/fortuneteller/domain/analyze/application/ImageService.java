@@ -1,4 +1,4 @@
-package com.jangpyeong.fortuneteller.domain.analyze;
+package com.jangpyeong.fortuneteller.domain.analyze.application;
 
 import java.io.IOException;
 import org.springframework.web.multipart.MultipartFile;

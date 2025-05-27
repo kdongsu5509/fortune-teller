@@ -1,5 +1,6 @@
 package com.jangpyeong.fortuneteller.common.config;
 
+import com.jangpyeong.fortuneteller.domain.analyze.domain.ResultCacheDto;
 import com.jangpyeong.fortuneteller.domain.jwt.domain.JwtAuthRedis;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,4 +25,14 @@ public class RedisConfig {
         template.setValueSerializer(new GenericJackson2JsonRedisSerializer());
         return template;
     }
+
+    @Bean
+    public RedisTemplate<String, ResultCacheDto> resultCacheDtoRedisTemplate(RedisConnectionFactory factory) {
+        RedisTemplate<String, ResultCacheDto> template = new RedisTemplate<>();
+        template.setConnectionFactory(factory);
+        template.setKeySerializer(new StringRedisSerializer());
+        template.setValueSerializer(new GenericJackson2JsonRedisSerializer());
+        return template;
+    }
+
 }

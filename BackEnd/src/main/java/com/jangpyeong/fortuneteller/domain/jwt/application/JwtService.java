@@ -1,5 +1,9 @@
-package com.jangpyeong.fortuneteller.domain.jwt.domain;
+package com.jangpyeong.fortuneteller.domain.jwt.application;
 
+import com.jangpyeong.fortuneteller.domain.jwt.domain.JwtAuthRedis;
+import com.jangpyeong.fortuneteller.domain.jwt.domain.JwtRepository;
+import com.jangpyeong.fortuneteller.domain.jwt.domain.JwtResult;
+import com.jangpyeong.fortuneteller.domain.jwt.domain.JwtResult.Issue;
 import com.jangpyeong.fortuneteller.infra.jwt.JwtUtil;
 import com.jangpyeong.fortuneteller.infra.user.JwtProperties;
 import jakarta.servlet.http.Cookie;
@@ -54,7 +58,7 @@ public class JwtService {
         return accessToken;
     }
 
-    public JwtResult.Issue issueJwtAuth(String userId, String role) {
+    public Issue issueJwtAuth(String userId, String role) {
 
         String access = jwtUtil.createAccessToken(userId, role);
         String refresh = jwtUtil.createRefreshToken(userId, role);

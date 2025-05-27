@@ -1,6 +1,8 @@
-package com.jangpyeong.fortuneteller.domain.user.domain;
+package com.jangpyeong.fortuneteller.domain.user.application;
 
 import com.jangpyeong.fortuneteller.common.util.JsonUtils;
+import com.jangpyeong.fortuneteller.domain.user.domain.User;
+import com.jangpyeong.fortuneteller.domain.user.domain.UserCommand.Signup;
 import com.jangpyeong.fortuneteller.infra.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,7 +17,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder passwordEncoder;
 
-    public void saveUser(UserCommand.Signup command) {
+    public void saveUser(Signup command) {
         final String encodedPassword = passwordEncoder.encode(command.getPassword());
         final String role = "ROLE_USER";
 

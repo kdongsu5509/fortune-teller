@@ -19,7 +19,7 @@ public class ResultCacheRepository {
     public void set(String email, ResultType type, ResultCacheDto dto) {
         redisTemplate.opsForValue().set(makeKey(email, type), dto, TTL);
     }
-
+    
     public void delete(String email, ResultType type) {
         redisTemplate.delete(makeKey(email, type));
     }
