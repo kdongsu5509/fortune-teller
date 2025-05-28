@@ -1,6 +1,6 @@
 package com.jangpyeong.fortuneteller.domain.image.api;
 
-import com.jangpyeong.fortuneteller.domain.image.application.ImageService;
+import com.jangpyeong.fortuneteller.domain.analyze.application.ImageService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.DeleteMapping;

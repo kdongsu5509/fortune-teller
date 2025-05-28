@@ -1,4 +1,4 @@
-package com.jangpyeong.fortuneteller.domain.image.application;
+package com.jangpyeong.fortuneteller.domain.analyze.application;
 
 import org.springframework.web.multipart.MultipartFile;
 
