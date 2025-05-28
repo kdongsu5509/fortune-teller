@@ -21,14 +21,14 @@ public class RedisConfig {
         template.setValueSerializer(new GenericJackson2JsonRedisSerializer());
         return template;
     }
-
-    @Bean
-    public RedisTemplate<String, ResultCacheDto> resultCacheDtoRedisTemplate(RedisConnectionFactory factory) {
-        RedisTemplate<String, ResultCacheDto> template = new RedisTemplate<>();
-        template.setConnectionFactory(factory);
-        template.setKeySerializer(new StringRedisSerializer());
-        template.setValueSerializer(new GenericJackson2JsonRedisSerializer());
-        return template;
-    }
+//
+//    @Bean
+//    public RedisTemplate<String, ResultCacheDto> resultCacheDtoRedisTemplate(RedisConnectionFactory factory) {
+//        RedisTemplate<String, ResultCacheDto> template = new RedisTemplate<>();
+//        template.setConnectionFactory(factory);
+//        template.setKeySerializer(new StringRedisSerializer());
+//        template.setValueSerializer(new GenericJackson2JsonRedisSerializer());
+//        return template;
+//    }
 
 }
