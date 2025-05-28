@@ -1,33 +1,46 @@
 package com.jangpyeong.fortuneteller.domain.analyze.domain;
 
 import com.jangpyeong.fortuneteller.common.util.BaseTimeEntity;
-import com.jangpyeong.fortuneteller.domain.user.domain.User;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import java.util.UUID;
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 @Table(name = "results")
 @Entity
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Builder
+@AllArgsConstructor
+@RequiredArgsConstructor(access = AccessLevel.PROTECTED)
 public class Result extends BaseTimeEntity {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Getter
+    @GeneratedValue
     private UUID uuid;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    @Column(name = "user_email", nullable = false, length = 100)
+    private String userEmail;
+
+    @Enumerated(EnumType.STRING)
     private ResultType resultType;
-    private String summary;
+
+    private String contents;
+
+    public static Result create(String userEmail, ResultType resultType, String contents) {
+        return Result.builder()
+                .uuid(UUID.randomUUID())
+                .userEmail(userEmail)
+                .resultType(resultType)
+                .contents(contents)
+                .build();
+    }
 }

@@ -10,19 +10,23 @@ import com.jangpyeong.fortuneteller.domain.analyze.api.dto.resp.TodayRespDto;
 public interface AnalyzeService {
 
     FaceRespDto doAnalyzeFace(
-            String imageUrl
+            String imageUrl,
+            String userEmail
     );
 
     SajuRespDto doAnalyzeSaju(
-            SajuReqDto sajuReqDto
+            SajuReqDto sajuReqDto,
+            String userEmail
     );
 
     DreamRespDto doAnalyzeDream(
-            DreamReqDto dreamReqDto
+            DreamReqDto dreamReqDto,
+            String userEmail
     );
 
     TodayRespDto doAnalyzeTodayLuck(
             String today,
-            SajuReqDto sajuReqDto
+            SajuReqDto sajuReqDto,
+            String userEmail
     );
 }

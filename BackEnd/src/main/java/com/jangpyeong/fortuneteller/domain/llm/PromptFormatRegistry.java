@@ -1,4 +1,4 @@
-package com.jangpyeong.fortuneteller.domain.analyze.application;
+package com.jangpyeong.fortuneteller.domain.llm;
 
 import com.jangpyeong.fortuneteller.domain.analyze.api.dto.resp.DreamRespDto;
 import com.jangpyeong.fortuneteller.domain.analyze.api.dto.resp.FaceRespDto;
@@ -13,6 +13,7 @@ public class PromptFormatRegistry {
         if (clazz == SajuRespDto.class) {
             return """
                         {
+                         \"summary\": \"...\",
                           \"ohaeng\": \"...\",
                           \"personality\": \"...\",
                           \"luck\": \"...\",
