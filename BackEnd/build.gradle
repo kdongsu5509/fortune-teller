@@ -38,7 +38,7 @@ dependencies {
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
     implementation 'org.springframework.boot:spring-boot-starter-web'
 
-    //Spring Boot Websocket
+    //Spring Boot WebSocket
     implementation 'org.springframework.boot:spring-boot-starter-websocket'
 
     //Spring AI
