@@ -8,7 +8,6 @@ import com.jangpyeong.fortuneteller.domain.analyze.api.dto.resp.SajuRespDto;
 import com.jangpyeong.fortuneteller.domain.analyze.api.dto.resp.TodayRespDto;
 
 public interface AnalyzeService {
-
     FaceRespDto doAnalyzeFace(
             String imageUrl,
             String userEmail

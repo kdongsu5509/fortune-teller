@@ -25,7 +25,7 @@ public class Result extends BaseTimeEntity {
 
     @Id
     @GeneratedValue
-    private UUID uuid;
+    private UUID id;
 
     @Column(name = "user_email", nullable = false, length = 100)
     private String userEmail;
@@ -37,7 +37,7 @@ public class Result extends BaseTimeEntity {
 
     public static Result create(String userEmail, ResultType resultType, String contents) {
         return Result.builder()
-                .uuid(UUID.randomUUID())
+                .id(UUID.randomUUID())
                 .userEmail(userEmail)
                 .resultType(resultType)
                 .contents(contents)

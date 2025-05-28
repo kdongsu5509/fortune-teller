@@ -1,6 +1,5 @@
 package com.jangpyeong.fortuneteller.common.config;
 
-import com.jangpyeong.fortuneteller.domain.analyze.domain.ResultCacheDto;
 import com.jangpyeong.fortuneteller.domain.jwt.domain.JwtAuthRedis;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

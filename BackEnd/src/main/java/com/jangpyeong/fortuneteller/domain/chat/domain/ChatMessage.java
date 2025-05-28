@@ -3,52 +3,43 @@ package com.jangpyeong.fortuneteller.domain.chat.domain;
 import com.jangpyeong.fortuneteller.common.util.BaseTimeEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import java.time.LocalDateTime;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
+import java.util.UUID;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Getter
 @Entity
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
 public class ChatMessage extends BaseTimeEntity {
 
     @Id
     @GeneratedValue
-    private Long id;
+    private UUID chatId;
 
     @Column(nullable = false)
-    private Long sessionId;
+    private UUID roomId;
 
     @Column(nullable = false, length = 100)
-    private String email;
+    @Email
+    private String senderEmail;
 
-    @Column(nullable = false, name = "content_role")
-    private String contentRole;
+    @Enumerated(EnumType.STRING)
+    private UserType userType;
 
-    @Column(nullable = false, length = 255)
-    private String content;
+    @NotNull
+    private String message;
 
-    // 생성자 팩토리
-    public static ChatMessage of(Long groupId, String email, String contentRole, String content) {
-        return new ChatMessage(groupId, email, contentRole, content);
-    }
-
-    // 생성자
-    public ChatMessage(
-            Long groupId,
-            String email,
-            String contentRole,
-            String content
-    ) {
-        this.sessionId = groupId;
-        this.email = email;
-        this.contentRole = contentRole;
-        this.content = content;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return super.getCreatedAt();
+    public enum UserType {
+        PERSON, AI
     }
 }

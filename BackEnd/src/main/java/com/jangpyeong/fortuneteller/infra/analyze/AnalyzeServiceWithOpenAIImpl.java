@@ -7,7 +7,7 @@ import com.jangpyeong.fortuneteller.domain.analyze.api.dto.resp.FaceRespDto;
 import com.jangpyeong.fortuneteller.domain.analyze.api.dto.resp.SajuRespDto;
 import com.jangpyeong.fortuneteller.domain.analyze.api.dto.resp.TodayRespDto;
 import com.jangpyeong.fortuneteller.domain.analyze.application.AnalyzeService;
-import com.jangpyeong.fortuneteller.domain.analyze.application.AsyncAnalyzeResultStoreService;
+import com.jangpyeong.fortuneteller.domain.analyze.application.ResultService;
 import com.jangpyeong.fortuneteller.domain.analyze.domain.ResultType;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
 public class AnalyzeServiceWithOpenAIImpl implements AnalyzeService {
 
     private final AiAnalysisExecutor executor;
-    private final AsyncAnalyzeResultStoreService asyncAnalyzeResultStoreService;
+    private final ResultService resultService;
 
     @Override
     public SajuRespDto doAnalyzeSaju(SajuReqDto req, String email) {
@@ -55,6 +55,7 @@ public class AnalyzeServiceWithOpenAIImpl implements AnalyzeService {
         ), TodayRespDto.class, email, ResultType.TODAY_LUCK);
     }
 
+
     private <T> T analyzeAndStore(
             String type,
             Map<String, Object> variables,
@@ -64,7 +65,7 @@ public class AnalyzeServiceWithOpenAIImpl implements AnalyzeService {
     ) {
         T result = executor.analyze(type, variables, responseType);
         String summary = extractSummary(result);
-        asyncAnalyzeResultStoreService.store(userEmail, resultType, summary);
+        resultService.store(userEmail, resultType, summary);
         return result;
     }
 

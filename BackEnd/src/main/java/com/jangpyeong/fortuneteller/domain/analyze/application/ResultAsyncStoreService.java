@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class AsyncAnalyzeResultStoreService {
-    private final AnalyzeResultWriteService writeService;
+public class ResultAsyncStoreService {
+    private final ResultWriteService writeService;
 
     @Async
     public void store(String userEmail, ResultType type, String contents) {
