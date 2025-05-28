@@ -28,37 +28,40 @@ public class ImageServiceImpl implements ImageService {
     private String bucketName;
 
     @Override
-    public String uploadImgae(MultipartFile file) throws IOException {
-        String uuid = UUID.randomUUID().toString();
-        String originalFilename = file.getOriginalFilename();
-        String contentType = file.getContentType();
-        String extension = "";
+    public String upload(MultipartFile file) {
+        UUID uuid = UUID.randomUUID();
+        BlobInfo blobInfo = createBlobInfo(uuid, file.getContentType());
 
-        if (originalFilename != null && originalFilename.contains(".")) {
-            extension = originalFilename.substring(originalFilename.lastIndexOf('.'));
-        }
+        writeImageToGCS(file, blobInfo);
 
-        String objectName = uuid + extension;
+        return String.format("https://storage.googleapis.com/%s/%s", bucketName, uuid);
+    }
 
-        BlobId blobId = BlobId.of(bucketName, objectName);
-        BlobInfo blobInfo = BlobInfo.newBuilder(blobId)
-                .setContentType(contentType)
-                .build();
-
+    private void writeImageToGCS(MultipartFile file, BlobInfo blobInfo) {
         try (WriteChannel writer = storage.writer(blobInfo);
              InputStream inputStream = file.getInputStream()) {
-            byte[] buffer = new byte[1024];
-            int limit;
-            while ((limit = inputStream.read(buffer)) >= 0) {
-                writer.write(ByteBuffer.wrap(buffer, 0, limit));
-            }
+            transferStreamToChannel(writer, inputStream);
+        } catch (IOException e) {
+            throw new ImageUploadException();
         }
+    }
 
-        return String.format("https://storage.googleapis.com/%s/%s", bucketName, objectName);
+    private void transferStreamToChannel(WriteChannel writer, InputStream inputStream) throws IOException {
+        byte[] buffer = new byte[1024];
+        int bytesRead;
+        while ((bytesRead = inputStream.read(buffer)) != -1) {
+            writer.write(ByteBuffer.wrap(buffer, 0, bytesRead));
+        }
+    }
+
+    private BlobInfo createBlobInfo(UUID uuid, String contentType) {
+        return BlobInfo.newBuilder(BlobId.of(bucketName, uuid.toString()))
+                .setContentType(contentType)
+                .build();
     }
 
     @Override
-    public void deleteImage(String imgAddress) {
+    public void delete(String imgAddress) {
         String objectName = imgAddress.substring(imgAddress.lastIndexOf("/") + 1);
         boolean deleted = storage.delete(bucketName, objectName);
         if (deleted) {
@@ -68,8 +71,6 @@ public class ImageServiceImpl implements ImageService {
         }
     }
 
-    @Override
-    public String getImageUrl(String imgAddress) {
-        return String.format("https://storage.googleapis.com/%s/%s", bucketName, imgAddress);
+    private static class ImageUploadException extends RuntimeException {
     }
 }

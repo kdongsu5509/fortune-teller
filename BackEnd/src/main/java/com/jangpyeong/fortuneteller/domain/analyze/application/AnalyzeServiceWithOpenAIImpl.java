@@ -29,9 +29,10 @@ public class AnalyzeServiceWithOpenAIImpl implements AnalyzeService {
     public Generation doAnalyze(String type, Map<String, Object> variables) {
         PromptTemplate template = new PromptTemplate(getPrompt(type));
         Prompt prompt = template.create(variables);
-        Generation res = chatService.chat(prompt);
-        return res;
+        return chatService.chat(prompt);
     }
+
+    //TODO : 분석을 하고 그것을 저장하는 로직 필요함. 특히, ResultService와 연동하여 결과를 저장하고 캐싱하는 로직이 필요함.
 
     @Override
     public SajuRespDto doAnalyzeSaju(SajuReqDto sajuReqDto) {

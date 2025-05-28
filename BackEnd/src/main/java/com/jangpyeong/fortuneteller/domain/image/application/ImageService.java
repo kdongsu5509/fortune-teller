@@ -1,12 +1,9 @@
 package com.jangpyeong.fortuneteller.domain.image.application;
 
-import java.io.IOException;
 import org.springframework.web.multipart.MultipartFile;
 
 public interface ImageService {
-    String uploadImgae(MultipartFile file) throws IOException;
+    String upload(MultipartFile file);
 
-    void deleteImage(String imgAddress);
-
-    String getImageUrl(String imgAddress);
+    void delete(String imgAddress);
 }

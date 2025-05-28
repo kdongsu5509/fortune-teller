@@ -2,8 +2,8 @@ package com.jangpyeong.fortuneteller.domain.image.api;
 
 import com.jangpyeong.fortuneteller.domain.image.application.ImageService;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import java.io.IOException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,15 +20,13 @@ public class ImageController {
 
     ImageService imageService;
 
-    @PostMapping("/upload")
+    @PostMapping
     public String uploadImage(MultipartFile file) {
-        String uploadedAddress;
-        try {
-            uploadedAddress = imageService.uploadImgae(file);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        return imageService.upload(file);
+    }
 
-        return uploadedAddress;
+    @DeleteMapping
+    public void deleteImage(String imageUrl) {
+        imageService.delete(imageUrl);
     }
 }
