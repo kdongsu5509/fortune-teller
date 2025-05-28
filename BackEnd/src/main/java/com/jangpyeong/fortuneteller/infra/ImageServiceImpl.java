@@ -4,7 +4,7 @@ import com.google.cloud.WriteChannel;
 import com.google.cloud.storage.BlobId;
 import com.google.cloud.storage.BlobInfo;
 import com.google.cloud.storage.Storage;
-import com.jangpyeong.fortuneteller.domain.analyze.application.ImageService;
+import com.jangpyeong.fortuneteller.domain.image.application.ImageService;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
