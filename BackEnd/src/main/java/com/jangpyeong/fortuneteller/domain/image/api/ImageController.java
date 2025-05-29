@@ -18,7 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 )
 public class ImageController {
 
-    ImageService imageService;
+    private final ImageService imageService;
 
     @PostMapping
     public String uploadImage(MultipartFile file) {
