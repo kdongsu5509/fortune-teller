@@ -9,10 +9,13 @@ import com.jangpyeong.fortuneteller.domain.analyze.api.dto.resp.TodayRespDto;
 import com.jangpyeong.fortuneteller.domain.analyze.application.AnalyzeService;
 import com.jangpyeong.fortuneteller.domain.analyze.application.ResultService;
 import com.jangpyeong.fortuneteller.domain.analyze.domain.ResultType;
+import java.util.HashMap;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class AnalyzeServiceWithOpenAIImpl implements AnalyzeService {
@@ -22,37 +25,37 @@ public class AnalyzeServiceWithOpenAIImpl implements AnalyzeService {
 
     @Override
     public SajuRespDto doAnalyzeSaju(SajuReqDto req, String email) {
-        return analyzeAndStore("saju", Map.of(
-                "name", req.name(),
-                "birthDate", req.birthDate().toString(),
-                "birthTime", req.time().getLabel(),
-                "sex", req.sex()
-        ), SajuRespDto.class, email, ResultType.SAJU);
+        Map<String, Object> variables = new HashMap<>();
+        variables.put("name", req.name());
+        variables.put("birthDate", req.birthDate().toString());
+        variables.put("birthTime", req.time().getLabel());
+        variables.put("sex", req.sex());
+        return analyzeAndStore("saju", variables, SajuRespDto.class, email, ResultType.SAJU);
     }
 
     @Override
     public DreamRespDto doAnalyzeDream(DreamReqDto req, String email) {
-        return analyzeAndStore("dream", Map.of(
-                "dream", req.dreamExplanation()
-        ), DreamRespDto.class, email, ResultType.DREAM);
+        Map<String, Object> variables = new HashMap<>();
+        variables.put("dream", req.dreamExplanation());
+        return analyzeAndStore("dream", variables, DreamRespDto.class, email, ResultType.DREAM);
     }
 
     @Override
     public FaceRespDto doAnalyzeFace(String imageUrl, String email) {
-        return analyzeAndStore("face", Map.of(
-                "imageUrl", imageUrl
-        ), FaceRespDto.class, email, ResultType.FACE);
+        Map<String, Object> variables = new HashMap<>();
+        variables.put("imageUrl", imageUrl);
+        return analyzeAndStore("face", variables, FaceRespDto.class, email, ResultType.FACE);
     }
 
     @Override
     public TodayRespDto doAnalyzeTodayLuck(String today, SajuReqDto req, String email) {
-        return analyzeAndStore("today-luck", Map.of(
-                "today", today,
-                "name", req.name(),
-                "birthDate", req.birthDate().toString(),
-                "birthTime", req.time().getLabel(),
-                "sex", req.sex()
-        ), TodayRespDto.class, email, ResultType.TODAY_LUCK);
+        Map<String, Object> variables = new HashMap<>();
+        variables.put("today", today);
+        variables.put("name", req.name());
+        variables.put("birthDate", req.birthDate().toString());
+        variables.put("birthTime", req.time().getLabel());
+        variables.put("sex", req.sex());
+        return analyzeAndStore("today-luck", variables, TodayRespDto.class, email, ResultType.TODAY_LUCK);
     }
 
 
@@ -63,7 +66,7 @@ public class AnalyzeServiceWithOpenAIImpl implements AnalyzeService {
             String userEmail,
             ResultType resultType
     ) {
-        T result = executor.analyze(type, variables, responseType);
+        T result = executor.analyze(type, variables, responseType, resultType);
         String summary = extractSummary(result);
         resultService.store(userEmail, resultType, summary);
         return result;
