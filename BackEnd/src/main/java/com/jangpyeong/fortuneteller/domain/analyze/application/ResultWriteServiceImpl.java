@@ -16,12 +16,11 @@ public class ResultWriteServiceImpl implements ResultWriteService {
     @Override
     @Transactional
     public void save(String userEmail, ResultType type, String content) {
-        resultRepository.save(
-                Result.create(
-                        userEmail,
-                        type,
-                        content
-                )
+        Result result = Result.create(
+                userEmail,
+                type,
+                content
         );
+        resultRepository.save(result);
     }
 }

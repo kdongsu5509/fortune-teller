@@ -37,7 +37,6 @@ public class Result extends BaseTimeEntity {
 
     public static Result create(String userEmail, ResultType resultType, String contents) {
         return Result.builder()
-                .id(UUID.randomUUID())
                 .userEmail(userEmail)
                 .resultType(resultType)
                 .contents(contents)
