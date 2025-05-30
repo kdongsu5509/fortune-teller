@@ -1,0 +1,61 @@
+name: CD to Prod
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy-prod:
+    runs-on: ubuntu-22.04
+    
+    defaults:
+      run:
+        working-directory: ./BackEnd
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up kubectl
+        uses: azure/setup-kubectl@v3
+        with:
+          version: 'latest'
+
+      - name: Set up Kubeconfig
+        run: |
+          echo "${{ secrets.KUBECONFIG_PROD }}" > kubeconfig
+          export KUBECONFIG=kubeconfig
+
+      - name: Deploy to Prod
+        run: |
+          kubectl set image deployment/my-spring-app my-spring-app=mydockerhub/myapp:${{ github.sha }} -n prod
+          kubectl rollout status deployment/my-spring-app -n prod
+
+
+          ---
+            /spring-app-repo
+    /src
+    /Dockerfile
+    /build.gradle
+    /chart  ← Helm chart 디렉토리 (보통 chart or helm-chart 라고 많이 씀)
+        /Chart.yaml
+        /values.yaml
+        /templates
+            deployment.yaml
+            service.yaml
+            configmap.yaml
+            ingress.yaml
+    /.github/workflows
+        ci.yaml
+        cd-dev.yaml
+        cd-prod.yaml
+
+
+        | 순서 | 대상                   | 이유                    |
+| -- | -------------------- | --------------------- |
+| 1  | MySQL + Redis        | 서비스 필수 DB/캐시          |
+| 2  | RabbitMQ             | 메시지 브로커 (서비스 연결 필요)   |
+| 3  | Spring               | 의존 서비스 준비 후 애플리케이션 배포 |
+| 4  | Prometheus + Grafana | 모니터링 활성화              |
+| 5  | K8s Dashboard        | 운영 관리 도구 (순서 영향 없음)   |

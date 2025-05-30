@@ -1,0 +1,58 @@
+name: springCI
+
+on:
+  workflow_dispatch:
+  push:
+    branches: 
+      - main
+      - dev
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    permissions:
+      contents: read
+
+    defaults:
+      run:
+        working-directory: ./BackEnd
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: "21"
+          distribution: "temurin"
+
+      - name: Give execute permission to Gradle wrapper
+        run: chmod +x ./gradlew
+
+      - name: Create secret properties file
+        run: |
+          touch ./src/main/resources/application-secret.properties
+          # 테스트 코드 주입 시 주석 해제 / touch ./src/test/resources/application-secret.properties
+
+      # Test 및 Build
+      - name: Build With Gradle
+        run: ./gradlew build
+
+      # GCP 인증
+      - name: Authenticate to GCP
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_AR_IAM_KEY }}
+
+      # Artifact Registry 연동
+      - name: Configure Docker for Artifact Registry
+        run: gcloud auth configure-docker asia-northeast3-docker.pkg.dev
+
+      # Docker Build (이미 GCP용으로 빌드하면 됨 → DockerHub용은 tag만 추가)
+      - name: Build Docker image
+        run: docker build -t asia-northeast3-docker.pkg.dev/jangpyeong/ai-fortune-teller-ar/AIFTSpring:latest .
+
+      # GCP Artifact Registry Push
+      - name: Push Docker image to GCP Artifact Registry
+        run: docker push asia-northeast3-docker.pkg.dev/jangpyeong/ai-fortune-teller-ar/AIFTSpring:latest
