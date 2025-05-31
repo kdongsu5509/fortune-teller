@@ -72,6 +72,9 @@ dependencies {
     runtimeOnly("com.mysql:mysql-connector-j")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 
+    //test database
+    testImplementation 'com.h2database:h2'
+
     //spring security
     implementation("org.springframework.boot:spring-boot-starter-security")
 
