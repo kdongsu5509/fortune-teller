@@ -35,9 +35,9 @@ jobs:
           touch ./src/main/resources/application-secret.properties
           # 테스트 코드 주입 시 주석 해제 / touch ./src/test/resources/application-secret.properties
 
-      # Test 및 Build
-      - name: Build With Gradle
-        run: ./gradlew build
+      # Test with Gradle
+      - name: Test With Gradle
+        run: ./gradlew test -i
 
       # GCP 인증
       - name: Authenticate to GCP
