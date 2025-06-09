@@ -3,8 +3,8 @@ import 'package:toastification/toastification.dart';
 
 void errorNotification(
   BuildContext context,
-  String _mainWarningText,
-  String _warnignExpalin,
+  String mainWarningText,
+  String warnignExpalin,
 ) {
   toastification.show(
     context: context,
@@ -12,11 +12,11 @@ void errorNotification(
     style: ToastificationStyle.flat,
     autoCloseDuration: const Duration(seconds: 3),
     title: Text(
-      _mainWarningText,
+      mainWarningText,
       style: TextStyle(fontSize: MediaQuery.of(context).size.width * 0.015),
     ),
     // you can also use RichText widget for title and description parameters
-    description: RichText(text: TextSpan(text: _warnignExpalin)),
+    description: RichText(text: TextSpan(text: warnignExpalin)),
     alignment: Alignment.topRight,
     direction: TextDirection.ltr,
     animationDuration: const Duration(milliseconds: 300),

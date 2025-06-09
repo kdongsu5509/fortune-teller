@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 
@@ -24,7 +23,7 @@ class SaJuResultView extends StatelessWidget {
     final sw = MediaQuery.of(context).size.width;
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
-    List<String> _tileTitle = [
+    List<String> tileTitle = [
       "🌕 출생 정보",
       "🌿 오행 분석",
       "🧠 성격",
@@ -44,11 +43,11 @@ class SaJuResultView extends StatelessWidget {
               ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
               textAlign: TextAlign.center,
             ),
-            contentsCard(context, _tileTitle[0], _tempData['birth'], sw),
-            contentsCard(context, _tileTitle[1], _tempData['ohaeng'], sw),
-            contentsCard(context, _tileTitle[2], _tempData['personality'], sw),
-            contentsCard(context, _tileTitle[3], _tempData['luck'], sw),
-            contentsCard(context, _tileTitle[4], _tempData['suggestion'], sw),
+            contentsCard(context, tileTitle[0], _tempData['birth'], sw),
+            contentsCard(context, tileTitle[1], _tempData['ohaeng'], sw),
+            contentsCard(context, tileTitle[2], _tempData['personality'], sw),
+            contentsCard(context, tileTitle[3], _tempData['luck'], sw),
+            contentsCard(context, tileTitle[4], _tempData['suggestion'], sw),
             getAskToGptButton(isDark, sw),
             SizedBox(height: sw * 0.05),
             Center(

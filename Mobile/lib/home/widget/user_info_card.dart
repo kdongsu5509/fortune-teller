@@ -1,5 +1,4 @@
 import 'package:ai_fortune_teller_app/common/router.dart';
-import 'package:ai_fortune_teller_app/setting/repository/model/user_info_dto.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -7,7 +6,7 @@ import '../../setting/repository/model/birth_time.dart';
 import '../../setting/util/user_info_provider.dart';
 
 class UserInfoCard extends ConsumerStatefulWidget {
-  UserInfoCard(this.sw, {super.key});
+  const UserInfoCard(this.sw, {super.key});
   final double sw;
 
   @override

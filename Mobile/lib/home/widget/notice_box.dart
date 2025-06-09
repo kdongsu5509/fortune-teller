@@ -8,8 +8,8 @@ class NoticeBox extends StatelessWidget {
     final sw = size.width;
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
-    final _title = "공지사항";
-    final _content = [
+    final title = "공지사항";
+    final content = [
       "• 결과 공유 기능이 곧 추가될 예정입니다.",
       "• 2025년 5월 15일부터 새로운 운세 서비스가 시작됩니다.",
       "• AI 운세는 참고용으로만 활용해 주세요.",
@@ -32,11 +32,11 @@ class NoticeBox extends StatelessWidget {
                 color: Theme.of(context).colorScheme.primary,
               ),
               SizedBox(width: sw * 0.015),
-              Text(_title, style: Theme.of(context).textTheme.titleMedium),
+              Text(title, style: Theme.of(context).textTheme.titleMedium),
             ],
           ),
           SizedBox(height: sw * 0.02),
-          ..._content.map(
+          ...content.map(
             (text) => Text(text, style: Theme.of(context).textTheme.bodySmall),
           ),
         ],

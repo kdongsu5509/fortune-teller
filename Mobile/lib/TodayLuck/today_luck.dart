@@ -14,16 +14,16 @@ class TodayFortuneView extends StatelessWidget {
         final sh = size.height;
         final isDark = Theme.of(context).brightness == Brightness.dark;
 
-        final String _generalTtile = "📅 종합 운세";
-        final String _moneyTtile = "💰 금전 운";
-        final String _loveTtile = "💘 연애 운";
-        final String _healthTtile = "💪 건강 운";
+        final String generalTtile = "📅 종합 운세";
+        final String moneyTtile = "💰 금전 운";
+        final String loveTtile = "💘 연애 운";
+        final String healthTtile = "💪 건강 운";
 
-        final List<String> _categoryTitle = [
-            _generalTtile,
-            _moneyTtile,
-            _loveTtile,
-            _healthTtile
+        final List<String> categoryTitle = [
+            generalTtile,
+            moneyTtile,
+            loveTtile,
+            healthTtile
         ];
 
         final fortune = {
@@ -55,7 +55,7 @@ class TodayFortuneView extends StatelessWidget {
         };
 
         final categories = fortune['categories'] as Map<String, dynamic>? ?? {};
-        final _contentList = categories.entries.map((entry) {
+        final contentList = categories.entries.map((entry) {
             return {
                 "description": entry.value['description'] ?? ''
             };
@@ -118,8 +118,8 @@ class TodayFortuneView extends StatelessWidget {
                             SizedBox(height: sh * 0.035),
 
                             /// 📌 카테고리 카드
-                            for (int i = 0; i < _categoryTitle.length; i++)
-                                contentsCard(context, _categoryTitle[i], _contentList[i]["description"], sw),
+                            for (int i = 0; i < categoryTitle.length; i++)
+                                contentsCard(context, categoryTitle[i], contentList[i]["description"], sw),
                             contentsCard(context, "💡 오늘의 조언", categories3, sw),
 
                             Padding(

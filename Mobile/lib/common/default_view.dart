@@ -79,7 +79,7 @@ class _DefaultViewState extends ConsumerState<DefaultView> {
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: '홈'),
           BottomNavigationBarItem(
-            icon: Icon(Icons.workspace_premium),
+            icon: Icon(Icons.workspaces_filled),
             label: '프리미엄',
           ),
           BottomNavigationBarItem(icon: Icon(Icons.settings), label: '설정'),

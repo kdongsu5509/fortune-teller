@@ -2,7 +2,6 @@ import 'dart:developer';
 
 import 'package:ai_fortune_teller_app/common/router.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 
 class FaceInputView extends StatefulWidget {
     const FaceInputView({super.key});

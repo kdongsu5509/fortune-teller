@@ -16,9 +16,9 @@ class SettingsView extends ConsumerWidget {
     final sw = sized.width;
     final isDark = ref.watch(currentThemeModeProvider) == ThemeMode.dark;
 
-    String _pageTitle = '환경 설정';
+    String pageTitle = '환경 설정';
 
-    List<String> _titleList = [
+    List<String> titleList = [
       '내 정보',
       '다크 모드',
       '알림 설정[미구현]',
@@ -26,7 +26,7 @@ class SettingsView extends ConsumerWidget {
       '로그아웃[미구현]',
     ];
 
-    List<Icon> _tileIcons = [
+    List<Icon> tileIcons = [
       const Icon(Icons.account_circle),
       const Icon(Icons.brightness_6),
       const Icon(Icons.notifications),
@@ -41,7 +41,7 @@ class SettingsView extends ConsumerWidget {
         children: [
           SizedBox(height: sw * 0.03),
           Text(
-            _pageTitle,
+            pageTitle,
             style: Theme.of(
               context,
             ).textTheme.titleLarge!.copyWith(fontSize: sw * 0.06),
@@ -49,16 +49,16 @@ class SettingsView extends ConsumerWidget {
           const Divider(),
 
           ListTile(
-            leading: _tileIcons[0],
-            title: Text(_titleList[0]),
+            leading: tileIcons[0],
+            title: Text(titleList[0]),
             onTap: () {
               router.push('/settings/user');
             },
           ),
 
           SwitchListTile(
-            secondary: _tileIcons[1],
-            title: Text(_titleList[1]),
+            secondary: tileIcons[1],
+            title: Text(titleList[1]),
             value: isDark,
             onChanged: (value) {
               viewModel.toggleTheme(ref);
@@ -66,24 +66,24 @@ class SettingsView extends ConsumerWidget {
           ),
 
           ListTile(
-            leading: _tileIcons[2],
-            title: Text(_titleList[2]),
+            leading: tileIcons[2],
+            title: Text(titleList[2]),
             onTap: () {
               // 알림 설정 화면으로 연결
             },
           ),
 
           ListTile(
-            leading: _tileIcons[3],
-            title: Text(_titleList[3]),
+            leading: tileIcons[3],
+            title: Text(titleList[3]),
             onTap: () {
               router.push('/settings/privacy');
             },
           ),
 
           ListTile(
-            leading: _tileIcons[4],
-            title: Text(_titleList[4]),
+            leading: tileIcons[4],
+            title: Text(titleList[4]),
             onTap: () {
               // 로그아웃 처리
             },

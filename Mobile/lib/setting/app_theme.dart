@@ -68,7 +68,7 @@ ThemeData createHighContrastLightTheme(BuildContext context) {
     checkboxTheme: CheckboxThemeData(
       fillColor: WidgetStateProperty.all(Colors.black),
     ),
-    cardTheme: CardTheme(
+    cardTheme: CardThemeData(
       color: Colors.white,
       elevation: 4,
       shape: RoundedRectangleBorder(
@@ -146,7 +146,7 @@ ThemeData createHighContrastDarkTheme(BuildContext context) {
     checkboxTheme: CheckboxThemeData(
       fillColor: WidgetStateProperty.all(Colors.white),
     ),
-    cardTheme: CardTheme(
+    cardTheme: CardThemeData(
       color: const Color(0xFF1A1A1A),
       elevation: 4,
       shape: RoundedRectangleBorder(

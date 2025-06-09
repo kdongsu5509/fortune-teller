@@ -7,7 +7,7 @@ class PrivacyPolicyView extends StatelessWidget {
   Widget build(BuildContext context) {
     final sw = MediaQuery.of(context).size.width;
 
-    const String _privacyPolicyContent = '''
+    const String privacyPolicyContent = '''
 1. 수집하는 개인정보 항목 및 수집 방법
 본 앱은 사용자에게 맞춤형 운세 분석 및 AI 기반 서비스를 제공하기 위해 다음과 같은 개인정보를 수집할 수 있습니다.
 
@@ -68,7 +68,7 @@ class PrivacyPolicyView extends StatelessWidget {
             ),
             SizedBox(height: sw * 0.05),
             Text(
-              _privacyPolicyContent,
+              privacyPolicyContent,
               style: Theme.of(
                 context,
               ).textTheme.bodyMedium!.copyWith(fontSize: sw * 0.04),

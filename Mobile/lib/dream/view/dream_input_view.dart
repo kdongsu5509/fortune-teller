@@ -36,11 +36,11 @@ class _DreamInputViewState extends State<DreamInputView> {
         final sw = size.width;
         final sh = size.height;
 
-        final _pageTitle = "🔮 어떤 꿈을 꾸셨나요?";
-        final _pageDescription = "자세하게 적을수록 정확한 해몽이 가능해요!";
-        final _hintText = "예: 높은 곳에서 떨어지는 꿈을 꾸었어요...";
-        final _buttonText = "AI에게 해몽 요청하기";
-        final _pageFooterDescription = "※ 꿈 내용을 바탕으로 AI가 유형과 해몽을 분석합니다.";
+        final pageTitle = "🔮 어떤 꿈을 꾸셨나요?";
+        final pageDescription = "자세하게 적을수록 정확한 해몽이 가능해요!";
+        final hintText = "예: 높은 곳에서 떨어지는 꿈을 꾸었어요...";
+        final buttonText = "AI에게 해몽 요청하기";
+        final pageFooterDescription = "※ 꿈 내용을 바탕으로 AI가 유형과 해몽을 분석합니다.";
 
         return Scaffold(
             backgroundColor: theme.scaffoldBackgroundColor,
@@ -51,14 +51,14 @@ class _DreamInputViewState extends State<DreamInputView> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                             Text(
-                                _pageTitle,
+                                pageTitle,
                                 style: theme.textTheme.titleLarge?.copyWith(
                                     fontWeight: FontWeight.bold
                                 )
                             ),
                             SizedBox(height: sh * 0.02),
                             Text(
-                                _pageDescription,
+                                pageDescription,
                                 style: theme.textTheme.bodyMedium?.copyWith(
                                     color: isDark ? Colors.grey[400] : Colors.grey[700]
                                 )
@@ -72,7 +72,7 @@ class _DreamInputViewState extends State<DreamInputView> {
                                     keyboardType: TextInputType.multiline,
                                     style: theme.textTheme.bodyMedium,
                                     decoration: InputDecoration(
-                                        hintText: _hintText,
+                                        hintText: hintText,
                                         hintStyle: TextStyle(
                                             color: isDark ? Colors.grey[500] : Colors.grey[600]
                                         ),
@@ -100,13 +100,13 @@ class _DreamInputViewState extends State<DreamInputView> {
                                             borderRadius: BorderRadius.circular(12)
                                         )
                                     ),
-                                    child: Text(_buttonText)
+                                    child: Text(buttonText)
                                 )
                             ),
                             SizedBox(height: sh * 0.02),
                             Center(
                                 child: Text(
-                                    _pageFooterDescription,
+                                    pageFooterDescription,
                                     style: theme.textTheme.bodySmall?.copyWith(
                                         color: isDark ? Colors.grey[300] : Colors.grey[600]
                                     ),

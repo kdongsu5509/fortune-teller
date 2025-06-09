@@ -92,7 +92,7 @@ class _EagerInitializationState extends ConsumerState<_EagerInitialization> {
 }
 
 class _MaterialApp extends ConsumerWidget {
-  const _MaterialApp({super.key});
+  const _MaterialApp();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
