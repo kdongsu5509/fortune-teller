@@ -4,9 +4,7 @@ name: springTest
 # springTest는 PR이 BackEnd 디렉토리의 파일에 변경이 있을 때 실행됩니다.
 on:
   pull_request:
-    branches-ignore:
-      - main
-      - dev
+  workflow_dispatch:
 
 jobs:
   build:
