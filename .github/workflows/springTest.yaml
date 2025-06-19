@@ -1,14 +1,11 @@
 name: springTest
 
-# springTest는 dev/main 브랜치 제외한 브랜치에 푸시되면 실행됩니다.
-# springTest는 PR이 BackEnd 디렉토리의 파일에 변경이 있을 때 실행됩니다.
 on:
   pull_request:
   workflow_dispatch:
 
 jobs:
   build:
-    # springTest는 BackEnd 디렉토리의 파일에 변경이 있을 때 실행됩니다.
     if: contains(github.event.pull_request.changed_files, 'BackEnd/')
     runs-on: ubuntu-22.04
     permissions:
@@ -36,9 +33,6 @@ jobs:
           echo "${{ secrets.SPRING_SECRET }}" > ./src/main/resources/application-secret.properties
           echo "${{ secrets.SPRING_TEST_SECRET }}" > ./src/test/resources/application-test.properties
           
-          #          touch ./src/main/resources/application-secret.properties
-          # 테스트 코드 주입 시 주석 해제 / touch ./src/test/resources/application-secret.properties
-
       # Test with Gradle
       - name: Test With Gradle
         run: ./gradlew test -i
