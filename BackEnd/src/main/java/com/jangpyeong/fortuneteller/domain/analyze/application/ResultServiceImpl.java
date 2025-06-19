@@ -1,6 +1,7 @@
 package com.jangpyeong.fortuneteller.domain.analyze.application;
 
 import com.jangpyeong.fortuneteller.domain.analyze.api.dto.resp.AnalysisResultRespDto;
+import com.jangpyeong.fortuneteller.domain.analyze.application.service.ResultService;
 import com.jangpyeong.fortuneteller.domain.analyze.domain.Result;
 import com.jangpyeong.fortuneteller.domain.analyze.domain.ResultRepository;
 import com.jangpyeong.fortuneteller.domain.analyze.domain.ResultType;

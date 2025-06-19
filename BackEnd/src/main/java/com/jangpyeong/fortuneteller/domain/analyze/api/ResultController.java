@@ -1,7 +1,7 @@
 package com.jangpyeong.fortuneteller.domain.analyze.api;
 
 import com.jangpyeong.fortuneteller.domain.analyze.api.dto.resp.AnalysisResultRespDto;
-import com.jangpyeong.fortuneteller.domain.analyze.application.ResultService;
+import com.jangpyeong.fortuneteller.domain.analyze.application.service.ResultService;
 import com.jangpyeong.fortuneteller.domain.user.domain.CustomUserDetails;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

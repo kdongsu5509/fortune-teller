@@ -7,7 +7,7 @@ import com.jangpyeong.fortuneteller.domain.analyze.api.dto.resp.DreamRespDto;
 import com.jangpyeong.fortuneteller.domain.analyze.api.dto.resp.FaceRespDto;
 import com.jangpyeong.fortuneteller.domain.analyze.api.dto.resp.SajuRespDto;
 import com.jangpyeong.fortuneteller.domain.analyze.api.dto.resp.TodayRespDto;
-import com.jangpyeong.fortuneteller.domain.analyze.application.AnalyzeService;
+import com.jangpyeong.fortuneteller.domain.analyze.application.service.AnalyzeService;
 import com.jangpyeong.fortuneteller.domain.user.domain.CustomUserDetails;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

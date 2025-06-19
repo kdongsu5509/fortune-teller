@@ -1,5 +1,6 @@
 package com.jangpyeong.fortuneteller.domain.analyze.application;
 
+import com.jangpyeong.fortuneteller.domain.analyze.application.service.ResultWriteService;
 import com.jangpyeong.fortuneteller.domain.analyze.domain.ResultType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Async;
