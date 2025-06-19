@@ -41,6 +41,10 @@ class UserServiceTest {
         when(userRepository.findByEmail(email)).thenReturn(Optional.empty());
         when(passwordEncoder.encode(rawPassword)).thenReturn(encodedPassword);
 
+        // 👇 이 줄이 중요!
+        when(userRepository.save(any(User.class)))
+                .thenAnswer(invocation -> invocation.getArgument(0));
+
         ArgumentCaptor<User> captor = ArgumentCaptor.forClass(User.class);
 
         // when
@@ -54,6 +58,7 @@ class UserServiceTest {
         assertThat(savedUser.getPassword()).isEqualTo(encodedPassword);
         assertThat(savedUser.getRole()).isEqualTo("ROLE_USER");
     }
+
 
     @Test
     void 회원가입_중복이메일_실패() {
