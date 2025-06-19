@@ -59,7 +59,6 @@ class UserServiceTest {
         assertThat(savedUser.getRole()).isEqualTo("ROLE_USER");
     }
 
-
     @Test
     void 회원가입_중복이메일_실패() {
         // given
