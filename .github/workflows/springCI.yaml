@@ -1,9 +1,10 @@
 name: springCI
-
+#CI는 dev 브랜치에 푸시되면 실행되고, PR은 main 브랜치에 머지될 때 실행됩니다.
 on:
-  workflow_dispatch:
-  push:
-    branches: 
+  workflow_run:
+    workflows: [ "springTest" ]
+    types: [ completed ]  # <- 보통 completed 사용
+    branches:
       - main
       - dev
 
@@ -27,18 +28,6 @@ jobs:
           java-version: "21"
           distribution: "temurin"
 
-      - name: Give execute permission to Gradle wrapper
-        run: chmod +x ./gradlew
-
-      - name: Create secret properties file
-        run: |
-          touch ./src/main/resources/application-secret.properties
-          # 테스트 코드 주입 시 주석 해제 / touch ./src/test/resources/application-secret.properties
-
-      # Test with Gradle
-      - name: Test With Gradle
-        run: ./gradlew test -i
-
       # GCP 인증
       - name: Authenticate to GCP
         uses: google-github-actions/auth@v2
@@ -49,7 +38,7 @@ jobs:
       - name: Configure Docker for Artifact Registry
         run: gcloud auth configure-docker asia-northeast3-docker.pkg.dev
 
-      # Docker Build (이미 GCP용으로 빌드하면 됨 → DockerHub용은 tag만 추가)
+      # Docker Build ()
       - name: Build Docker image
         run: docker build -t asia-northeast3-docker.pkg.dev/jangpyeong/ai-fortune-teller-ar/AIFTSpring:latest .
 
