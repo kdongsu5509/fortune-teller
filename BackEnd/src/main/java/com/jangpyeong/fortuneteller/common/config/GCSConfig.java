@@ -7,14 +7,12 @@ import java.io.IOException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.core.io.Resource;
 
 @Configuration
+@Profile("!test")
 public class GCSConfig {
-
-    /**
-     * Google Cloud Storage (GCS) client bean configuration.
-     */
 
     @Value("${spring.cloud.gcp.storage.credentials.project-id}")
     private String ProjectId;
