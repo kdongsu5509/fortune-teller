@@ -36,10 +36,6 @@ jobs:
       - name: Create secret properties file
         run: |
           echo "${{ secrets.SPRING_SECRET }}" > ./src/main/resources/application-secret.properties
-          echo "${{ secrets.SPRING_TEST_SECRET }}" > ./src/test/resources/application-test.properties
-          
-          #          touch ./src/main/resources/application-secret.properties
-          # 테스트 코드 주입 시 주석 해제 / touch ./src/test/resources/application-secret.properties
 
       # Test with Gradle
       - name: Test With Gradle
