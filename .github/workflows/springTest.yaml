@@ -2,6 +2,8 @@ name: springTest
 
 on:
   pull_request:
+    paths:
+      - 'BackEnd/**'
   workflow_dispatch:
 
 jobs:
