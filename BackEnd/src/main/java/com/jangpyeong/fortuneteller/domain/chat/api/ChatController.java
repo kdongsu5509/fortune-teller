@@ -20,6 +20,7 @@
 //
 //    @PostMapping("/start")
 //    public UUID makeChattingRoomId() {
+//        //check the user payed.
 //        return UUID.randomUUID();
 //    }
 //

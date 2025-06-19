@@ -2,9 +2,9 @@ name: springTest
 
 on:
   pull_request:
-    paths:
-      - 'BackEnd/**'
-  workflow_dispatch:
+    branches-ignore:
+      - main
+      - dev
 
 jobs:
   build:
@@ -32,8 +32,7 @@ jobs:
       - name: Create secret properties file
         run: |
           echo "${{ secrets.SPRING_SECRET }}" > ./src/main/resources/application-secret.properties
-          echo "${{ secrets.SPRING_TEST_SECRET }}" > ./src/test/resources/application-test.properties
-          
+
       # Test with Gradle
       - name: Test With Gradle
         run: ./gradlew test -i
